@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd ..
+sudo chmod 775 realEstate
+sudo xampp restart
+cd realEstate

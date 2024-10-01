@@ -1,3 +1,6 @@
+<?php
+    include "../src/index.php";
+?>
 <html>
     <head>
         <link href="./css/index.css" rel="stylesheet" type="text/css"/>
@@ -5,10 +8,13 @@
 
     <body>
         <?php 
-            require("../components/header.php")
+            include "../components/header.php"
         ?>
+
+        <h1> Hello World</h1>
+
         <?php 
-            require("../components/footer.php")
+            include "../components/footer.php"
         ?>
         <script src="./js/index.js"></script>
     </body>
