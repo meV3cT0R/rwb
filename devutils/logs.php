@@ -7,9 +7,9 @@
 
     function logError($msg): void {
         if(ENV == "PROD") return;
-        echo "$msg <br />";
+        echo "<p style='color:red;'> $msg <p>";
     }
     function logWarning($msg): void {
         if(ENV == "PROD") return;
-        echo "$msg <br />";
+        echo "</p style='color:yellow;'> $msg <p>";
     }
