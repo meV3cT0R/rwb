@@ -1,7 +1,9 @@
 <?php
 logMessage("inside countryService.php");
-include(__dir__."/../../constants.php");
-include(__dir__."/../models/Country.php");
+include __DIR__."/../../constants.php";
+include __DIR__."/../models/Country.php";
+include __DIR__."/../../config/db.php";
+include __DIR__."/../../devutils/logs.php";
 
 class CountryService {
     private $db;
@@ -13,9 +15,11 @@ class CountryService {
         $this->db = $dbConnection;
     }
     function getCountry(): Country{
+        logMessage("Getting Country");
         $country = new Country();
+
         return $country;
     }
 
 }
-echo (new CountryService())->getCountry()->getName();
+echo (new CountryService((new DB())->connect()))->getCountry()->getName();

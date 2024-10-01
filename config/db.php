@@ -1,9 +1,9 @@
 <?php  
     class DB {
-        private $servername = "localhost";
-        private $username = "root";
-        private $password = "root";
-        private $conn;
+        private string $servername = "localhost";
+        private string $username = "root";
+        private string $password = "root";
+        private mysqli $conn;
 
         function __construct($servername=null,$username=null,$password=null) {   
             if($servername==null && $username==null && $password==null){
@@ -18,8 +18,11 @@
             $this->username = $username;
             $this->password = $password;
         }
-        function connect() {
+        function connect() : mysqli {
             $conn = new mysqli($this->servername, $this->username, $this->password);
+            if($conn->connect_error)  {
+                throw new ErrorException($conn->connect_error);
+            }
             $this->conn=$conn;
             return $conn;
         }
