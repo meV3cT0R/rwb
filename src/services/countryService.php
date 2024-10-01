@@ -1,12 +1,10 @@
 <?php
 logMessage("inside countryService.php");
-include __DIR__."/../../constants.php";
 include __DIR__."/../models/Country.php";
 include __DIR__."/../../config/db.php";
-include __DIR__."/../../devutils/logs.php";
 
 class CountryService {
-    private $db;
+    private mysqli $db;
 
     function __construct($dbConnection) {
         if($dbConnection == null) {
@@ -14,12 +12,24 @@ class CountryService {
         }
         $this->db = $dbConnection;
     }
-    function getCountry(): Country{
+    function getCountries() : array {
         logMessage("Getting Country");
-        $country = new Country();
-
-        return $country;
+        $result  = $this->db->query("SELECT * FROM country;") or trigger_error("Something Went wrong while trying to execute SELECT query");
+        $countries = []; 
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $country = new Country();
+                $country->setName($row["name"]);
+                $country->setId((int)$row["id"]);
+                array_push($countries,$country);
+            }
+        }
+        return $countries;
     }
 
 }
-echo (new CountryService((new DB())->connect()))->getCountry()->getName();
+try {
+    echo implode((new CountryService((new DB())->connect()))->getCountries());
+} catch(Exception $e) {
+    logMessage("". $e->getMessage());
+}
