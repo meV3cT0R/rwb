@@ -1,7 +1,5 @@
 <?php
 logMessage("inside countryService.php");
-include __DIR__."/../models/Country.php";
-include __DIR__."/../../config/db.php";
 
 class CountryService {
     private mysqli $db;
@@ -52,6 +50,7 @@ class CountryService {
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Insertion Failed");
             }
+            $country->setId($this->db->insert_id);
         }catch(PDOException $pdoe) {
             throw new ErrorException("Database Error :  ".$pdoe->getMessage());
         }catch(ErrorException $e) {
@@ -98,16 +97,5 @@ class CountryService {
     }
 }
 
-try {
-    $cs = new CountryService((new DB())->connect());
-    // $cs->postCountry(new Country("Germany"));
-    echo implode($cs->getCountries());
-    $updatedCountry = new Country("Poland");
-    $updatedCountry->setId(5);
-    $cs->updateCountry($updatedCountry);
-    echo implode($cs->getCountries());
 
-} catch(Exception $e) {
-    logMessage("". $e->getMessage());
-}
 

@@ -46,12 +46,12 @@ create table city (
     id int auto_increment primary key,
     name varchar(50) not null,
     countryId int not null,
-    stateId int not null,
+    stateId int,
     createdBy int,
     createdAt datetime default current_timestamp,
     foreign key (createdBy) references user(id) on delete set null,
     foreign key (countryId) references country(id) on delete cascade,
-    foreign key (stateId) references state(id) on delete cascade
+    foreign key (stateId) references state(id) on delete set null
 );
 
 create table propertyType (
