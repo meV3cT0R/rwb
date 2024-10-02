@@ -110,16 +110,23 @@
                     $countryId = $this->countryService->postCountry(new Country(null,$city->getCountry()->getName()))->getId();
                 }
                 $city->getCountry()->setId($countryId);
-
-                $stateId = $city->getState()->getId();
-                if($city->getState()!=null && $stateId===null) {
-                    $stateId= $this->stateService->postState(new State(null,$city->getState()->getName(),$city->getCountry()))->getId();
+                
+                $stateId = null;
+                if($city->getState()!=null){
+                    $stateId = $city->getState()->getId();
+                    if($stateId===null) {
+                        $stateId= $this->stateService->postState(new State(null,$city->getState()->getName(),$city->getCountry()))->getId();
+                    }
                 }
                 
                 $cityName = $city->getName();
                 $cityStmt = $this->db->prepare("INSERT INTO city(name,stateId,countryId) values(?,?,?);");
 
                 $cityStmt->bind_param("sii",$cityName,$stateId,$countryId);
+
+                if(!$cityStmt->execute()) {
+                    throw new ErrorException("Data Insertion Failed");
+                }
             }catch(PDOException $pdoe) {
                 throw new ErrorException("Database Error :  ".$pdoe->getMessage());
             }catch(ErrorException $e) {
@@ -128,14 +135,18 @@
             return $city;
         }
 
-        function updateState(State $state) : State {
-            logMessage("Updating State");
+        function updateCity(City $city) : City {
+            logMessage("Updating City");
             try{
-                $stmt = $this->db->prepare("UPDATE state set name=?,countryId=? where id=?");
-                $name= $state->getName();
-                $id = $state->getId();
-                $countryId = $state->getCountry()->getId();
-                $stmt->bind_param("sii", $name,$countryId,$id);
+                $stmt = $this->db->prepare("UPDATE city set name=?,countryId=?,stateId=? where id=?");
+                $name= $city->getName();
+                $id = $city->getId();
+                $countryId = $city->getCountry()->getId();
+                $stateId = null;
+                if($city->getState()!=null) {
+                    $stateId = $city->getState()->getId();
+                }
+                $stmt->bind_param("siii", $name,$countryId,$stateId,$id);
     
                 if(!$stmt->execute()) {
                     throw new ErrorException("Data Updation Failed");
@@ -145,18 +156,18 @@
             }catch(ErrorException $e) {
                 throw $e;
             }
-            return $state;
+            return $city;
         } 
     
-        function deleteState(int $id) : State {
+        function deleteCity(int $id) : City {
             logMessage("Deleting data with the id $id");
-            $state = null;
+            $city = null;
             try{
-                $state = $this->getStateById($id);
-                if($state===null){
-                    throw new ErrorException("State with given id not found");
+                $city = $this->getCityById($id);
+                if($city===null){
+                    throw new ErrorException("City with given id not found");
                 }
-                $stmt = $this->db->prepare("DELETE FROM state where id=?");
+                $stmt = $this->db->prepare("DELETE FROM city where id=?");
                 $stmt->bind_param("s",$id);
                 if(!$stmt->execute()) {
                     throw new ErrorException("Data Deletion Failed");
@@ -166,6 +177,6 @@
             }catch(ErrorException $e) {
                 throw $e;
             }
-            return $state;
+            return $city;
         }
     }

@@ -89,9 +89,9 @@ create table enquiry(
     id int auto_increment primary key,
     enquiry varchar(255) not null,
     createdBy int not null,
-    reviewFor int not null,
+    enquiryFor int not null,
     createdAt datetime default current_timestamp,
-    foreign key (reviewFor) references property(id) on delete cascade,
+    foreign key (enquiryFor) references property(id) on delete cascade,
     foreign key (createdBy) references user(id) on delete cascade
 );
 

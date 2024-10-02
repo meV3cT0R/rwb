@@ -36,7 +36,10 @@
         $cityService = new cityService($dbConnection,$cs,$ss);
         logMessage(implode( $cityService->getCities()));
         logMessage($cityService->getCityById(id: 1));
-
+        // $cityService->updateCity(new City(1,"Kyoto",new Country(1) ));
+        logMessage($cityService->getCityById(id: 1));
+        // $cityService->postCity(new City(null,"tokyo",new Country(1)));
+        logMessage(implode( $cityService->getCities()));
     } catch(Exception $e) {
         logMessage("". $e->getMessage());
     }

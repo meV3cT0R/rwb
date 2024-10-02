@@ -4,10 +4,10 @@
 --->
 <?php
     class City {
-        private int|null $id;
-        private string $name;
-        private Country $country;
-        private State|null $state;
+        private int|null $id=null;
+        private string|null $name=null;
+        private Country|null $country=null;
+        private State|null $state=null;
 
         public function __construct(int $id=null, string $name=null, Country $country=null,State $state=null) {
             if($id ===null && $name ===null && $country ===null && $state=null) {
@@ -22,12 +22,12 @@
                 $this->name = $name;
                 return;
             }
-            if($state ===null) {
-                $this->id = $id;
-                $this->name = $name;
-                $this->country = $country;
-                return;
-            }
+            // if($state ===null) {
+            //     $this->id = $id;
+            //     $this->name = $name;
+            //     $this->country = $country;
+            //     return;
+            // }
             $this->id = $id;
             $this->name = $name;
             $this->country = $country;
@@ -39,15 +39,15 @@
             return $this->id;
         }
 
-        public function getName(): string {
+        public function getName(): string|null {
             return $this->name;
         }
 
-        public function getCountry(): Country {
+        public function getCountry(): Country|null {
             return $this->country;
         }
 
-        public function getState(): State {
+        public function getState(): State|null {
             return $this->state;
         }
 
