@@ -14,6 +14,35 @@
 
     private ?array $propertyPhotos = null;
 
+    public function __construct(
+        ?int $id = null,
+        ?PropertyType $propertyType = null,
+        ?string $status = null,
+        ?int $yearBuilt = null,
+        ?User $marketedBy = null,
+        ?string $description = null,
+        ?float $price = null,
+        ?float $totalSqFt = null,
+        ?string $lotSizeUnit = null,
+        ?float $lotSize = null,
+        ?DateTime $createdAt = null,
+        ?array $propertyPhotos= null
+    ) {
+        $this->id = $id;
+        $this->propertyType = $propertyType;
+        $this->status = $status;
+        $this->yearBuilt = $yearBuilt;
+        $this->marketedBy = $marketedBy;
+        $this->description = $description;
+        $this->price = $price;
+        $this->totalSqFt = $totalSqFt;
+        $this->lotSizeUnit = $lotSizeUnit;
+        $this->lotSize = $lotSize;
+        $this->createdAt = $createdAt;
+        $this->propertyPhotos = $propertyPhotos;
+    }
+    
+
     public function getId(): ?int {
         return $this->id;
     }

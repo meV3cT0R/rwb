@@ -3,7 +3,7 @@
         private int|null $id=null;
         private string|null $name=null;
 
-        function __construct(int|null $id, string|null $name) {
+        function __construct(int|null $id=null, string|null $name=null) {
             $this->id=$id;
             $this->name=$name;
         }

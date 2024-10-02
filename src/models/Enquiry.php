@@ -6,6 +6,21 @@ class Enquiry {
     private ?Property $enquiryFor = null;
     private ?DateTime $createdAt = null;
 
+
+    public function __construct(
+        ?int $id = null,
+        ?string $enquiry = null,
+        ?User $createdBy = null,
+        ?Property $enquiryFor = null,
+        ?DateTime $createdAt = null
+    ) {
+        $this->id = $id;
+        $this->enquiry = $enquiry;
+        $this->createdBy = $createdBy;
+        $this->enquiryFor = $enquiryFor;
+        $this->createdAt = $createdAt;
+    }
+    
     public function getId(): ?int {
         return $this->id;
     }

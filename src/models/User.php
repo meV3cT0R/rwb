@@ -8,7 +8,27 @@ class User {
     private ?string $password = null;
     private ?Role $role = null;
     private ?string $avatar = null;
-
+    public function __construct(
+        ?int $id = null,
+        ?string $firstName = null,
+        ?string $lastName = null,
+        ?string $email = null,
+        ?string $username = null,
+        ?string $password = null,
+        ?Role $role = null,
+        ?string $avatar = null
+    ) {
+        $this->id = $id;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->username = $username;
+        $this->password = $password;
+        $this->role = $role;
+        $this->avatar = $avatar;
+    }
+    
+    
     public function getId(): ?int {
         return $this->id;
     }

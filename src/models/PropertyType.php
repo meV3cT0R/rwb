@@ -5,6 +5,19 @@ class PropertyType {
     private ?User $createdBy = null;
     private ?DateTime $createdAt = null;
 
+    public function __construct(
+        ?int $id = null,
+        ?string $name = null,
+        ?User $createdBy = null,
+        ?DateTime $createdAt = null
+    ) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->createdBy = $createdBy;
+        $this->createdAt = $createdAt;
+    }
+    
+
     public function getId(): ?int {
         return $this->id;
     }
