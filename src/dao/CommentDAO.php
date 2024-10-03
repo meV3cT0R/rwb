@@ -10,25 +10,12 @@ class CommentDAO
     private mysqli $db;
     function __construct(
         mysqli $dbConnection,
-        UserService $userService,
-        PropertyPhotosServices $propertyPhotosServices,
-        EnquiryService $enquiryService,
-        PropertyService $propertyService
+
     ) {
         if ($dbConnection == null) {
             throw new ErrorException("No Database Connection");
         }
-        Helper::checkDependencies([
-            'UserService' => $userService,
-            'PropertyPhotosServices' => $propertyPhotosServices,
-            'EnquiryService' => $enquiryService,
-            'PropertyService' => $propertyService,
-        ]);
         $this->db = $dbConnection;
-        $this->userService = $userService;
-        $this->propertyPhotosServices = $propertyPhotosServices;
-        $this->enquiryService = $enquiryService;
-        $this->propertyService = $propertyService;
     }
 
     function getCommentsByEnquiryId(int $id): array

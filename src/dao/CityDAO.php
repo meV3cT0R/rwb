@@ -5,26 +5,16 @@
     logMessage("inside City Service.php");
     class CityService {
         private mysqli $db;
-        private CountryService $countryService;
-        private StateService $stateService;
 
         public function __construct(
             mysqli $dbConnection=null,
-            CountryService $countryService,
-            StateService $stateService
+
         ) {
             if($dbConnection===null){
                 throw new ErrorException("No Database Connection");
             }
-            if($countryService===null) {
-                throw new ErrorException("Required Dependency 'CountryService' is not Provided");
-            }
-            if($countryService===null) {
-                throw new ErrorException("Required Dependency 'StateService' is not Provided");
-            }
+
             $this->db = $dbConnection;
-            $this->countryService = $countryService;
-            $this->stateService = $stateService;
         }
         function getCities() : array {
             logMessage("Getting Cities");
@@ -102,26 +92,18 @@
             logMessage("Posting city");
             try{
                 if($city->getCountry()===null) {
-                    throw new ErrorException("[No Country Provided] State Should be part of Country");
+                    throw new ErrorException("[No Country Provided] City Should be part of Country");
                 }
+
+                $cityName = $city->getName();
                 $countryId = $city->getCountry()->getId();
-                
-                if($countryId===null) {
-                    $countryId = $this->countryService->postCountry(new Country(null,$city->getCountry()->getName()))->getId();
-                }
-                $city->getCountry()->setId($countryId);
                 
                 $stateId = null;
                 if($city->getState()!=null){
-                    $stateId = $city->getState()->getId();
-                    if($stateId===null) {
-                        $stateId= $this->stateService->postState(new State(null,$city->getState()->getName(),$city->getCountry()))->getId();
-                    }
+                    $stateId = $city->getState()->getId();  
                 }
-                
-                $cityName = $city->getName();
-                $cityStmt = $this->db->prepare("INSERT INTO city(name,stateId,countryId) values(?,?,?);");
 
+                $cityStmt = $this->db->prepare("INSERT INTO city(name,stateId,countryId) values(?,?,?);");
                 $cityStmt->bind_param("sii",$cityName,$stateId,$countryId);
 
                 if(!$cityStmt->execute()) {

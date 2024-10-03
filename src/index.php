@@ -14,14 +14,14 @@
     try {
         $dbConnection = (new DB())->connect();
 
-        $cs = new CountryService($dbConnection);
+        $cs = new CountryDAO($dbConnection);
         // $cs->postCountry(new Country("Germany"));
         logMessage(implode($cs->getCountries()));
         $updatedCountry = new Country(null,"Poland");
         // $updatedCountry->setId(5);
         // $cs->updateCountry($updatedCountry);
         logMessage( implode($cs->getCountries()));
-        $ss = new StateService($dbConnection);
+        $ss = new StateDAO($dbConnection);
         // $ss->postState(new State(null,"california",new Country(6,"USA")));
         logMessage( implode($ss->getStates()));
         logMessage( $ss->getStateById(id: 1));
@@ -33,7 +33,7 @@
         // $cs->updateCountry($updatedCountry);
         // echo implode($ss->getStates());
 
-        $cityService = new cityService($dbConnection,$cs,$ss);
+        $cityService = new CityDAO($dbConnection,$cs,$ss);
         logMessage(implode( $cityService->getCities()));
         logMessage($cityService->getCityById(id: 1));
         // $cityService->updateCity(new City(1,"Kyoto",new Country(1) ));
