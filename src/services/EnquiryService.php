@@ -1,19 +1,21 @@
 <?php
-    class PropertyTypeService {
+    class EnquiryService {
         private mysqli $db;
         public function __construct(
-            mysqli $db
+            mysqli $db,
+            UserService $userService,
+            PropertyService $propertyService
         ) {
             if ($db == null) {
                 throw new ErrorException("No Database Connection");
             }
         }
 
-        public function getPropertyTypes() :array {
+        public function getEnquiriesByPropertyId() :array {
             return [];
         }
 
-        public function getPropertyTypeById() : Property {
+        public function getEnquiriesByUserId() : Property {
             return new Property();
         }
 

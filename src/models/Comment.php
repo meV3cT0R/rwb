@@ -4,7 +4,7 @@
         private User|null $createdBy=null;
         private string|null $comment=null;
 
-        private Property|null $commentFor=null; //property
+        private Enquiry|null $commentFor=null; //property
         
         function __construct(int|null $id=null,User|null $createdBy=null,string|null $comment,Property|null $commentFor) {
             $this->id=$id;
@@ -25,7 +25,7 @@
             return $this->comment;
         }
 
-        public function getCommentFor():Property|null {
+        public function getCommentFor():Enquiry|null {
             return $this->commentFor;
         }
 
@@ -41,8 +41,8 @@
             $this->comment = $comment;
         }
 
-        public function setCommentFor(Property|null $property) : void {
-            $this->property = $property;
+        public function setCommentFor(Enquiry|null $commentFor) : void {
+            $this->commentFor = $commentFor;
         }
     }
 

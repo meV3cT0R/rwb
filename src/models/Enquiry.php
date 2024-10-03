@@ -4,6 +4,9 @@ class Enquiry {
     private ?string $enquiry = null;
     private ?User $createdBy = null;
     private ?Property $enquiryFor = null;
+
+    private ?Comment $comment = null;
+
     private ?DateTime $createdAt = null;
 
 
@@ -43,6 +46,14 @@ class Enquiry {
 
     public function setCreatedBy(?User $createdBy): void {
         $this->createdBy = $createdBy;
+    }
+
+    public function getComment(): ?Comment {
+        return $this->comment;
+    }
+
+    public function setComment(?Comment $comment): void {
+        $this->comment = $comment;
     }
 
     public function getEnquiryFor(): ?Property {
