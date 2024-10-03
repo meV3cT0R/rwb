@@ -18,7 +18,7 @@ class PropertyDAO
             if ($propertyResult->num_rows > 0) {
                 while ($row = $propertyResult->fetch_assoc()) {
                     $property = new Property();
-
+                    $property->setId($row["id"]);
                     $property->setStatus($row["status"]);
                     $property->setYearBuilt($row["yearBuilt"]);
                     $property->setDescription($row["description"]);
@@ -49,7 +49,7 @@ class PropertyDAO
             if ($propertyResult->num_rows > 0) {
                 $row = $propertyResult->fetch_assoc();
                 $property = new Property();
-
+                $property->setId($row["id"]);
                 $property->setStatus($row["status"]);
                 $property->setYearBuilt($row["yearBuilt"]);
                 $property->setDescription($row["description"]);
@@ -165,7 +165,7 @@ class PropertyDAO
             $lotSize = $property->getLotSize();
             
 
-            $propertyStmt->bind_param("isiisffsf",
+            $propertyStmt->bind_param("isiisffsfi",
                 $propertyType,
                 $status,
                 $yearBuilt,
