@@ -28,7 +28,7 @@ class PropertyPhotosDAO
         $propertyPhotos = [];
         try {
             $propertyPhotosStmt = $this->db->prepare("SELECT * FROM propertyPhotos where propertyId=?;");
-
+            $propertyPhotosStmt->bind_param("i", $propertyId);
             if (!$propertyPhotosStmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
             }
@@ -46,11 +46,12 @@ class PropertyPhotosDAO
         return $propertyPhotos;
     }
 
-    public function getPropertyPhotosById(int $id): PropertyPhotos
+    public function getPropertyPhotosById(int $propertyId): PropertyPhotos
     {
         $propertyPhoto = null;
         try {
             $propertyPhotosStmt = $this->db->prepare("SELECT * FROM propertyPhotos where propertyId=?;");
+            $propertyPhotosStmt->bind_param("i", $propertyId);
 
             if (!$propertyPhotosStmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
