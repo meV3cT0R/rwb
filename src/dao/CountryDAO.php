@@ -1,7 +1,7 @@
 <?php
 logMessage("inside countryService.php");
 
-class CountryService {
+class CountryDAO {
     private mysqli $db;
 
     function __construct($dbConnection) {

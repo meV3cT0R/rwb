@@ -5,16 +5,9 @@
 <?php
 logMessage("inside CommentService.php");
 
-class CommentService
+class CommentDAO
 {
     private mysqli $db;
-    private UserService $userService;
-
-    private PropertyPhotosServices $propertyPhotosServices;
-    private EnquiryService $enquiryService;
-
-    private PropertyService $propertyService;
-
     function __construct(
         mysqli $dbConnection,
         UserService $userService,
@@ -139,7 +132,6 @@ class CommentService
                         (float) $row["propertyTypeName"],
                         $row["propertyTypeName"],
                         null,
-                        $this->propertyPhotosServices->getPhotosByPropertyId((int) $row["propertyId"])
                     );
                     $comment = new Comment(
                         (int) $row["commentId"],
@@ -259,7 +251,6 @@ class CommentService
                 (float) $row["propertyTypeName"],
                 $row["propertyTypeName"],
                 null,
-                $this->propertyPhotosServices->getPhotosByPropertyId((int) $row["propertyId"])
             );
             $comment = new Comment(
                 (int) $row["commentId"],

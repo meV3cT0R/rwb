@@ -2,7 +2,7 @@
     Required Dependencies
 ----->
 <?php
-    class UserService{
+    class UserDAO{
         private mysqli $db;
 
         public function __construct() {

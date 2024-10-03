@@ -3,7 +3,7 @@
         
 ---->
 <?php
-    class PropertyPhotosServices {
+    class PropertyPhotosDAO {
         private mysqli $db;
 
         function __construct(

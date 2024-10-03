@@ -1,5 +1,5 @@
 <?php
-    class PropertyService {
+    class PropertyDAO {
         private mysqli $db;
         public function __construct(
             mysqli $db

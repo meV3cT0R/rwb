@@ -4,7 +4,7 @@
 <?php
     logMessage("inside State Service.php");
 
-    class StateService {
+    class StateDAO {
         private mysqli $db;
 
         public function __construct($dbConnection=null) {

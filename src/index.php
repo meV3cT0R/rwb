@@ -4,9 +4,9 @@
     include __DIR__."/models/State.php";
     include __DIR__."/models/Country.php";
     include __DIR__."/models/City.php";
-    include(__DIR__."/services/CountryService.php");
-    include(__DIR__."/services/StateService.php");
-    include(__DIR__."/services/CityService.php");
+    include(__DIR__."/dao/CountryDAO.php");
+    include(__DIR__."/dao/StateDAO.php");
+    include(__DIR__."/dao/CityDAO.php");
     include __DIR__."/../config/db.php";
 
 
