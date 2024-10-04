@@ -1,5 +1,5 @@
 <?php
-    include "../src/index.php";
+    include __DIR__."/../src/index.php";
 ?>
 <html>
     <head>
@@ -8,13 +8,13 @@
 
     <body>
         <?php 
-            include "../components/header.php";
+            include __DIR__."/../components/header.php";
         ?>
 
         <h1> Hello World</h1>
 
         <?php 
-            include "../components/footer.php";
+            include __DIR__."/../components/footer.php";
         ?>
         <script src="./js/index.js"></script>
     </body>

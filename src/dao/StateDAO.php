@@ -2,7 +2,7 @@
     State
 --->
 <?php
-    logMessage("inside State Service.php");
+    logMessage("inside StateDAO.php");
 
     class StateDAO {
         private mysqli $db;

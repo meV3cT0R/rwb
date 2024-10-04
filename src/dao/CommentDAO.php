@@ -10,7 +10,6 @@ class CommentDAO
     private mysqli $db;
     function __construct(
         mysqli $dbConnection,
-
     ) {
         if ($dbConnection == null) {
             throw new ErrorException("No Database Connection");
@@ -298,7 +297,7 @@ class CommentDAO
         return $comment;
     }
 
-    function deleteCountry(int $id): Comment
+    function deleteComment(int $id): Comment
     {
         logMessage("Deleting data with the id $id");
         $comment = null;

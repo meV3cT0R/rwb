@@ -7,8 +7,6 @@ class Enquiry {
 
     private ?array $comments = null;
 
-
-
     public function __construct(
         ?int $id = null,
         ?string $enquiry = null,

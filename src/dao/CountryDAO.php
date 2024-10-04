@@ -1,5 +1,5 @@
 <?php
-logMessage("inside countryService.php");
+logMessage("inside countryDAO.php");
 
 class CountryDAO {
     private mysqli $db;

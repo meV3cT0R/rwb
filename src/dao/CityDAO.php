@@ -2,7 +2,7 @@
     City
 --->
 <?php
-    logMessage("inside City Service.php");
+    logMessage("inside CityDAO.php");
     class CityDAO {
         private mysqli $db;
 

@@ -24,12 +24,12 @@ class EnquiryDAO
         return $propertyType;
     }
 
-    public function getEnquiries(): array
+    public function getEnquiriesByPropertyId(int $propertyId): array
     {
         $objs = [];
         try {
-            $stmt = $this->db->prepare("SELECT * FROM enquiry;");
-
+            $stmt = $this->db->prepare("SELECT * FROM enquiry where id=?;");
+            $stmt->bind_param("i", $propertyId);
             if (!$stmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
             }

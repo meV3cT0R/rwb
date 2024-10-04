@@ -1,7 +1,7 @@
 <?php
     class Country {
         private int|null $id=null;
-        private string $name=null;
+        private ?string $name=null;
         private ?array $states=null;
         private ?array $cities=null;
         
