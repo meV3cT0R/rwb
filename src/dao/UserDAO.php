@@ -28,19 +28,45 @@ class UserDAO
 
         return $user;
     }
-    public function getUsers(): array
-    {
+
+    private function queryHelper($initQuery,$map,&$query="",&$bindArr=[],&$bindString="") {
+        $query = $initQuery. " ";
+        $i =0;
+        foreach ($map as $key => $value) {
+            if($i=0){
+                $query .= "where ";
+            }
+            $query .= "$key=?";
+            if($i!=count($map)-1) {
+                $query .= " and ";
+            }
+        }
+        foreach ($map as $key => $value) {
+            array_push($bindArr,$value["value"]);
+            array_push($bindString,$value["type"]);
+        }
+        $query .=";";
+    }
+
+    public function getUsersHelper(array $map) :array{
+        $query = "";
+        $bindArr = [];
+        $bindString = "";
+
+        $this->queryHelper("SELECT * FROM users",$map,$query,$bindArr,$bindString);
+
         $users = [];
         try {
-            $stmt = $this->db->prepare("SELECT * FROM users where propertyId=?;");
-            $stmt->bind_param("i", $propertyId);
-            if (!$propertyPhotosStmt->execute()) {
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param($bindString, $bindArr);
+
+            if (!$stmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
             }
-            $propertyPhotosResult = $propertyPhotosStmt->get_result();
-            if ($propertyPhotosResult->num_rows > 0) {
-                while ($row = $propertyPhotosResult->fetch_assoc()) {
-                    array_push($propertyPhotos, $this->rowMapHelper($row));
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    array_push($users, $this->rowMapHelper($row));
                 }
             }
         } catch (PDOException $pdoe) {
@@ -48,57 +74,128 @@ class UserDAO
         } catch (ErrorException $e) {
             throw $e;
         }
-        return $propertyPhotos;
+        return $users;
     }
-
-    public function getPropertyPhotosById(int $propertyId): PropertyPhotos
+    public function getUsers(): array
     {
-        $propertyPhoto = null;
-        try {
-            $propertyPhotosStmt = $this->db->prepare("SELECT * FROM propertyPhotos where propertyId=?;");
-            $propertyPhotosStmt->bind_param("i", $propertyId);
+        return $this->getUsersHelper(array(
 
-            if (!$propertyPhotosStmt->execute()) {
+        ));
+    }
+    public function getUsersByRole(int $roleId): array
+    {
+        return $this->getUsersHelper(array(
+            "role" => array(
+                "type" => "i",
+                "value" => $roleId
+            )
+        ));
+    }
+    private function getUserHelper(array $map): User{
+        $query = "";
+        $bindArr = [];
+        $bindString = "";
+
+        $this->queryHelper("SELECT * FROM users",$map,$query,$bindArr,$bindString);
+
+        $user = null;
+        try {
+            $stmt = $this->db->prepare($query);
+
+
+            $stmt->bind_param($bindString, $bindArr);
+
+            if (!$stmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
             }
-            $propertyPhotosResult = $propertyPhotosStmt->get_result();
-            if ($propertyPhotosResult->num_rows > 0) {
-                $row = $propertyPhotosResult->fetch_assoc();
-                $propertyPhoto = $this->rowMapHelper($row);
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $user = $this->rowMapHelper($row);
             }
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());
         } catch (ErrorException $e) {
             throw $e;
         }
-        return $propertyPhoto;
+        return $user;
+    }
+    public function getUserById(int $id): User
+    {
+        return $this->getUserHelper(array(
+            "id"=> array(
+                "type" => "i",
+                "value" => $id
+            )
+        ));
     }
 
-    public function postPropertyPhoto(PropertyPhotos $propertyPhotos): PropertyPhotos
+    public function getUserByUsername(string $username): User {
+        return $this->getUserHelper(array(
+            "username"=> array(
+                "type" => "s",
+                "value" => $username
+            )
+        ));
+    }
+
+    public function getUserByUsernameAndPassword(string $username,string $password): User {
+        return $this->getUserHelper(array(
+            "username"=> array(
+                "type" => "s",
+                "value" => $username
+            ),
+            "password"=> array(
+                "type" => "s",
+                "value" => $password
+            ),
+        ));
+    }
+    public function postUser(User $user): User
     {
         try {
             $stmt = $this->db->prepare("INSERT
-            INTO property(
-                    url,
-                    propertyId
+            INTO users(
+                    firstName,
+                    lastName,
+                    email,
+                    username,
+                    password,
+                    role,
+                    avatar
                 )
                 values(
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
                     ?,
                     ?
                 );
             ");
 
-            $propertyId = null;
-            if ($propertyPhotos->getProperty() != null) {
-                $propertyId = $propertyPhotos->getProperty()->getId();
+            $roleId = null;
+            if ($user->getRole() != null) {
+                $roleId = $user->getRole()->getId();
             }
-            $url = $propertyPhotos->getUrl();
+            $firstName = $user->getFirstName();
+            $email = $user->getEmail();
+            $lastName = $user->getLastName();
+            $username = $user->getUsername();
+            $password = $user->getPassword();
+            $avatar = $user->getAvatar();
 
 
             $stmt->bind_param(
-                "si",
-                $propertyId,
-                $url,
+                "sssssis",
+                $firstName,
+                $lastName,
+                $email,
+                $username,
+                $password,
+                $roleId,
+                $avatar,
             );
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Insertion Failed");
@@ -109,29 +206,44 @@ class UserDAO
         } catch (ErrorException $e) {
             throw $e;
         }
-        return $propertyPhotos;
+        return $user;
     }
 
-    public function updatePropertyPhotos(PropertyPhotos $propertyPhotos): PropertyPhotos
+    public function updateUser(User $user): User
     {
         try {
-            $stmt = $this->db->prepare("UPDATE propertyPhotos
-            set url=?,
-                    propertyId=?
+            $stmt = $this->db->prepare("UPDATE users
+            set firstName=?,
+                    lastName=?,
+                    email=?,
+                    username=?,
+                    password=?,
+                    role=?,
+                    avatar=?
                 where id=?
             ");
-            $id = $propertyPhotos->getId();
-            $propertyId = null;
-            if ($propertyPhotos->getProperty() != null) {
-                $propertyId = $propertyPhotos->getProperty()->getId();
+            $id = $user->getId();
+            $roleId = null;
+            if ($user->getRole() != null) {
+                $roleId = $user->getRole()->getId();
             }
-            $url = $propertyPhotos->getUrl();
+            $firstName = $user->getFirstName();
+            $email = $user->getEmail();
+            $lastName = $user->getLastName();
+            $username = $user->getUsername();
+            $password = $user->getPassword();
+            $avatar = $user->getAvatar();
 
 
             $stmt->bind_param(
-                "sii",
-                $propertyId,
-                $url,
+                "sssssisi",
+                $firstName,
+                $lastName,
+                $email,
+                $username,
+                $password,
+                $roleId,
+                $avatar,
                 $id
             );
 
@@ -144,20 +256,20 @@ class UserDAO
         } catch (ErrorException $e) {
             throw $e;
         }
-        return $propertyPhotos;
+        return $user;
     }
 
-    function deletePropertyPhotos(int $id): PropertyPhotos
+    function deleteUser(int $id): User
     {
-        logMessage("Deleting PropertyPhotos with the id $id");
-        $propertyPhotos = null;
+        logMessage("Deleting Users with the id $id");
+        $user = null;
         try {
-            $propertyPhotos = $this->getPropertyPhotosById($id);
-            if ($propertyPhotos === null) {
+            $user = $this->getUserById($id);
+            if ($user === null) {
                 throw new ErrorException("Property with given id not found");
             }
-            $stmt = $this->db->prepare("DELETE FROM propertyPhotos where id=?");
-            $stmt->bind_param("s", $id);
+            $stmt = $this->db->prepare("DELETE FROM users where id=?");
+            $stmt->bind_param("i", $id);
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Deletion Failed");
             }
@@ -166,6 +278,6 @@ class UserDAO
         } catch (ErrorException $e) {
             throw $e;
         }
-        return $propertyPhotos;
+        return $user;
     }
 }
