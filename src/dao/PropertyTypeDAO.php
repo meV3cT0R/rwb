@@ -85,7 +85,7 @@ class PropertyTypeDAO
             ");
 
             $createdBy = null;
-            if ($propertyType->getCreatedAt() != null) {
+            if ($propertyType->getCreatedBy() != null) {
                 $createdBy = $propertyType->getCreatedBy()->getId();
             }
             $name = $propertyType->getName();
@@ -120,7 +120,7 @@ class PropertyTypeDAO
             ");
             $id = $propertyType->getId();
             $createdBy = null;
-            if ($propertyType->getCreatedAt() != null) {
+            if ($propertyType->getCreatedBy() != null) {
                 $createdBy = $propertyType->getCreatedBy()->getId();
             }
             $name = $propertyType->getName();
@@ -155,7 +155,7 @@ class PropertyTypeDAO
                 throw new ErrorException("Property with given id not found");
             }
             $stmt = $this->db->prepare("DELETE FROM propertyPhotos where id=?");
-            $stmt->bind_param("s", $id);
+            $stmt->bind_param("i", $id);
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Deletion Failed");
             }

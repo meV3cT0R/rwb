@@ -152,7 +152,7 @@ class PropertyPhotosDAO
                 throw new ErrorException("Property with given id not found");
             }
             $stmt = $this->db->prepare("DELETE FROM propertyPhotos where id=?");
-            $stmt->bind_param("s", $id);
+            $stmt->bind_param("i", $id);
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Deletion Failed");
             }
