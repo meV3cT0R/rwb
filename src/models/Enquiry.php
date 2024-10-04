@@ -7,7 +7,6 @@ class Enquiry {
 
     private ?array $comments = null;
 
-    private ?DateTime $createdAt = null;
 
 
     public function __construct(
@@ -15,13 +14,14 @@ class Enquiry {
         ?string $enquiry = null,
         ?User $createdBy = null,
         ?Property $enquiryFor = null,
-        ?DateTime $createdAt = null
+        array $comments = null
     ) {
         $this->id = $id;
         $this->enquiry = $enquiry;
         $this->createdBy = $createdBy;
         $this->enquiryFor = $enquiryFor;
-        $this->createdAt = $createdAt;
+        $this->comments = $comments;
+
     }
     
     public function getId(): ?int {
@@ -48,13 +48,6 @@ class Enquiry {
         $this->createdBy = $createdBy;
     }
 
-    public function getComment(): ?array {
-        return $this->comments;
-    }
-
-    public function setComment(?array $comments): void {
-        $this->comments = $comments;
-    }
 
     public function getEnquiryFor(): ?Property {
         return $this->enquiryFor;
@@ -64,11 +57,11 @@ class Enquiry {
         $this->enquiryFor = $enquiryFor;
     }
 
-    public function getCreatedAt(): ?DateTime {
-        return $this->createdAt;
+    public function getComments(): ?array {
+        return $this->comments;
     }
 
-    public function setCreatedAt(?DateTime $createdAt): void {
-        $this->createdAt = $createdAt;
+    public function setComments(?array $comments): void {
+        $this->comments = $comments;
     }
 }

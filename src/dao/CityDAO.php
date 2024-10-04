@@ -3,7 +3,7 @@
 --->
 <?php
     logMessage("inside City Service.php");
-    class CityService {
+    class CityDAO {
         private mysqli $db;
 
         public function __construct(
