@@ -32,7 +32,6 @@
         }
 
         public function dashboard() : void {
-            echo __DIR__." <br/>";
             $totalPropertyTypes = count($this->propertyTypeRepository->getPropertyTypes());
             $totalCountry = count($this->countryRepository->getCountries());
             $totalState = count($this->stateRepository->getStates());

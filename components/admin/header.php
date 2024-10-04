@@ -1,3 +1,7 @@
-<div>
-    <h1>This is Admin Header</h1>
+<div class="header">
+    <button
+        id="toggleSidebar"
+    >
+        click
+    </button>
 </div>

@@ -89,7 +89,6 @@
     $uri = explode("/",$uri);
     $uri = array_slice($uri,2);
     $uri = implode("/",$uri);
-    echo $uri."<br/>";
 
     $route = array(
         "" => function():void{
