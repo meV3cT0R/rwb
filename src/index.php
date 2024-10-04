@@ -1,5 +1,4 @@
 <?php
-    include(__DIR__."/../devutils/logs.php");
     logMessage("inside src/index.php");
     include __DIR__."/models/State.php";
     include __DIR__."/models/Country.php";
@@ -7,7 +6,6 @@
     include(__DIR__."/dao/CountryDAO.php");
     include(__DIR__."/dao/StateDAO.php");
     include(__DIR__."/dao/CityDAO.php");
-    include __DIR__."/../config/db.php";
 
 
 

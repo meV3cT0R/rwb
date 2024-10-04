@@ -1,5 +1,5 @@
 <?php
-    class StateRepository {
+    class CityRepository {
         private CityDAO $cityDAO;
 
         public function __construct(

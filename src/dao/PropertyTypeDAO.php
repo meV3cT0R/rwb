@@ -12,6 +12,7 @@ class PropertyTypeDAO
         if ($db == null) {
             throw new ErrorException("No Database Connection");
         }
+        $this->db = $db;
     }
     private function rowMapHelper(array $row): PropertyType
     {

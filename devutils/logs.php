@@ -1,5 +1,5 @@
 <?php
-    include(__DIR__."/../constants.php");
+    require_once __DIR__."/../constants.php";
     function logMessage($msg): void {
         if(ENV == "PROD") return;
         echo "$msg <br />";

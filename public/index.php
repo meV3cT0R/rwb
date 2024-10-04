@@ -3,7 +3,7 @@
 ?>
 <html>
     <head>
-        <link href="./css/index.css" rel="stylesheet" type="text/css"/>
+        <link href="http://localhost/realEstate/public/css/index.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>

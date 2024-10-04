@@ -48,6 +48,16 @@
             return $user;
         }
 
+        public function getUsersByRoleName(string $roleName) : array {
+            $users = $this->getUsers();
+            $usersWithSpecificRole = [];
+            foreach($users as $user) {
+                if(strcmp($user->getRole()->getRoleName(),strtoupper($roleName))==0){
+                    array_push($usersWithSpecificRole,$user);
+                }
+            }
+            return $usersWithSpecificRole;
+        }
         public function postUser(User $user) : User {
             return $this->userDAO->postUser($user);
         }

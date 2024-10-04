@@ -1,4 +1,19 @@
 h1 {
     text-align: center;
     text-decoration: underline;
+    color:red;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    h1 {
+
+        color:green;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    h1 {
+        color:blue;
+    }
 }
