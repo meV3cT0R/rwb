@@ -70,9 +70,9 @@ create table property(
     marketedBy int not null,
     description varchar(255) not null,
     price float not null,
-    totalSqFt int not null,
+    totalSqFt float not null,
     lotSizeUnit varchar(20) not null,
-    lotSize int not null,
+    lotSize float not null,
     foreign key (marketedBy) references user(id) on delete cascade,
     createdAt datetime default current_timestamp
 );
