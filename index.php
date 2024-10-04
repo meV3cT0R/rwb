@@ -4,6 +4,10 @@
 
     require_once "config/db.php";
     
+    require_once "src/models/Country.php";
+    require_once "src/models/City.php";
+    require_once "src/models/State.php";
+
     require_once "src/controllers/HomeController.php";
     require_once "src/controllers/AdminController.php";
 

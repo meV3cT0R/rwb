@@ -12,6 +12,7 @@ class UserDAO
         if ($db == null) {
             throw new ErrorException("No Database Connection");
         }
+        $this->db=$db;
     }
     private function rowMapHelper(array $row): User
     {
@@ -53,12 +54,14 @@ class UserDAO
         $bindArr = [];
         $bindString = "";
 
-        $this->queryHelper("SELECT * FROM users",$map,$query,$bindArr,$bindString);
+        $this->queryHelper("SELECT * FROM user",$map,$query,$bindArr,$bindString);
 
         $users = [];
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param($bindString, $bindArr);
+            if($bindString !=""){
+                $stmt->bind_param($bindString, $bindArr);
+            }
 
             if (!$stmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
@@ -96,7 +99,7 @@ class UserDAO
         $bindArr = [];
         $bindString = "";
 
-        $this->queryHelper("SELECT * FROM users",$map,$query,$bindArr,$bindString);
+        $this->queryHelper("SELECT * FROM user",$map,$query,$bindArr,$bindString);
 
         $user = null;
         try {
@@ -155,7 +158,7 @@ class UserDAO
     {
         try {
             $stmt = $this->db->prepare("INSERT
-            INTO users(
+            INTO user(
                     firstName,
                     lastName,
                     email,
@@ -268,7 +271,7 @@ class UserDAO
             if ($user === null) {
                 throw new ErrorException("Property with given id not found");
             }
-            $stmt = $this->db->prepare("DELETE FROM users where id=?");
+            $stmt = $this->db->prepare("DELETE FROM user where id=?");
             $stmt->bind_param("i", $id);
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Deletion Failed");

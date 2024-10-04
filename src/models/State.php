@@ -43,7 +43,7 @@
         }
 
 
-        public function setCities(array $cities): ?array {
+        public function setCities(array $cities): void {
             $this->cities = $cities;
         }
 

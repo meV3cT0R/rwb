@@ -20,7 +20,7 @@
             $cities = $this->cityDAO->getCities();
             $citiesOfState = [];
             foreach($cities as $city) {
-                if($city->getState()->getId() == $state->getId()) {
+                if($city->getState() !=null && $city->getState()->getId() == $state->getId()) {
                     array_push($citiesOfState, $city);
                 }
             }

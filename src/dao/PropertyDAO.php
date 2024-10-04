@@ -8,6 +8,7 @@ class PropertyDAO
         if ($db == null) {
             throw new ErrorException("No Database Connection");
         }
+        $this->db=$db;
     }
 
     public function getProperties(): array
