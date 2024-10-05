@@ -1,8 +1,17 @@
+<?php
+    if(isset($_POST["logout"])) {
+        session_start();
+        session_destroy();
+        header("Location: /realEstate/login",true);
+        exit();
+    }
+
+?>
 <div id="sidebar">
     <div>
         <div id="logo">
             <div>
-                <h1> Logo asdfsd adfasdf </h1>
+                <h1> RE </h1>
             </div>
 
         </div>
@@ -14,42 +23,55 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/propertyType">
+                    <a href="/realEstate/admin/propertyType">
                         Property Type
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/country">
-                        country
+                    <a href="/realEstate/admin/country">
+                        counties
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/state">
-                        state
+                    <a href="/realEstate/admin/state">
+                        states
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/owner">
-                        owner
+                    <a href="/realEstate/admin/city">
+                        cities
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/user">
-                        user
+                    <a href="/realEstate/admin/agents">
+                        agents
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/properties">
+                    <a href="/realEstate/admin/owners">
+                        owners
+                    </a>
+                </li>
+                <li>
+                    <a href="/realEstate/admin/users">
+                        users
+                    </a>
+                </li>
+                <li>
+                    <a href="/realEstate/admin/properties">
                         properties
                     </a>
                 </li>
 
             </ul>
         </div>
-        <div class="logoutDiv">
-            <button>
-                logout
-            </button>
+        <div >
+            <form class="logoutDiv" method="POST" action="">
+                <button name="logout">
+                    logout
+                </button>
+            </form>
+
         </div>
     </div>
 </div>

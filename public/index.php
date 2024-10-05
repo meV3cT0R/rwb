@@ -3,7 +3,8 @@
 ?>
 <html>
     <head>
-        <link href="http://localhost/realEstate/public/css/index.css" rel="stylesheet" type="text/css"/>
+        <link href=<?php echo URL . "public/css/index.css" ?> rel="stylesheet" type="text/css"/>
+        
     </head>
 
     <body>
@@ -16,6 +17,6 @@
         <?php 
             include __DIR__."/../components/footer.php";
         ?>
-        <script src="./js/index.js"></script>
+        <script src=<?php echo URL . "public/js/index.js" ?>></script>
     </body>
 </html>

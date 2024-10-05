@@ -10,6 +10,12 @@
 
     require_once "src/controllers/HomeController.php";
     require_once "src/controllers/AdminController.php";
+    require_once "src/controllers/PropertyTypeController.php";
+    require_once "src/controllers/AdminCountryController.php";
+    require_once "src/controllers/AdminStateController.php";
+    require_once "src/controllers/AdminCityController.php";
+    require_once "src/controllers/AdminUserController.php";
+    require_once "src/controllers/AdminPropertyController.php";
 
     require_once "src/dao/PropertyTypeDAO.php";
     require_once "src/dao/UserDAO.php";
@@ -84,6 +90,25 @@
         $userRepository,
         $propertyRepository
     );
+    $propertyTypeController = new PropertyTypeController(
+        $propertyTypeRepository
+    );
+    $adminCountryController = new AdminCountryController(
+        $countryRepository
+    );
+    $adminStateController = new AdminStateController(
+        $stateRepository
+    );
+    $adminCityController = new AdminCityController(
+        $cityRepository
+    );
+
+    $adminUserController = new AdminUserController(
+        $userRepository
+    );
+    $adminPropertyController = new AdminPropertyController(
+        $propertyRepository
+    );
 
     $uri = $_SERVER['REQUEST_URI'];
     $uri = explode("/",$uri);
@@ -99,6 +124,46 @@
             global $adminController;
             $adminController->dashboard();
 
+        },
+        "admin/propertytype"=> function():void {
+            global $propertyTypeController;
+            $propertyTypeController->home();
+        },
+        "admin/country"=> function():void {
+            global $adminCountryController;
+            $adminCountryController->home();
+        },
+        "admin/state"=> function():void {
+            global $adminStateController;
+            $adminStateController->home();
+        },
+        "admin/city"=> function():void {
+            global $adminCityController;;
+            $adminCityController->home();
+        },
+        "admin/users"=> function():void {
+            global $adminUserController;;
+            $adminUserController->getUsers();
+        },
+        "admin/agents"=> function():void {
+            global $adminUserController;;
+            $adminUserController->getAgents();
+        },
+        "admin/owners"=> function():void {
+            global $adminUserController;;
+            $adminUserController->getOwners();
+        },
+        "admin/properties"=> function():void {
+            global $adminPropertyController;
+            $adminPropertyController->home();
+        },
+        "login"=>function() :void {
+            global $homeController;
+            $homeController->getLogin();
+        },
+        "register"=>function() :void {
+            global $homeController;
+            $homeController->getRegister();
         }
     );
 

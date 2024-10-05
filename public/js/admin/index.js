@@ -3,7 +3,8 @@ document.body.onload = function() {
     const sidebar  =document.querySelector("#sidebar");
     const body = document.querySelector("#body");
     const links = document.querySelectorAll("#sidebar ul li a");
-    
+    const logoutButton = document.querySelector(".logoutDiv button");
+
     for(const link of links) {
         link.style.transition = ".3s";
     }
@@ -14,7 +15,7 @@ document.body.onload = function() {
 
     sidebar.style.transition = ".5s";
     body.style.transition = ".5s";
-
+    logoutButton.style.transition = ".5s";
 
 
     toggleSidebar.addEventListener("click",function() {

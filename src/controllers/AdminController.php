@@ -42,4 +42,5 @@
             $totalProperties = count($this->propertyRepository->getProperties());
             require_once __DIR__."/../../public/admin/dashboard.php";
         }
+
     }
