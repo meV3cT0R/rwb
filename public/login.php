@@ -13,7 +13,7 @@
             include __DIR__."/../components/header.php";
         ?>
 
-        <div class="formContainer">
+        <div class="body formContainer">
             <form >
                 <h1> Login </h1>
                 <div>

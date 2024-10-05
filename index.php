@@ -7,6 +7,10 @@
     require_once "src/models/Country.php";
     require_once "src/models/City.php";
     require_once "src/models/State.php";
+    require_once "src/models/PropertyType.php";
+    require_once "src/models/Property.php";
+    require_once "src/models/User.php";
+    require_once "src/models/Role.php";
 
     require_once "src/controllers/HomeController.php";
     require_once "src/controllers/AdminController.php";
@@ -81,7 +85,9 @@
         $roleDAO,
     );
 
-    $homeController = new HomeController();
+    $homeController = new HomeController(
+        $propertyRepository
+    );
     $adminController = new AdminController(
         $propertyTypeRepository,
         $countryRepository,
@@ -164,6 +170,18 @@
         "register"=>function() :void {
             global $homeController;
             $homeController->getRegister();
+        },
+        "about"=>function() :void {
+            global $homeController;
+            $homeController->getAbout();
+        },
+        "properties"=>function() :void {
+            global $homeController;
+            $homeController->getProperties();
+        },
+        "contact"=>function() :void {
+            global $homeController;
+            $homeController->getContact();
         }
     );
 

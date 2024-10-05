@@ -34,17 +34,18 @@ class UserDAO
         $query = $initQuery. " ";
         $i =0;
         foreach ($map as $key => $value) {
-            if($i=0){
+            if($i==0){
                 $query .= "where ";
             }
             $query .= "$key=?";
             if($i!=count($map)-1) {
                 $query .= " and ";
             }
+            $i++;
         }
         foreach ($map as $key => $value) {
             array_push($bindArr,$value["value"]);
-            array_push($bindString,$value["type"]);
+            $bindString .= $value["type"];
         }
         $query .=";";
     }
@@ -100,6 +101,9 @@ class UserDAO
         $bindString = "";
 
         $this->queryHelper("SELECT * FROM user",$map,$query,$bindArr,$bindString);
+        logMessage("Generated Query :".$query);
+        logMessage("Generated bind types :".$bindString);
+        logMessage("Generated bind values :".implode($bindArr));
 
         $user = null;
         try {

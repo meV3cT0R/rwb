@@ -15,6 +15,7 @@ create table user(
     id int auto_increment primary key,
     firstName varchar(50) not null,
     lastName varchar(50) not null,
+    email varchar(100) not null,
     username varchar(50) not null,
     password varchar(255) not null,
     roleId int,
@@ -73,7 +74,10 @@ create table property(
     totalSqFt float not null,
     lotSizeUnit varchar(20) not null,
     lotSize float not null,
+    cityId int,
+    address varchar(50) not null,
     foreign key (marketedBy) references user(id) on delete cascade,
+    foreign key (cityId) references city(id) on delete set null,
     createdAt datetime default current_timestamp
 );
 
@@ -104,5 +108,70 @@ create table comment (
     foreign key (commentFor) references enquiry(id) on delete cascade,
     foreign key (createdBy) references user(id) on delete cascade
 );
+
+create table invoice (
+    id int auto_increment primary key,
+    propertyId int not null,            
+    issuedTo int not null,    
+    issuedBy int not null,             
+    amount float not null,             
+    status varchar(20) not null,      
+    dueDate date not null,              
+    createdAt datetime default current_timestamp,
+    foreign key (propertyId) references property(id) on delete cascade,
+    foreign key (issuedTo) references user(id) on delete cascade,
+    foreign key (issuedBy) references user(id) on delete cascade
+);
+
+create table documentType (
+    id int auto_increment primary key,
+    name varchar(50) not null,           
+    description varchar(255),            
+    createdAt datetime default current_timestamp
+);
+
+
+create table document (
+    id int auto_increment primary key,
+    documentTypeId int,            
+    filePath varchar(255) not null,         
+    uploadedBy int not null,                 
+    relatedToProperty int,                  
+    relatedToUser int,                      
+    relatedToInvoice int,                    
+    description varchar(255),                
+    createdAt datetime default current_timestamp,
+    foreign key (documentTypeId) references documentType(id) on delete set null,
+    foreign key (uploadedBy) references user(id) on delete cascade,
+    foreign key (relatedToProperty) references property(id) on delete cascade,
+    foreign key (relatedToUser) references user(id) on delete set null,
+    foreign key (relatedToInvoice) references invoice(id) on delete set null
+);
+
+
+
+
+create table paymentMethod (
+    id int auto_increment primary key,
+    methodName varchar(50) not null,      
+    description varchar(255),        
+    createdAt datetime default current_timestamp
+);
+create table payment (
+    id int auto_increment primary key,
+    invoiceId int not null,    
+    paidBy int not null,           
+    paidTo int not null,                
+    amount float not null,            
+    paymentDate datetime default current_timestamp, 
+    paymentMethodId int, 
+    paymentStatus varchar(20) not null, 
+    createdAt datetime default current_timestamp,
+    foreign key (invoiceId) references invoice(id) on delete cascade,
+    foreign key (paidBy) references user(id) on delete cascade,
+    foreign key (paidTo) references user(id) on delete cascade,
+    foreign key (paymentMethodId) references paymentMethod(id) on delete cascade 
+);
+
 
 

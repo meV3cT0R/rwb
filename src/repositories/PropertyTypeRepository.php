@@ -24,9 +24,13 @@
             $propertyTypes = $this->propertyTypeDAO->getPropertyTypes();
             $propertyTypesToBeSent = array();
             foreach($propertyTypes as $propertyType) {
-                $createdBy = $this->userDAO->getUserById($propertyType->getCreatedBy()->getId());
-                $createdBy->setRole($this->roleDAO->getRoleById($createdBy->getRole()->getId()));
-                $propertyType->setCreatedBy($createdBy);
+                if($propertyType->getCreatedBy() !=null){
+                    $createdBy = $this->userDAO->getUserById($propertyType->getCreatedBy()->getId());
+                    if($createdBy!=null && $createdBy->getRole() !=null) {
+                        $createdBy->setRole($this->roleDAO->getRoleById($createdBy->getRole()->getId()));
+                    }
+                    $propertyType->setCreatedBy($createdBy);
+                }
                 array_push($propertyTypesToBeSent,$propertyType);
             }
             return $propertyTypesToBeSent;
@@ -34,10 +38,11 @@
 
         public function getPropertyTypeById($id) : PropertyType {
             $propertyType = $this->propertyTypeDAO->getPropertyTypeById($id);
-
-            $createdBy = $this->userDAO->getUserById($propertyType->getCreatedBy()->getId());
-            $createdBy->setRole($this->roleDAO->getRoleById($createdBy->getRole()->getId()));
-            $propertyType->setCreatedBy($createdBy);
+            if($propertyType->getCreatedBy() !=null){
+                $createdBy = $this->userDAO->getUserById($propertyType->getCreatedBy()->getId());
+                $createdBy->setRole($this->roleDAO->getRoleById($createdBy->getRole()->getId()));
+                $propertyType->setCreatedBy($createdBy);
+            }
             return $propertyType;
         }
 

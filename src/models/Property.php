@@ -12,6 +12,8 @@
     private ?float $lotSize = null;
     private ?DateTime $createdAt = null;
 
+    private ?string $address = null;
+    private ?City $city = null;
     private ?array $propertyPhotos = null;
 
     public function __construct(
@@ -26,7 +28,9 @@
         ?string $lotSizeUnit = null,
         ?float $lotSize = null,
         ?DateTime $createdAt = null,
-        ?array $propertyPhotos= null
+        ?array $propertyPhotos= null,
+        ?string $address = null,
+        ?City $city = null,
     ) {
         $this->id = $id;
         $this->propertyType = $propertyType;
@@ -40,6 +44,8 @@
         $this->lotSize = $lotSize;
         $this->createdAt = $createdAt;
         $this->propertyPhotos = $propertyPhotos;
+        $this->address = $address;
+        $this->city = $city;
     }
     
 
@@ -131,7 +137,22 @@
         $this->createdAt = $createdAt;
     }
 
-    public function getPropertyPhotos(): ?PropertyPhotos {
+    public function getAddress(): ?string {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): void {
+        $this->address = $address;
+    }
+
+    public function getCity(): ?City {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): void {
+        $this->city = $city;
+    }
+    public function getPropertyPhotos(): ?array {
         return $this->propertyPhotos;
     }
 

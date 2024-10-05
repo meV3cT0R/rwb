@@ -14,7 +14,7 @@
             include __DIR__."/../components/header.php";
         ?>
 
-        <div class="formContainer">
+        <div class="formContainer body">
             <form method="post" action="">
                 <h1> Register </h1>
                 <div>

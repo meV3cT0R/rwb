@@ -1,5 +1,18 @@
 <?php
     class HomeController {
+
+        private PropertyRepository $propertyRepository;
+        public function __construct(
+            PropertyRepository $propertyRepository
+        ) {
+            Helper::checkDependencies(
+                array(
+                    "PropertyRepository" => $propertyRepository
+                )
+                );
+            $this->propertyRepository = $propertyRepository;
+        }
+
         public function home() : void {
             require_once __DIR__."/../../public/index.php";
         }
@@ -8,5 +21,18 @@
         }
         public function getRegister() : void {
             require_once __DIR__."/../../public/register.php";
+        }
+
+        public function getAbout() : void {
+            require_once __DIR__."/../../public/about.php";
+        }
+
+        public function getProperties() : void {
+            $properties = $this->propertyRepository->getProperties();
+            require_once __DIR__."/../../public/properties.php";
+        }
+
+        public function getContact() : void {
+            require_once __DIR__."/../../public/contact.php";
         }
     }

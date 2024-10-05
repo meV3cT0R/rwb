@@ -45,10 +45,7 @@ button {
     transition: .3s;
 }
 
-.header div div ul li a:hover {
-    color:white;
-    background-color:var(--primary);
-}
+
 
 .header  .buttons {
     display:flex;
@@ -56,7 +53,6 @@ button {
     width:100%;
     gap:15px;
     margin:0 20px;
-    margin-bottom:15px;
 }
 .header  .buttons div {
     width:90%;
@@ -102,9 +98,16 @@ body {
 body>div:nth-child(2) {
     flex-grow: 1;
 }
+.body {
+    flex-grow:1;
+}
 
 .header div .gap {
     flex-grow: 1;
+}
+#toggleContainer {
+    display:flex;
+    flex-direction: row-reverse;
 }
 
 @media (max-width: 767px) {
@@ -119,25 +122,50 @@ body>div:nth-child(2) {
     .header div div ul li {
         width : 100%;
     }
+    .header .buttons {
+        margin-bottom:15px;
+
+    }
+    .header div div ul li a:hover {
+        color:white;
+        background-color:var(--primary);
+    }
 }
 
 @media (min-width: 768px) {
+    .header {
+        transform : translateX(0%);
+    }
     .header > div > div:first-child {
         width:20%;
     }
     .header>div {
         flex-direction: row;
+        align-items: center;
+        padding :20px 0;
     }
-    .header div div:nth-child(2) {
-        border: 1px solid black;
+    /* .header >div >div:nth-child(2) {
         width:100%;
-    }
+    } */
     .header div div ul li {
         display:inline-block;
     }
 
     .header .buttons {
+        align-items: center;
         flex-direction: row;
+    }
+    .header >div div ul li div {
+        width:0%; 
+        height:2px;
+        background-color:var(--primary);
+        transition: .3s;
+    }
+    .header >div div ul li:hover div {
+        width:100%; 
+    }
+    #toggleContainer {
+        display:none;
     }
 }
 

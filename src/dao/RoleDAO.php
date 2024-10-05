@@ -18,7 +18,7 @@
             $roles = []; 
             try {
                 $result = $this->db->query("SELECT 
-                   * from roles;
+                   * from role;
                    ");
                 if($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
@@ -39,7 +39,7 @@
         function getRoleById(int $id) : Role {
             logMessage("Getting Role by Id");
             $result  = $this->db->query("SELECT 
-                   * from roles where id=$id;
+                   * from role where id=$id;
                    ") or trigger_error("Something Went wrong while trying to execute SELECT query");
             $role = new Role();
             if($result->num_rows> 0) {

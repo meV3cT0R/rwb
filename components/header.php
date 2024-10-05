@@ -7,24 +7,31 @@
         <div>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="/realEstate">
                         Home
                     </a>
+                    <div></div>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/realEstate/about">
                         About
                     </a>
+                    <div></div>
+
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/realEstate/properties">
                         Properties
                     </a>
+                    <div></div>
+
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/realEstate/contact">
                         Contact
                     </a>
+                    <div></div>
+
                 </li>
             </ul>
         </div>
@@ -53,3 +60,10 @@
     </div>
 
 </div>
+<nav id="toggleContainer">
+    <button
+        id="toggleSidebarNormal"
+    >
+        toggle
+    </button>
+</nav>

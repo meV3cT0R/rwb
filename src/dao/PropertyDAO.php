@@ -13,7 +13,7 @@ class PropertyDAO
 
     public function getProperties(): array
     {
-        $propreties = [];
+        $properties = [];
         try {
             $propertyResult = $this->db->query("SELECT * FROM property;");
             if ($propertyResult->num_rows > 0) {
@@ -27,7 +27,8 @@ class PropertyDAO
                     $property->setTotalSqFt($row["totalSqFt"]);
                     $property->setLotSizeUnit($row["lotSizeUnit"]);
                     $property->setLotSize($row["lotSize"]);
-
+                    $property->setAddress($row["address"]);
+                    $property->setCity(new City($row["cityId"]));
                     $property->setPropertyType(new PropertyType($row["propertyType"]));
                     $property->setMarketedBy(new User($row["marketedBy"]));
 
@@ -39,7 +40,7 @@ class PropertyDAO
         } catch (ErrorException $e) {
             throw $e;
         }
-        return $propreties;
+        return $properties;
     }
 
     public function getPropertyById(int $id): Property
@@ -58,7 +59,8 @@ class PropertyDAO
                 $property->setTotalSqFt($row["totalSqFt"]);
                 $property->setLotSizeUnit($row["lotSizeUnit"]);
                 $property->setLotSize($row["lotSize"]);
-
+                $property->setAddress($row["address"]);
+                $property->setCity(new City($row["cityId"]));
                 $property->setPropertyType(new PropertyType($row["propertyType"]));
                 $property->setMarketedBy(new User($row["marketedBy"]));
 
@@ -84,10 +86,14 @@ class PropertyDAO
                     price,
                     totalSqFt,
                     lotSizeUnit,
-                    lotSize    
+                    lotSize,
+                    address,
+                    cityId    
                 )
 
                 values(
+                    ?,
+                    ?,
                     ?,
                     ?,
                     ?,
@@ -111,9 +117,13 @@ class PropertyDAO
             $totalSqFt = $property->getTotalSqFt();
             $lotSizeUnit = $property->getLotSizeUnit();
             $lotSize = $property->getLotSize();
+            $address = $property->getAddress();
+            $cityId = null;
+            if($property->getCity()!=null)
+                $cityId = $property->getCity()->getId();
             
 
-            $propertyStmt->bind_param("isiisffsf",
+            $propertyStmt->bind_param("isiisffsfsi",
                 $propertyType,
                 $status,
                 $yearBuilt,
@@ -122,7 +132,9 @@ class PropertyDAO
                 $price,
                 $totalSqFt,
                 $lotSizeUnit,
-                $lotSize
+                $lotSize,
+                $address,
+                $cityId
             );
             if(!$propertyStmt->execute()){
                 throw new ErrorException("Data Insertion Failed");
