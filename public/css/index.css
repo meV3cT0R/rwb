@@ -5,25 +5,49 @@
     --danger: rgba(215, 41, 41, 0.822);
 }
 
+body {
+    display:flex;
+    min-height:100vh;
+}
+
+body div:nth-child(2) {
+    flex-grow: 1;
+}
+
 .header {
-    position: fixed;
     background: white;
     box-shadow:2px 1px 3px grey;
 }
 
-.header>div {
+.header > div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width : 200px;
 }
 
 button {
     cursor: pointer;
 }
 
-.header ul li {
+.header div div ul li {
     list-style-type: none;
+}
+
+.header >div >div {
+    width:100%;
+}
+.header div div ul li a {
+    padding: 10px 20px;
+    display:block;
+    text-align: center;
+    text-decoration :none;
+    color:var(--primary);
+    transition: .3s;
+}
+
+.header div div ul li a:hover {
+    color:white;
+    background-color:var(--primary);
 }
 
 .header  .buttons {
@@ -35,11 +59,11 @@ button {
     margin-bottom:15px;
 }
 .header  .buttons div {
-    width:100%;
-    text-align: center;
+    width:90%;
+    margin: 0 auto;
 }
 .header  .buttons  div  button {
-    width:90%;  
+    width:100%;  
     border:0;
     padding:5px;
     border-radius:10px;
@@ -79,25 +103,42 @@ body>div:nth-child(2) {
     flex-grow: 1;
 }
 
-.header>div>.gap {
+.header div .gap {
     flex-grow: 1;
 }
 
 @media (max-width: 767px) {
+    .header{
+        position:fixed;
+
+    }
     .header>div {
         height: 100vh;
+        width : 200px;
+    }
+    .header div div ul li {
+        width : 100%;
     }
 }
 
 @media (min-width: 768px) {
-    .header {
-        position: relative;
+    .header > div > div:first-child {
+        width:20%;
     }
-
     .header>div {
         flex-direction: row;
     }
+    .header div div:nth-child(2) {
+        border: 1px solid black;
+        width:100%;
+    }
+    .header div div ul li {
+        display:inline-block;
+    }
 
+    .header .buttons {
+        flex-direction: row;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {}

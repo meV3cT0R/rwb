@@ -33,13 +33,18 @@
         </div>
         <div class="buttons">
             <div>
-                <button>
+                <button
+                    onclick="window.open('/realEstate/login','_self')"
+                >
                     Login
                 </button>
             </div>
 
             <div>
-                <button>
+                <button
+                    onclick="window.open('/realEstate/register','_self')"
+
+                >
                     Register
                 </button>
             </div>
