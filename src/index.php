@@ -1,11 +1,6 @@
 <?php
     logMessage("inside src/index.php");
-    include __DIR__."/models/State.php";
-    include __DIR__."/models/Country.php";
-    include __DIR__."/models/City.php";
-    include(__DIR__."/dao/CountryDAO.php");
-    include(__DIR__."/dao/StateDAO.php");
-    include(__DIR__."/dao/CityDAO.php");
+
 
 
 

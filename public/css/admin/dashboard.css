@@ -1,0 +1,39 @@
+.info {
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.info > div {
+    text-align: center;
+    border-radius: 25px;
+    display: grid;
+    place-items: center;
+    background-color: whitesmoke;
+    box-shadow: 1px 2px 5px gray;
+    color:rgba(0,0,0,0.5);
+}
+
+@media (min-width: 768px) {
+    h1 {
+        color:green;
+    }
+    .info {
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    h1 {
+
+        color:green;
+    }
+
+}
+
+
+@media (min-width: 1024px) {
+    h1 {
+        color:blue;
+    }
+}

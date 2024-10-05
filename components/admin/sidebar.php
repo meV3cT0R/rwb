@@ -6,7 +6,7 @@
             </div>
 
         </div>
-        <div>
+        <div class="nav">
             <ul>
                 <li>
                     <a href="/realEstate/admin">

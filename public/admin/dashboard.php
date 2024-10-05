@@ -20,7 +20,7 @@ require_once __DIR__ . "/../../constants.php";
         <?php
         include __DIR__ . "/../../components/admin/header.php";
         ?>
-        <div>
+        <div class="info">
             <div>
                 <h2> <strong>Total Property Type</strong> : <span> <?php echo $totalPropertyTypes; ?></span></h2>
             </div>
@@ -34,13 +34,13 @@ require_once __DIR__ . "/../../constants.php";
                 <h2> <strong>Total City</strong> : <span> <?php echo $totalCity; ?></span></h2>
             </div>
             <div>
-                <h2> <strong>Total Agent</strong> : <span> <?php echo $totalAgent; ?></span></h2>
+                <h2> <strong>Total Agents</strong> : <span> <?php echo $totalAgent; ?></span></h2>
             </div>
             <div>
-                <h2> <strong>Total Owner</strong> : <span> <?php echo $totalOwner; ?></span></h2>
+                <h2> <strong>Total Owners</strong> : <span> <?php echo $totalOwner; ?></span></h2>
             </div>
             <div>
-                <h2> <strong>Total User</strong> : <span> <?php echo $totalUser; ?></span></h2>
+                <h2> <strong>Total Users</strong> : <span> <?php echo $totalUser; ?></span></h2>
             </div>
             <div>
                 <h2> <strong>Total Properties</strong> : <span> <?php echo $totalProperties; ?></span></h2>
