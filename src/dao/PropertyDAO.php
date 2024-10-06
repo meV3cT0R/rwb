@@ -47,7 +47,7 @@ class PropertyDAO
     {
         $property = null;
         try {
-            $propertyResult = $this->db->query("SELECT * FROM property;");
+            $propertyResult = $this->db->query("SELECT * FROM property WHERE id=$id;");
             if ($propertyResult->num_rows > 0) {
                 $row = $propertyResult->fetch_assoc();
                 $property = new Property();
@@ -63,8 +63,6 @@ class PropertyDAO
                 $property->setCity(new City($row["cityId"]));
                 $property->setPropertyType(new PropertyType($row["propertyType"]));
                 $property->setMarketedBy(new User($row["marketedBy"]));
-
-                array_push($properties, $property);
             }
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());

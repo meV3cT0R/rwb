@@ -213,6 +213,13 @@ error_reporting(E_ALL);
             global $homeController;
             $homeController->getProperties();
         },
+        "property-details"=>function() :void {
+            global $homeController;
+            global $params;
+            $id = $params["id"];
+            logMessage($id);
+            $homeController->getPropertyDetails($id);
+        },
         "contact"=>function() :void {
             global $homeController;
             $homeController->getContact();
