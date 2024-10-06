@@ -17,7 +17,7 @@ include __DIR__ . "/../src/index.php";
     include __DIR__ . "/../components/header.php";
     ?>
     <main class="body">
-        <div>
+        <div style="margin-top:30px;">
 
             <h1> Welcome to RE</h1>
             <div class="title">
