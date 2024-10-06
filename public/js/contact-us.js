@@ -1,6 +1,7 @@
 const form = document.querySelector("#contact-form");
 
 form.addEventListener("submit", (event) => {
+  console.log("hello");
   event.preventDefault();
 
   const firstName = document.getElementById("firstName").value;
