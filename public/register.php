@@ -5,6 +5,11 @@
             logMessage("register clicked");
             $image = Helper::uploadImage($_FILES["file"]);
             logMessage($image);
+            $user->setFirstName($_POST["firstName"]);
+            $user->setLastName($_POST["lastName"]);
+            $user->setUsername($_POST["username"]);
+            $user->setPassword($_POST["password"]);
+            $register($user);
         }catch(Exception $e){
             $error = $e->getMessage();
         }
