@@ -11,7 +11,6 @@
                 array(
                     "PropertyRepository" => $propertyRepository,
                     "UserService" => $userService
-
                 )
                 );
             $this->propertyRepository = $propertyRepository;
@@ -26,18 +25,29 @@
                 $dto = new ResDTO("User Data");
                 try {
                     $user = $this->userService->login($username,$password);
+                    session_start();
+                    $_SESSION["user"]=$user;
                     $dto->setData($user);
                 }catch(Exception $e) {
-                    $error = $e->getMessage();
                     $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
                 }
 
                 return $dto;
-
             };
             require_once __DIR__."/../../public/login.php";
         }
         public function getRegister() : void {
+            $register = function (User $user): ResDTO {
+                $dto = new ResDTO("User Data");
+                try {
+                    $user = $this->userService->register($user);
+                    $dto->setData($user);
+                }catch(Exception $e) {
+                    $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
+                }
+
+                return $dto;
+            };
             require_once __DIR__."/../../public/register.php";
         }
 

@@ -12,7 +12,6 @@
 <html>
     <head>
         <link href=<?php echo URL . "public/css/index.css" ?> rel="stylesheet" type="text/css"/>
-        
         <link href=<?php echo URL . "public/css/form.css" ?> rel="stylesheet" type="text/css"/>
     </head>
 

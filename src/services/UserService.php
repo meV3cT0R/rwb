@@ -18,9 +18,16 @@
             }
             return new UserDTO($user);
         }
-        
 
         public function register(User $user) : ?UserDTO {
-            return null;
+            $userDTO = null;
+            try {
+                $user->setPassword(password_hash($user->getPassword(), PASSWORD_BCRYPT));
+                $user=$this->userRepository->postUser($user);
+                $userDTO = new UserDTO($user);
+            }catch(Exception $e) {
+                throw $e;
+            }
+            return $userDTO;
         }
     }
