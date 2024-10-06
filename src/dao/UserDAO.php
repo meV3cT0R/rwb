@@ -138,7 +138,7 @@ class UserDAO
         ));
     }
 
-    public function getUserByUsername(string $username): User {
+    public function getUserByUsername(string $username): ?User {
         return $this->getUserHelper(array(
             "username"=> array(
                 "type" => "s",
@@ -169,7 +169,7 @@ class UserDAO
                     email,
                     username,
                     password,
-                    role,
+                    roleId,
                     avatar
                 )
                 values(
@@ -226,7 +226,7 @@ class UserDAO
                     email=?,
                     username=?,
                     password=?,
-                    role=?,
+                    roleId=?,
                     avatar=?
                 where id=?
             ");

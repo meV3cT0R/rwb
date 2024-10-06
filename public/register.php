@@ -9,6 +9,8 @@
             $user->setLastName($_POST["lastName"]);
             $user->setUsername($_POST["username"]);
             $user->setPassword($_POST["password"]);
+            $user->setRole(new Role($_POST["role"]));
+            $user->setAvatar($image);
             $register($user);
         }catch(Exception $e){
             $error = $e->getMessage();
