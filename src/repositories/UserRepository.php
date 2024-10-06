@@ -43,7 +43,12 @@
         }
 
         public function getUserByUsernameAndPassword(string $username,string $password) : User {
-            $user = $this->userDAO->getUserByUsernameAndPassword($username,$password);
+            try {
+                $user = $this->userDAO->getUserByUsernameAndPassword($username,$password);
+            }catch(Exception $e) {
+                throw new Exception("User with given Username and Password not Found");
+            }
+            
             $user->setRole($this->roleDAO->getRoleById($user->getRole()->getId()));
             return $user;
         }

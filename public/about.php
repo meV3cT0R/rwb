@@ -17,7 +17,7 @@ include __DIR__ . "/../src/index.php";
     include __DIR__ . "/../components/header.php";
     ?>
     <main class="body">
-        <div>
+        <div style="margin-top:30px;">
 
             <h1> Welcome to RE</h1>
             <div class="title">
@@ -29,14 +29,17 @@ include __DIR__ . "/../src/index.php";
             <div class="story">
 
         </div>
+        <hr>
         <div class="mission">
             <h1>Our mission</h2>
             <p class="desc">Our mission is to provide a superior real estate experience that exceeds our clients' expectations. We strive to build long-term relationships based on trust, respect, and open communication. Our goal is to make the process of buying or selling a property as smooth and stress-free as possible, while ensuring that our clients achieve their goals and realize their dreams.</p>
         </div>
+        <hr>
         <div class="team">
             <h1>Our Team</h1>
             <p class="desc">Our team of experienced agents and support staff are dedicated to providing exceptional service and expert guidance throughout every step of the real estate process. With extensive knowledge of the local market and a passion for delivering results, our team is committed to helping you achieve your real estate goals.   </p>
         </div>
+        <hr>
         <div class="sets-apart">
             <h1>What sets Us Apart</h1>
             <ul>
@@ -59,7 +62,7 @@ include __DIR__ . "/../src/index.php";
 </ul>
 
         </div>
-        <div class="touch"></div>
+        <!-- <div class="touch"></div> -->
     </main>
     <?php
     include __DIR__ . "/../components/footer.php";

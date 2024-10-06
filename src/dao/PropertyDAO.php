@@ -47,7 +47,7 @@ class PropertyDAO
     {
         $property = null;
         try {
-            $propertyResult = $this->db->query("SELECT * FROM property;");
+            $propertyResult = $this->db->query("SELECT * FROM property WHERE id=$id;");
             if ($propertyResult->num_rows > 0) {
                 $row = $propertyResult->fetch_assoc();
                 $property = new Property();

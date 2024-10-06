@@ -34,6 +34,21 @@ require_once __DIR__ . "/../src/models/Property.php";
                     <p><strong>Marketed By:</strong> <?php echo $property->getMarketedBy()->getFirstName(); ?></p>
                     <p><strong>City:</strong> <?php echo $property->getCity()->getName(); ?></p>
                 </div>
+                
+            </div>
+            <div class="gallery">
+                <h3>Property Gallery</h3>
+                <div class="gallery-grid">
+                    <?php if ($property->getPropertyPhotos() != null): ?>
+                        <?php foreach ($property->getPropertyPhotos() as $photo): ?>
+                            <div class="gallery-item">
+                                <img src="<?php echo URL . $photo->getUrl(); ?>" alt="Gallery Image" />
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No additional images available.</p>
+                    <?php endif; ?>
+                </div>
             </div>
         <?php else: ?>
             <p>Property not found.</p>

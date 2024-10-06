@@ -1,3 +1,3 @@
 <?php
-    define("ENV","DENV");
+    define("ENV","DEV");
     define("URL","http://localhost/realEstate/");

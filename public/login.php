@@ -1,10 +1,17 @@
 <?php
-    include __DIR__."/../src/index.php";
+    if(isset($_POST["login"])) {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $res = $login( $username, $password );
+        if($res instanceof ResDTO){
+            $error = $res->getErrorDTO()->getMessage();
+        }
+
+    }
 ?>
 <html>
     <head>
         <link href=<?php echo URL . "public/css/index.css" ?> rel="stylesheet" type="text/css"/>
-        
         <link href=<?php echo URL . "public/css/form.css" ?> rel="stylesheet" type="text/css"/>
     </head>
 
@@ -14,14 +21,18 @@
         ?>
 
         <div class="body formContainer">
-            <form >
+            <form action="" method="post">
                 <h1> Login </h1>
                 <div>
-                    <label> 
-                        Username
-                    </label>
-
-                    <input type="text" name="username" />
+                    <p
+                        class="error"
+                    > 
+                        <?php
+                            if(isset($error)) {
+                                echo $error;
+                            }
+                        ?>
+                    </p>
                 </div>
                 <div>
                     <label> 
@@ -30,9 +41,16 @@
 
                     <input type="text" name="username" />
                 </div>
+                <div>
+                    <label> 
+                        Password
+                    </label>
+
+                    <input type="password" name="password" />
+                </div>
 
                 <div>
-                    <button>
+                    <button name="login">
                         Log in
                     </button>
                 </div>
