@@ -27,7 +27,7 @@ class Helper
     public static function uploadImage($file): string
     {
         logMessage("inside upload Image");
-        $targetDir = "/realEstate/images/";
+        $targetDir = "realEstate/images/";
         if(!is_dir($targetDir)){
             if (mkdir($targetDir, 0755, true)) {
                 logMessage("Directory created successfully.");
