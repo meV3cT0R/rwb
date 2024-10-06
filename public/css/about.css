@@ -1,0 +1,66 @@
+h3 {
+  color: var(--primary);
+  font-size: 32px;
+}
+
+ul {
+  list-style: none;
+}
+
+li > p {
+  font-size: 24px;
+  color: rgb(9, 102, 102);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.title,
+.mission,
+.team,
+.sets-apart {
+  padding: 20px 30px;
+}
+
+.description {
+  font-size: 32px;
+  width: 50%;
+  padding: 10px 20px;
+  /* text-align: center; */
+  color: rgb(9, 102, 102);
+}
+
+img {
+  width: 50%;
+  height: auto;
+}
+
+.desc {
+  font-size: 32px;
+  width: 100%;
+  margin: auto;
+  color: rgb(9, 102, 102);
+  padding: 10px 20px;
+}
+
+/* Media query for medium and smaller screens */
+@media (max-width: 768px) {
+  .title {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .description,
+  .desc {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  img {
+    width: 100%;
+  }
+}
