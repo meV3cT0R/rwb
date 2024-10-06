@@ -4,7 +4,20 @@
         $password = $_POST["password"];
         $res = $login( $username, $password );
         if($res instanceof ResDTO){
-            $error = $res->getErrorDTO()->getMessage();
+            if($res->getErrorDTO()!=null) {
+                $error = $res->getErrorDTO()->getMessage();
+            }
+            else {
+                $userDTO = $res->getData();
+                if($userDTO instanceof UserDTO) {
+                    if($userDTO->getRole()=="ADMIN") {
+                        header("Location: /realEstate/admin");
+                    }else {
+                        header("Location: /realEstate/");
+
+                    }
+                }
+            }
         }
 
     }

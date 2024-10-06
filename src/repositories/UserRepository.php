@@ -36,7 +36,7 @@
             return $user;
         }
 
-        public function getUserByUsername(string $username) : User {
+        public function getUserByUsername(string $username) : ?User {
             $user = $this->userDAO->getUserByUsername($username);
             $user->setRole($this->roleDAO->getRoleById($user->getRole()->getId()));
             return $user;
