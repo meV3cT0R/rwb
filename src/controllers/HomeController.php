@@ -2,24 +2,52 @@
     class HomeController {
 
         private PropertyRepository $propertyRepository;
+        private UserService $userService;
         public function __construct(
-            PropertyRepository $propertyRepository
+            PropertyRepository $propertyRepository,
+            UserService $userService
         ) {
             Helper::checkDependencies(
                 array(
-                    "PropertyRepository" => $propertyRepository
+                    "PropertyRepository" => $propertyRepository,
+                    "UserService" => $userService
                 )
                 );
             $this->propertyRepository = $propertyRepository;
+            $this->userService = $userService;
         }
 
         public function home() : void {
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
+            $login = function (string $username,string $password): ResDTO {
+                $dto = new ResDTO("User Data");
+                try {
+                    $user = $this->userService->login($username,$password);
+                    session_start();
+                    $_SESSION["user"]=$user;
+                    $dto->setData($user);
+                }catch(Exception $e) {
+                    $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
+                }
+
+                return $dto;
+            };
             require_once __DIR__."/../../public/login.php";
         }
         public function getRegister() : void {
+            $register = function (User $user): ResDTO {
+                $dto = new ResDTO("User Data");
+                try {
+                    $user = $this->userService->register($user);
+                    $dto->setData($user);
+                }catch(Exception $e) {
+                    $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
+                }
+
+                return $dto;
+            };
             require_once __DIR__."/../../public/register.php";
         }
 

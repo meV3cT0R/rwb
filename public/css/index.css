@@ -109,7 +109,10 @@ body>div:nth-child(2) {
     display:flex;
     flex-direction: row-reverse;
 }
-
+.error {
+    text-align: center;
+    color:red;
+}
 @media (max-width: 767px) {
     .header{
         position:fixed;

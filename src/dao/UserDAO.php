@@ -61,7 +61,7 @@ class UserDAO
         try {
             $stmt = $this->db->prepare($query);
             if($bindString !=""){
-                $stmt->bind_param($bindString, $bindArr);
+                $stmt->bind_param($bindString, ...$bindArr);
             }
 
             if (!$stmt->execute()) {
@@ -95,7 +95,7 @@ class UserDAO
             )
         ));
     }
-    private function getUserHelper(array $map): User{
+    private function getUserHelper(array $map): ?User{
         $query = "";
         $bindArr = [];
         $bindString = "";
@@ -108,9 +108,8 @@ class UserDAO
         $user = null;
         try {
             $stmt = $this->db->prepare($query);
-
-
-            $stmt->bind_param($bindString, $bindArr);
+            $params = array_merge([$bindString],$bindArr);
+            call_user_func_array([$stmt,"bind_param"],Helper::refValues($params));
 
             if (!$stmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
@@ -119,6 +118,8 @@ class UserDAO
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $user = $this->rowMapHelper($row);
+            }else {
+                throw new Exception("User not found with given information");
             }
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());

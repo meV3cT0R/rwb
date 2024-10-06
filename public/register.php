@@ -1,6 +1,18 @@
 <?php
     if(isset($_POST["register"])) {
-             
+        $user = new User();
+        try{
+            logMessage("register clicked");
+            $image = Helper::uploadImage($_FILES["file"]);
+            logMessage($image);
+            $user->setFirstName($_POST["firstName"]);
+            $user->setLastName($_POST["lastName"]);
+            $user->setUsername($_POST["username"]);
+            $user->setPassword($_POST["password"]);
+            $register($user);
+        }catch(Exception $e){
+            $error = $e->getMessage();
+        }
     }
 ?>
 <html>
@@ -15,8 +27,11 @@
         ?>
 
         <div class="formContainer body">
-            <form method="post" action="">
+            <form method="post" action="" enctype="multipart/form-data">
                 <h1> Register </h1>
+                <div>
+
+                </div>
                 <div>
                     <label> 
                         First Name
@@ -47,11 +62,27 @@
                 </div>
 
                 <div>
+                    <label>
+                        User Type
+                    </label>
+                    <select name="role">
+                        <option value="2">
+                            Customer
+                        </option>
+                        <option VALUE="3">
+                            Owner
+                        </option>
+                        <option VALUE="4">
+                            Agent
+                        </option>
+                    </select>
+                </div>
+                <div>
                     <label> 
                         Avatar
                     </label>
 
-                    <input type="file" name="password" />
+                    <input type="file" name="file" />
                 </div>
 
                 <div>

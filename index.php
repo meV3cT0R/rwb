@@ -16,15 +16,6 @@ error_reporting(E_ALL);
     require_once "src/models/User.php";
     require_once "src/models/Role.php";
 
-    require_once "src/controllers/HomeController.php";
-    require_once "src/controllers/AdminController.php";
-    require_once "src/controllers/PropertyTypeController.php";
-    require_once "src/controllers/AdminCountryController.php";
-    require_once "src/controllers/AdminStateController.php";
-    require_once "src/controllers/AdminCityController.php";
-    require_once "src/controllers/AdminUserController.php";
-    require_once "src/controllers/AdminPropertyController.php";
-
     require_once "src/dao/PropertyTypeDAO.php";
     require_once "src/dao/UserDAO.php";
     require_once "src/dao/RoleDAO.php";
@@ -41,6 +32,21 @@ error_reporting(E_ALL);
     require_once "src/repositories/UserRepository.php";
     require_once "src/repositories/PropertyRepository.php";
     
+    require_once "src/dto/ErrorDTO.php";
+    require_once "src/dto/ResDTO.php";
+    require_once "src/dto/UserDTO.php";
+
+    require_once "src/services/UserService.php";
+
+    require_once "src/controllers/HomeController.php";
+    require_once "src/controllers/AdminController.php";
+    require_once "src/controllers/PropertyTypeController.php";
+    require_once "src/controllers/AdminCountryController.php";
+    require_once "src/controllers/AdminStateController.php";
+    require_once "src/controllers/AdminCityController.php";
+    require_once "src/controllers/AdminUserController.php";
+    require_once "src/controllers/AdminPropertyController.php";
+
     $dbConnection = (new DB())->connect();
 
 
@@ -89,8 +95,13 @@ error_reporting(E_ALL);
         $roleDAO,
     );
 
+    $userService = new UserService(
+        $userRepository
+    );
+
     $homeController = new HomeController(
-        $propertyRepository
+        $propertyRepository,
+                            $userService
     );
     $adminController = new AdminController(
         $propertyTypeRepository,
@@ -121,8 +132,16 @@ error_reporting(E_ALL);
     );
 
     $uri = $_SERVER['REQUEST_URI'];
-    $uri = explode("/",$uri);
+    
+    $uri = explode("?",$uri);
+    if(count($uri)>1){
+        $params = Helper::getParams($uri[1]);
+    }
+
+    $uri = explode("/",$uri[0]);
     $uri = array_slice($uri,2);
+    
+
     $uri = implode("/",$uri);
 
     $route = array(
