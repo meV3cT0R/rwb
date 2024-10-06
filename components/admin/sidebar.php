@@ -29,7 +29,7 @@
                 </li>
                 <li>
                     <a href="/realEstate/admin/country">
-                        counties
+                        Countries
                     </a>
                 </li>
                 <li>
