@@ -3,14 +3,11 @@
         $user = new User();
         try{
             logMessage("register clicked");
-            logMessage(implode($_FILES));
-            $image = Helper::uploadImage($_FILES);
+            $image = Helper::uploadImage($_FILES["file"]);
+            logMessage($image);
         }catch(Exception $e){
             $error = $e->getMessage();
         }
-
-
-        echo $image;
     }
 ?>
 <html>
@@ -25,7 +22,7 @@
         ?>
 
         <div class="formContainer body">
-            <form method="post" action="">
+            <form method="post" action="" enctype="multipart/form-data">
                 <h1> Register </h1>
                 <div>
 

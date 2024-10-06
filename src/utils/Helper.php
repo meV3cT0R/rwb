@@ -24,17 +24,17 @@ class Helper
     }
 
 
-    public static function uploadImage($files): string
+    public static function uploadImage($file): string
     {
         logMessage("inside upload Image");
-        logMessage(implode($files));
+
         $targetDir = "images/";
-        $targetFile = $targetDir . basename($files["file"]);
+        $targetFile = $targetDir . basename($file["name"]);
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $maxFileSize = 5 * 1024 * 1024;
 
-        if (isset($files)) {
-            $check = getimagesize($files["tmp_name"]);
+        if (isset($file)) {
+            $check = getimagesize($file["tmp_name"]);
             if ($check !== false) {
                 logMessage("File is an image - " . $check["mime"]);
             } else {
@@ -42,7 +42,7 @@ class Helper
             }
         }
 
-        if ($files["size"] > $maxFileSize) {
+        if ($file["size"] > $maxFileSize) {
             throw new Exception("Sorry, your file is too large.");
         }
 
@@ -52,8 +52,8 @@ class Helper
         }
 
 
-        if (move_uploaded_file($files["tmp_name"], $targetFile)) {
-            logMessage("The file " . basename($files["name"]) . " has been uploaded.");
+        if (move_uploaded_file($file["tmp_name"], $targetFile)) {
+            logMessage("The file " . basename($file["name"]) . " has been uploaded.");
         } else {
             throw new Exception("Sorry, there was an error uploading your file.");
         }
