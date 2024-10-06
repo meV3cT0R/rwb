@@ -43,7 +43,7 @@ include __DIR__ . "/../src/index.php";
         <div class="sets-apart">
             <h1>What sets Us Apart</h1>
             <ul>
-    <li>
+         <li>
         <h3>Personalized Service:</h3>
         <p>We take the time to understand your unique needs and goals, tailoring our approach to meet your individual requirements.</p>
     </li>
