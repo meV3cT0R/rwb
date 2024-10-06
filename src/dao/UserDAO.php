@@ -61,7 +61,7 @@ class UserDAO
         try {
             $stmt = $this->db->prepare($query);
             if($bindString !=""){
-                $stmt->bind_param($bindString, $bindArr);
+                $stmt->bind_param($bindString, ...$bindArr);
             }
 
             if (!$stmt->execute()) {

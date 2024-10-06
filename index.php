@@ -12,15 +12,6 @@
     require_once "src/models/User.php";
     require_once "src/models/Role.php";
 
-    require_once "src/controllers/HomeController.php";
-    require_once "src/controllers/AdminController.php";
-    require_once "src/controllers/PropertyTypeController.php";
-    require_once "src/controllers/AdminCountryController.php";
-    require_once "src/controllers/AdminStateController.php";
-    require_once "src/controllers/AdminCityController.php";
-    require_once "src/controllers/AdminUserController.php";
-    require_once "src/controllers/AdminPropertyController.php";
-
     require_once "src/dao/PropertyTypeDAO.php";
     require_once "src/dao/UserDAO.php";
     require_once "src/dao/RoleDAO.php";
@@ -37,6 +28,21 @@
     require_once "src/repositories/UserRepository.php";
     require_once "src/repositories/PropertyRepository.php";
     
+    require_once "src/dto/ErrorDTO.php";
+    require_once "src/dto/ResDTO.php";
+    require_once "src/dto/UserDTO.php";
+
+    require_once "src/services/UserService.php";
+
+    require_once "src/controllers/HomeController.php";
+    require_once "src/controllers/AdminController.php";
+    require_once "src/controllers/PropertyTypeController.php";
+    require_once "src/controllers/AdminCountryController.php";
+    require_once "src/controllers/AdminStateController.php";
+    require_once "src/controllers/AdminCityController.php";
+    require_once "src/controllers/AdminUserController.php";
+    require_once "src/controllers/AdminPropertyController.php";
+
     $dbConnection = (new DB())->connect();
 
 
@@ -85,8 +91,13 @@
         $roleDAO,
     );
 
+    $userService = new UserService(
+        $userRepository
+    );
+
     $homeController = new HomeController(
-        $propertyRepository
+        $propertyRepository,
+                            $userService
     );
     $adminController = new AdminController(
         $propertyTypeRepository,

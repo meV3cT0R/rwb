@@ -2,7 +2,11 @@
     if(isset($_POST["login"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
-        $login( $username, $password );
+        $res = $login( $username, $password );
+        if($res instanceof ResDTO){
+            $error = $res->getErrorDTO()->getMessage();
+        }
+
     }
 ?>
 <html>
@@ -21,6 +25,15 @@
             <form action="" method="post">
                 <h1> Login </h1>
                 <div>
+                    <p> 
+                        <?php
+                            if(isset($error)) {
+                                echo $error;
+                            }
+                        ?>
+                    </p>
+                </div>
+                <div>
                     <label> 
                         Username
                     </label>
@@ -32,7 +45,7 @@
                         Username
                     </label>
 
-                    <input type="text" name="username" />
+                    <input type="text" name="password" />
                 </div>
 
                 <div>

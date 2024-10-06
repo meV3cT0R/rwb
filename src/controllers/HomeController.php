@@ -22,15 +22,17 @@
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
-            $login = function (string $username,string $password): GenDTO {
-                $user = null;
+            $login = function (string $username,string $password): ResDTO {
+                $dto = new ResDTO("User Data");
                 try {
                     $user = $this->userService->login($username,$password);
-                    
+                    $dto->setData($user);
                 }catch(Exception $e) {
                     $error = $e->getMessage();
+                    $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
                 }
-                return $user;
+
+                return $dto;
 
             };
             require_once __DIR__."/../../public/login.php";

@@ -1,5 +1,5 @@
 <?php
-class GenDTO
+class ResDTO
 {
     private ?string $message = null;
     private $data = null;

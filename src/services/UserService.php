@@ -19,7 +19,7 @@
         }
         
 
-        public function register(User $user) : UserDTO {
-            
+        public function register(User $user) : ?UserDTO {
+            return null;
         }
     }
