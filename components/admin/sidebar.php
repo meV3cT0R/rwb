@@ -23,8 +23,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/admin/propertyType">
-                        Property Type
+                    <a href="/realEstate/admin/">
+                        Property TypepropertyType
                     </a>
                 </li>
                 <li>

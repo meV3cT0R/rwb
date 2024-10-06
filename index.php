@@ -186,6 +186,17 @@ error_reporting(E_ALL);
             global $adminPropertyController;
             $adminPropertyController->home();
         },
+        "admin/updateprofile"=> function():void {
+            global $adminUserController;
+            global $params;
+            $id = $params["id"];
+            $adminUserController->getUserById($id);
+        },
+        "admin/changepassword"=> function():void {
+            global $adminUserController;
+            global $params;
+            $adminUserController->getUserById($id);
+        },
         "login"=>function() :void {
             global $homeController;
             $homeController->getLogin();

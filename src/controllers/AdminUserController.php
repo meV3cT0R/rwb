@@ -46,5 +46,10 @@
             $arr = [];
             $this->helper( $users,$cols,$arr);
             require_once __DIR__."/../../public/admin/table.php";
-        }        
+        }  
+        public function getUserById($id):void {
+            $user = $this->userRepository->getUserById($id);
+            $this->helper($user);
+            require_once __DIR__."/../../public/admin/table.php";
+        }      
     }
