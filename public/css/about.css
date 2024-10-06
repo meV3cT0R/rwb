@@ -6,6 +6,15 @@ h3 {
 ul {
   list-style: none;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+ul > li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 li > p {
