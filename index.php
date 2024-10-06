@@ -128,8 +128,13 @@
     );
 
     $uri = $_SERVER['REQUEST_URI'];
-    $uri = explode("/",$uri);
+    
+    $uri = explode("?",$uri);
+    $params = Helper::getParams($uri[1]);
+    $uri = explode("/",$uri[0]);
     $uri = array_slice($uri,2);
+    
+
     $uri = implode("/",$uri);
 
     $route = array(

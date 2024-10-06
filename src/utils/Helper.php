@@ -67,4 +67,18 @@ class Helper
 
         return $targetFile;
     }
+
+    public static function getParams(string $queryParams) : array {
+        trim($queryParams);
+        $arr = explode("&",$queryParams);
+        $params  = array();
+
+        foreach($arr as $val) {
+                $val = trim($val);
+                $arrVal = explode("=",$val);
+                $params[$arrVal[0]] = $arrVal[1];
+        }
+
+        return $params;
+    }
 }
