@@ -144,7 +144,7 @@ class PropertyPhotosDAO
 
     function deletePropertyPhotos(int $id): PropertyPhotos
     {
-        logMessage("Deleting PropertyPhotos with the id $id");
+        // logMessage("Deleting PropertyPhotos with the id $id");
         $propertyPhotos = null;
         try {
             $propertyPhotos = $this->getPropertyPhotosById($id);

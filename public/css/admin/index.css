@@ -53,7 +53,7 @@
   display: flex;
   flex-flow: row-reverse;
   box-shadow: 1px 1px 1px gray;
-  padding: 200px 0px;
+  padding: 20px 0px;
 }
 
 #sidebar div ul li a {

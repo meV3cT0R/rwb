@@ -204,7 +204,7 @@ class PropertyDAO
     }
 
     function deleteProperty(int $id) : Property {
-        logMessage("Deleting Property with the id $id");
+        // logMessage("Deleting Property with the id $id");
         $property = null;
         try{
             $property = $this->getPropertyById($id);

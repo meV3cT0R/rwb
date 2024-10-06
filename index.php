@@ -186,17 +186,18 @@ error_reporting(E_ALL);
             global $adminPropertyController;
             $adminPropertyController->home();
         },
-        "admin/updateprofile"=> function():void {
-            global $adminUserController;
-            global $params;
-            $id = $params["id"];
-            $adminUserController->getUserById($id);
-        },
-        "admin/changepassword"=> function():void {
-            global $adminUserController;
-            global $params;
-            $adminUserController->getUserById($id);
-        },
+     "admin/updateprofile" => function () use ($adminUserController) { 
+        global $params;
+        $id = $params["id"];
+        $user = $adminUserController->getUserById($id); 
+        require_once __DIR__ . '/public/admin/userProfile.php'; 
+    },
+       "admin/changepassword" => function () use ($adminUserController) { 
+        global $params;
+        $id = $params["id"];
+        $user = $adminUserController->getUserById($id); 
+        require_once __DIR__ . '/public/admin/changePassword.php'; 
+    },
         "login"=>function() :void {
             global $homeController;
             $homeController->getLogin();

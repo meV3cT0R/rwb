@@ -101,9 +101,9 @@ class UserDAO
         $bindString = "";
 
         $this->queryHelper("SELECT * FROM user",$map,$query,$bindArr,$bindString);
-        logMessage("Generated Query :".$query);
-        logMessage("Generated bind types :".$bindString);
-        logMessage("Generated bind values :".implode($bindArr));
+        // logMessage("Generated Query :".$query);
+        // logMessage("Generated bind types :".$bindString);
+        // logMessage("Generated bind values :".implode($bindArr));
 
         $user = null;
         try {
@@ -269,7 +269,7 @@ class UserDAO
 
     function deleteUser(int $id): User
     {
-        logMessage("Deleting Users with the id $id");
+        // logMessage("Deleting Users with the id $id");
         $user = null;
         try {
             $user = $this->getUserById($id);

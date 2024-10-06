@@ -117,7 +117,7 @@ class EnquiryDAO
 
     public function updateEnquiry(Enquiry $obj): Enquiry
     {
-        logMessage(msg: "Updating PropertyType with the id ".$obj->getId());
+        // logMessage(msg: "Updating PropertyType with the id ".$obj->getId());
 
         try {
             $stmt = $this->db->prepare("UPDATE propertyType
@@ -161,7 +161,7 @@ class EnquiryDAO
 
     function deleteEnquiry(int $id): Enquiry
     {
-        logMessage("Deleting PropertyType with the id $id");
+        // logMessage("Deleting PropertyType with the id $id");
         $obj = null;
         try {
             $obj = $this->getEnquiryById($id);

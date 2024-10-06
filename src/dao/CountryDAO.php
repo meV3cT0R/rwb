@@ -1,5 +1,5 @@
 <?php
-logMessage("inside countryDAO.php");
+// logMessage("inside countryDAO.php");
 
 class CountryDAO {
     private mysqli $db;
@@ -11,7 +11,7 @@ class CountryDAO {
         $this->db = $dbConnection;
     }
     function getCountries() : array {
-        logMessage("Getting Countries");
+        // logMessage("Getting Countries");
         $result  = $this->db->query("SELECT * FROM country;") or trigger_error("Something Went wrong while trying to execute SELECT query");
         $countries = []; 
         if($result->num_rows > 0) {
@@ -26,7 +26,7 @@ class CountryDAO {
     }
 
     function getCountryById(int $id) : Country {
-        logMessage("Getting Country by Id");
+        // logMessage("Getting Country by Id");
         $result  = $this->db->query("SELECT * FROM country where id='$id';") or trigger_error("Something Went wrong while trying to execute SELECT query");
         $country = new Country();
         if($result->num_rows> 0) {
@@ -41,7 +41,7 @@ class CountryDAO {
 
 
     function postCountry(Country $country) : Country{
-        logMessage("Posting Country");
+        // logMessage("Posting Country");
         try{
             $stmt = $this->db->prepare("INSERT INTO country(name) values(?)");
             $name = $country->getName();
@@ -60,7 +60,7 @@ class CountryDAO {
     }
 
     function updateCountry(Country $country) : Country {
-        logMessage("Updating Country");
+        // logMessage("Updating Country");
         try{
             $stmt = $this->db->prepare("UPDATE country set name=? where id=?");
             $name= $country->getName();
@@ -79,7 +79,7 @@ class CountryDAO {
     } 
 
     function deleteCountry(int $id) : Country {
-        logMessage("Deleting data with the id $id");
+        // logMessage("Deleting data with the id $id");
         $country = null;
         try{
             $country = $this->getCountryById($id);

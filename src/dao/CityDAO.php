@@ -2,7 +2,7 @@
     City
 --->
 <?php
-    logMessage("inside CityDAO.php");
+    // logMessage("inside CityDAO.php");
     class CityDAO {
         private mysqli $db;
 
@@ -17,7 +17,7 @@
             $this->db = $dbConnection;
         }
         function getCities() : array {
-            logMessage("Getting Cities");
+            // logMessage("Getting Cities");
             $cities = []; 
             try {
                 $result = $this->db->query("SELECT 
@@ -55,7 +55,7 @@
         }
 
         function getCityById(int $id) : City {
-            logMessage("Getting City by Id");
+            // logMessage("Getting City by Id");
             $result  = $this->db->query("SELECT 
                     city.id as cityId,
                     city.name as cityName,
@@ -89,7 +89,7 @@
         }
 
         function postCity(City $city) : City{
-            logMessage("Posting city");
+            // logMessage("Posting city");
             try{
                 if($city->getCountry()===null) {
                     throw new ErrorException("[No Country Provided] City Should be part of Country");
@@ -118,7 +118,7 @@
         }
 
         function updateCity(City $city) : City {
-            logMessage("Updating City");
+            // logMessage("Updating City");
             try{
                 $stmt = $this->db->prepare("UPDATE city set name=?,countryId=?,stateId=? where id=?");
                 $name= $city->getName();
@@ -142,7 +142,7 @@
         } 
     
         function deleteCity(int $id) : City {
-            logMessage("Deleting data with the id $id");
+            // logMessage("Deleting data with the id $id");
             $city = null;
             try{
                 $city = $this->getCityById($id);
