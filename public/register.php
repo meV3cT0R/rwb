@@ -9,8 +9,6 @@
             $user->setLastName($_POST["lastName"]);
             $user->setUsername($_POST["username"]);
             $user->setPassword($_POST["password"]);
-            $user->setRole(new Role($_POST["role"]));
-            $user->setAvatar($image);
             $register($user);
         }catch(Exception $e){
             $error = $e->getMessage();
@@ -28,7 +26,7 @@
             include __DIR__."/../components/header.php";
         ?>
 
-        <div class="formContainer body">
+        <div class="formContainer body" style="margin-bottom:50px;">
             <form method="post" action="" enctype="multipart/form-data">
                 <h1> Register </h1>
                 <div>

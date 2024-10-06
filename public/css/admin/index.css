@@ -68,6 +68,15 @@
     margin-right:40px;
     padding:5px;
     cursor:pointer;
+    background-color:var(--primary);
+    border:0;
+    color:#fff;
+    padding:10px;
+}
+
+
+#toggleSidebar:hover {
+    box-shadow: 1px 1px 5px grey;
 }
 
 .logoutDiv {
@@ -75,7 +84,7 @@
     margin-bottom:20px;
 }
 .logoutDiv >button {
-    background-color: rgb(242, 32, 32);
+    background-color: #D9534F;
     border:0;
     color:white;
     padding:10px 0;
@@ -104,15 +113,15 @@
 }
 
 .tableContainer >table > thead tr{
-    background-color:var(--secondary);
-    color:rgba(0,0,0,0.6);
+    background-color:var(--primaryShade2);
+    color:#fff;
 }
 .odd {
-    background-color:var(--secondary);
-    color:rgba(0,0,0,0.6);
+    background-color:var(--primaryShade2);
+    color:#fff;
 }
 .even {
-    background-color: var(--primary);
+    background-color: var(--primaryShade1);
     color :white;
 }
 @media (min-width: 768px)  {

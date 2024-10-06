@@ -61,7 +61,8 @@ class UserDAO
         try {
             $stmt = $this->db->prepare($query);
             if($bindString !=""){
-                $stmt->bind_param($bindString, ...$bindArr);
+                $params = array_merge([$bindString],$bindArr);
+                call_user_func_array([$stmt,"bind_param"],Helper::refValues($params));
             }
 
             if (!$stmt->execute()) {
@@ -89,7 +90,7 @@ class UserDAO
     public function getUsersByRole(int $roleId): array
     {
         return $this->getUsersHelper(array(
-            "role" => array(
+            "roleId" => array(
                 "type" => "i",
                 "value" => $roleId
             )

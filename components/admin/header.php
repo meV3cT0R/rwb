@@ -2,6 +2,6 @@
     <button
         id="toggleSidebar"
     >
-        click
+        T
     </button>
 </div>

@@ -17,25 +17,32 @@ include __DIR__ . "/../src/index.php";
     include __DIR__ . "/../components/header.php";
     ?>
     <div class="body">
-        <div style="margin-top:20px;">
 
-            <h1>Contact RE</h1>
-            <p>We're here to help and answer any question you might have. We look forward to hearing from you 😊</p>
-        </div>
-    
+    <div style="margin:30px 0;">
+
+<h1>Contact RE</h1>
+</div>
     <form id="contact-form" method="post" >
+      <div>
+        <p>We're here to help and answer any question you might have. We look forward to hearing from you 😊</p>
 
+      </div>
       <div class="names">
-            <label for="firstName">FIRST NAME* <input type="text" id="firstName" name="firstName" required></label>
-        
-            <label for="lastName">LAST NAME* <input type="text" id="lastName" name="lastName" required></label> 
+          <div>
+            <label for="firstName">First Name </label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+        <div>
+
+            <label for="lastName">Last Name </label>
+             <input type="text" id="lastName" name="lastName" required>
+             </div>
             
       </div>
-
-         <label for="email">EMAIL*</label><br>
+         <label for="email">E-mail</label><br>
     <input type="email" id="email" name="email" required>
 
-    <label for="message">MESSAGE*</label><br>
+    <label for="message">Message</label><br>
     <textarea id="message" name="message" required></textarea>
 
       <button type="submit">Send Message</button>
