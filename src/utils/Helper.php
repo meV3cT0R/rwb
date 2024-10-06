@@ -28,7 +28,7 @@ class Helper
     {
         logMessage("inside upload Image");
 
-        $targetDir = "images/";
+        $targetDir = "/realEstate/images/";
         $targetFile = $targetDir . basename($file["name"]);
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $maxFileSize = 5 * 1024 * 1024;
