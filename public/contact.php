@@ -23,7 +23,8 @@ include __DIR__ . "/../src/index.php";
             <p>We're here to help and answer any question you might have. We look forward to hearing from you 😊</p>
         </div>
     
-    <form id="contact-form">
+    <form id="contact-form" method="post" >
+
       <div class="names">
             <label for="firstName">FIRST NAME* <input type="text" id="firstName" name="firstName" required></label>
         
@@ -38,7 +39,8 @@ include __DIR__ . "/../src/index.php";
     <textarea id="message" name="message" required></textarea>
 
       <button type="submit">Send Message</button>
-    </form>
+</form>
+
   </div>
     <?php
     include __DIR__ . "/../components/footer.php";
