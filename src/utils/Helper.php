@@ -9,6 +9,13 @@
             foreach ($arr as $name => $service) {
                 Helper::checkDependency($service,$name);
             }
-            
+        }
+
+        public static function refValues(array $arr) :array {
+            $refs = [];
+            foreach ($arr as $key => $value) {
+                $refs[$key] = &$arr[$key];
+            }
+            return $refs;
         }
     }

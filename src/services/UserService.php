@@ -11,9 +11,10 @@
                 $this->userRepository= $userRepository;
         }
         public function login(string $username,string $password): UserDTO {
-            $user = $this->userRepository->getUserByUsernameAndPassword($username,password_hash($password,PASSWORD_BCRYPT));
-            if ($user === null) {
-                throw new Exception("Username or Password Invalid");
+            try {
+                $user = $this->userRepository->getUserByUsernameAndPassword($username,password_hash($password,PASSWORD_BCRYPT));
+            } catch (Exception $e) {
+                throw new Exception("Invalid Username or Password");
             }
             return new UserDTO($user);
         }

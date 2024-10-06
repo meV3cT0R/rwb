@@ -25,7 +25,9 @@
             <form action="" method="post">
                 <h1> Login </h1>
                 <div>
-                    <p> 
+                    <p
+                        class="error"
+                    > 
                         <?php
                             if(isset($error)) {
                                 echo $error;
@@ -42,10 +44,10 @@
                 </div>
                 <div>
                     <label> 
-                        Username
+                        Password
                     </label>
 
-                    <input type="text" name="password" />
+                    <input type="password" name="password" />
                 </div>
 
                 <div>
