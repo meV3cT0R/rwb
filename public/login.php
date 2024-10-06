@@ -1,5 +1,9 @@
 <?php
-    include __DIR__."/../src/index.php";
+    if(isset($_POST["login"])) {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $login( $username, $password );
+    }
 ?>
 <html>
     <head>
@@ -14,7 +18,7 @@
         ?>
 
         <div class="body formContainer">
-            <form >
+            <form action="" method="post">
                 <h1> Login </h1>
                 <div>
                     <label> 
@@ -32,7 +36,7 @@
                 </div>
 
                 <div>
-                    <button>
+                    <button name="login">
                         Log in
                     </button>
                 </div>
