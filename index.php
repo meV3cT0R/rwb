@@ -183,6 +183,12 @@ error_reporting(E_ALL);
             global $homeController;
             $homeController->getProperties();
         },
+        "property-details"=>function() :void {
+            global $homeController;
+            $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+            logMessage($id);
+            $homeController->getPropertyDetails($id);
+        },
         "contact"=>function() :void {
             global $homeController;
             $homeController->getContact();

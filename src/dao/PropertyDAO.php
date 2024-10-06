@@ -63,8 +63,6 @@ class PropertyDAO
                 $property->setCity(new City($row["cityId"]));
                 $property->setPropertyType(new PropertyType($row["propertyType"]));
                 $property->setMarketedBy(new User($row["marketedBy"]));
-
-                array_push($properties, $property);
             }
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());

@@ -40,7 +40,7 @@
             return $propertiesToBeSent;
         }
 
-        public function getPropertyTypeById(int $id) : Property {
+        public function getPropertyById(int $id) : Property {
             $property = $this->propertyDAO->getPropertyById($id);
 
             $marketedBy = $this->userDAO->getUserById($property->getMarketedBy()->getId());

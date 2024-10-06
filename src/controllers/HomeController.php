@@ -32,6 +32,12 @@
             require_once __DIR__."/../../public/properties.php";
         }
 
+        public function getPropertyDetails($id) : void {
+            logMessage($id);
+            $property = $this->propertyRepository->getPropertyById($id);
+            require_once __DIR__."/../../public/property-details.php";
+        }
+
         public function getContact() : void {
             require_once __DIR__."/../../public/contact.php";
         }
