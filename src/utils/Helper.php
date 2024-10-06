@@ -79,6 +79,7 @@ class Helper
                 $params[$arrVal[0]] = $arrVal[1];
         }
 
+        
         return $params;
     }
 }
