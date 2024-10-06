@@ -22,11 +22,11 @@
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
-            $error = "";
-            $login = function (string $username,string $password): UserDTO {
+            $login = function (string $username,string $password): GenDTO {
                 $user = null;
                 try {
                     $user = $this->userService->login($username,$password);
+                    
                 }catch(Exception $e) {
                     $error = $e->getMessage();
                 }
