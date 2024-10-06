@@ -43,23 +43,23 @@ include __DIR__ . "/../src/index.php";
         <div class="sets-apart">
             <h1>What sets Us Apart</h1>
             <ul>
-    <li>
-        <h3>Personalized Service:</h3>
-        <p>We take the time to understand your unique needs and goals, tailoring our approach to meet your individual requirements.</p>
-    </li>
-    <li>
-        <h3>Expert Knowledge:</h3>
-        <p>Our team has extensive knowledge of the local market, ensuring that you receive the best possible guidance and advice.</p>
-    </li>
-    <li>
-        <h3>Proven Results:</h3>
-        <p>Our track record of success speaks for itself, with a long history of satisfied clients and successful transactions.</p>
-    </li>
-    <li>
-        <h3>Community Focus:</h3>
-        <p>We are committed to giving back to our community, supporting local charities and initiatives that make a positive impact.</p>
-    </li>
-</ul>
+                <li>
+                    <h3>Personalized Service:</h3>
+                    <p>We take the time to understand your unique needs and goals, tailoring our approach to meet your individual requirements.</p>
+                </li>
+                <li>
+                    <h3>Expert Knowledge:</h3>
+                    <p>Our team has extensive knowledge of the local market, ensuring that you receive the best possible guidance and advice.</p>
+                </li>
+                <li>
+                    <h3>Proven Results:</h3>
+                    <p>Our track record of success speaks for itself, with a long history of satisfied clients and successful transactions.</p>
+                </li>
+                <li>
+                    <h3>Community Focus:</h3>
+                    <p>We are committed to giving back to our community, supporting local charities and initiatives that make a positive impact.</p>
+                </li>
+            </ul>
 
         </div>
         <!-- <div class="touch"></div> -->
