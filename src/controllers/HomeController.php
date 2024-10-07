@@ -150,6 +150,12 @@
         }
 
         public function getUpdateProfile(): void {
+            session_start();
+            $user = $this->userService->getUserById($_SESSION["user"]->getId());
+            $editUser = function (User $user) {
+                $this->userService->updateUser($user);
+            };
+
             require_once __DIR__."/../../public/updateProfile.php";
         }
 

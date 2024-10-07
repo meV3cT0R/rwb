@@ -261,6 +261,7 @@ class UserDAO
             }
             logMessage("Inside Update User after bind_param after stmt_execution");
             logMessage($this->db->error);
+            logMessage($this->db->info);
 
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());

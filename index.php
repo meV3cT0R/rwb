@@ -52,6 +52,7 @@ error_reporting(E_ALL);
     require_once "src/controllers/AdminCityController.php";
     require_once "src/controllers/AdminUserController.php";
     require_once "src/controllers/AdminPropertyController.php";
+    require_once "src/controllers/AdminPageController.php";
 
     require_once "src/middlewares/authentications/Auth.php";
 
@@ -155,6 +156,10 @@ error_reporting(E_ALL);
         $propertyRepository
     );
 
+
+    $adminPagesController = new AdminPageController(
+
+    );
 
     $auth = new Auth();
 
@@ -369,6 +374,11 @@ error_reporting(E_ALL);
             $id = $params["id"];
             $homeController->deleteProperties($id);
         },
+        "admin/pages"=>function() :void {
+            global $adminPagesController;
+            $adminPagesController->home();
+
+        }
     );
 
     if(isset($route[strtolower($uri)])) {

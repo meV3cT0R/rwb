@@ -63,6 +63,12 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="/realEstate/admin/pages">
+                        pages
+                    </a>
+                </li>
+
             </ul>
         </div>
         <div >

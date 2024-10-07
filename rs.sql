@@ -109,69 +109,18 @@ create table comment (
     foreign key (createdBy) references user(id) on delete cascade
 );
 
--- 1create table invoice (
---     id int auto_increment primary key,
---     propertyId int not null,            
---     issuedTo int not null,    
---     issuedBy int not null,             
---     amount float not null,             
---     status varchar(20) not null,      
---     dueDate date not null,              
---     createdAt datetime default current_timestamp,
---     foreign key (propertyId) references property(id) on delete cascade,
---     foreign key (issuedTo) references user(id) on delete cascade,
---     foreign key (issuedBy) references user(id) on delete cascade
--- );
 
--- create table documentType (
---     id int auto_increment primary key,
---     name varchar(50) not null,           
---     description varchar(255),            
---     createdAt datetime default current_timestamp
--- );
+create table aboutUs {
+    id int auto_increment primary key,
+    aboutUs varchar(500),
+    image varchar(100),
+    mission varchar(500);
+    team varchar(500);
+}
 
-
--- create table document (
---     id int auto_increment primary key,
---     documentTypeId int,            
---     filePath varchar(255) not null,         
---     uploadedBy int not null,                 
---     relatedToProperty int,                  
---     relatedToUser int,                      
---     relatedToInvoice int,                    
---     description varchar(255),                
---     createdAt datetime default current_timestamp,
---     foreign key (documentTypeId) references documentType(id) on delete set null,
---     foreign key (uploadedBy) references user(id) on delete cascade,
---     foreign key (relatedToProperty) references property(id) on delete cascade,
---     foreign key (relatedToUser) references user(id) on delete set null,
---     foreign key (relatedToInvoice) references invoice(id) on delete set null
--- );
-
-
-
-
--- create table paymentMethod (
---     id int auto_increment primary key,
---     methodName varchar(50) not null,      
---     description varchar(255),        
---     createdAt datetime default current_timestamp
--- );
--- create table payment (
---     id int auto_increment primary key,
---     invoiceId int not null,    
---     paidBy int not null,           
---     paidTo int not null,                
---     amount float not null,            
---     paymentDate datetime default current_timestamp, 
---     paymentMethodId int, 
---     paymentStatus varchar(20) not null, 
---     createdAt datetime default current_timestamp,
---     foreign key (invoiceId) references invoice(id) on delete cascade,
---     foreign key (paidBy) references user(id) on delete cascade,
---     foreign key (paidTo) references user(id) on delete cascade,
---     foreign key (paymentMethodId) references paymentMethod(id) on delete cascade 
--- );
-
-
-
+create table contactUs {
+    id int auto_increment primary key,
+    email varchar(100),
+    phone varchar(20),
+    address varchar(20),
+}

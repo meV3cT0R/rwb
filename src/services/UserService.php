@@ -129,4 +129,12 @@
             $user->setRole(new Role(4));
             $this->userRepository->postUser($user);
         }
+
+        public function getUserById(int $id):User{
+                return $this->userRepository->getUserById($id);
+        }
+
+        public function updateUser(User $user):User{
+            return $this->userRepository->updateUser($user);
+    }
     }
