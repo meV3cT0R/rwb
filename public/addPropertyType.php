@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . "/../constants.php";
 
-// Handle form submission
 if (isset($_POST["submitPropertyType"])) {
     try {
         $propertyTypeName = $_POST["propertyTypeName"];
@@ -9,12 +8,17 @@ if (isset($_POST["submitPropertyType"])) {
             throw new Exception("Property Type name is required.");
         }
 
-        // Assuming PropertyType is a class handling property types
         $propertyType = new PropertyType();
         $propertyType->setName($propertyTypeName);
+        if(isset($_SESSION["user"])){
 
-        // Assuming savePropertyType is the function to save it in the database
-        savePropertyType($propertyType);
+            $propertyType->setCreatedBy($_SESSION["user"]->getId());
+        }else {
+            header("Location: /realEstate/login");
+        }
+
+        $addPropertyType($propertyType);
+        header("Location: /realEstate/admin/propertytype");
     } catch (Exception $e) {
         $error = $e->getMessage();
     }

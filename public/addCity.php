@@ -1,18 +1,4 @@
 <?php
-// Simulating fetching data from the backend (replace these with real database queries)
-$countries = [
-    ['id' => 1, 'name' => 'USA'],
-    ['id' => 2, 'name' => 'Canada'],
-    ['id' => 3, 'name' => 'India']
-];
-
-$states = [
-    ['id' => 1, 'country_id' => 1, 'name' => 'California'],
-    ['id' => 2, 'country_id' => 1, 'name' => 'Texas'],
-    ['id' => 3, 'country_id' => 2, 'name' => 'Ontario'],
-    ['id' => 4, 'country_id' => 3, 'name' => 'Maharashtra']
-];
-
 if (isset($_POST["submitCity"])) {
     try {
         $cityName = $_POST["cityName"];
@@ -25,10 +11,11 @@ if (isset($_POST["submitCity"])) {
 
         $city = new City();
         $city->setName($cityName);
-        $city->setCountryId($countryId);
-        $city->setStateId($stateId);
 
-        saveCity($city);
+        $city->setCountry(new Country($countryId));
+        $city->setState(new State($stateId));
+
+        $saveCity($city);
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
@@ -47,7 +34,7 @@ if (isset($_POST["submitCity"])) {
     <div class="body">
         
         <?php require_once __DIR__ . "/../components/admin/header.php"; ?>
-        <div class="formContainer body" style="margin-bottom: 50px;">
+        <div class="formContainer body" style="margin-bottom: 50px">
             <form method="post" action="" class="city-form">
                 <h1>Add City</h1>
 
@@ -67,7 +54,7 @@ if (isset($_POST["submitCity"])) {
                     <select name="countryId" id="countryDropdown" class="city-form-select" onchange="filterStates()">
                         <option value="">Select Country</option>
                         <?php foreach ($countries as $country) : ?>
-                            <option value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
+                            <option value="<?php echo $country->getId(); ?>"><?php echo $country->getName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -77,8 +64,8 @@ if (isset($_POST["submitCity"])) {
                     <select name="stateId" id="stateDropdown" class="city-form-select">
                         <option value="">Select State</option>
                         <?php foreach ($states as $state) : ?>
-                            <option value="<?php echo $state['id']; ?>" data-country-id="<?php echo $state['country_id']; ?>">
-                                <?php echo $state['name']; ?>
+                            <option value="<?php echo $state->getId(); ?>" data-country-id="<?php echo $state->getCountry()->getId(); ?>">
+                                <?php echo $state->getName(); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>

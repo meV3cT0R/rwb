@@ -60,7 +60,7 @@ create table propertyType (
     name varchar(50) not null,
     createdBy int,
     createdAt datetime default current_timestamp,
-    foreign key (createdBy) references country(id) on delete set null
+    foreign key (createdBy) references user(id) on delete set null
 );
 
 create table property(

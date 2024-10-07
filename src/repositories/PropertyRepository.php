@@ -63,4 +63,8 @@
         public function deleteProperty(int $id) : Property {
             return $this->propertyDAO->deleteProperty($id);
         }
+
+        public function getStatuses() : array {
+            return $this->propertyDAO->getAllStatuses();
+        }
     }

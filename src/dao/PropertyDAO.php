@@ -221,4 +221,26 @@ class PropertyDAO
         }
         return $property;
     }
+
+    function getAllStatuses() : array {
+        $arr = [];
+        try{
+            $stmt = $this->db->prepare("SELECT DISTINCT status FROM property;");
+            if(!$stmt->execute()) {
+                throw new ErrorException("[Failed to Get Data] : ". $this->db->error);
+            }
+            $result = $stmt->get_result();
+
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    array_push($arr,$row["status"]);
+                }
+            }
+        }catch(PDOException $pdoe) {
+            throw new ErrorException("Database Error :  ".$pdoe->getMessage());
+        }catch(ErrorException $e) {
+            throw $e;
+        }
+        return $arr;
+    }
 }

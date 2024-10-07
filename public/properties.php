@@ -1,6 +1,18 @@
 <?php
 require_once __DIR__ . "/../constants.php";
 require_once __DIR__ . "/../src/models/Property.php";
+
+
+if (isset($_POST["search"])) {
+    if (isset($search)) {
+        $properties = $search($_POST["type"], $_POST["status"], $_POST["city"]);
+    }
+}else {
+    if(isset($propertiesInitial)) {
+        $properties = $propertiesInitial;
+    }
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,24 +28,22 @@ require_once __DIR__ . "/../src/models/Property.php";
 <body>
     <?php include __DIR__ . "/../components/header.php"; ?>
 
-    <div class="container">
+    <div class="container" style="flex-grow:1">
         <h1 style="margin-bottom:20px;">Properties</h1>
 
         <div class="searchBar">
-            <form class="searchForm">
+            <form class="searchForm" action="" method="post">
                 <?php
-                $types = ["Land", "home"];
-                $status = ["sold","available"];
-                $cities = ["kathmandu","tokyo"];
+
                 if (isset($types)) {
                     ?>
-                    <select>
-                        <option value="all"> all</option>
-                        
+                    <select name="type">
+                        <option value="all"> Type</option>
+
                         <?php
                         foreach ($types as $type) {
                             ?>
-                            <option value="<?php echo $type?>"> <?php echo $type; ?></option>
+                            <option value="<?php echo $type->getId() ?>"> <?php echo $type->getName(); ?></option>
                             <?php
                         }
                         ?>
@@ -45,13 +55,13 @@ require_once __DIR__ . "/../src/models/Property.php";
                 <?php
                 if (isset($status)) {
                     ?>
-                    <select>
-                        <option value="all"> all</option>
+                    <select name="status">
+                        <option value="all"> Status</option>
 
                         <?php
                         foreach ($status as $s) {
                             ?>
-                            <option value="<?php echo $s?>"> <?php echo $s; ?></option>
+                            <option value="<?php echo $s ?>"> <?php echo $s; ?></option>
                             <?php
                         }
                         ?>
@@ -62,13 +72,13 @@ require_once __DIR__ . "/../src/models/Property.php";
                 <?php
                 if (isset($cities)) {
                     ?>
-                    <select>
-                        <option value="all"> all</option>
+                    <select name="city">
+                        <option value="all"> City </option>
 
                         <?php
                         foreach ($cities as $city) {
                             ?>
-                            <option value="<?php echo $city?>"> <?php echo $city; ?></option>
+                            <option value="<?php echo $city->getId() ?>"> <?php echo $city->getName(); ?></option>
                             <?php
                         }
                         ?>
@@ -76,9 +86,7 @@ require_once __DIR__ . "/../src/models/Property.php";
                     <?php
                 }
                 ?>
-                <button
-                    class="search"
-                >
+                <button class="search" name="search">
                     search
                 </button>
             </form>
