@@ -16,6 +16,8 @@
     private ?City $city = null;
     private ?array $propertyPhotos = null;
 
+    private ?array $enquiry = null;
+
     public function __construct(
         ?int $id = null,
         ?PropertyType $propertyType = null,
@@ -158,5 +160,13 @@
 
     public function setPropertyPhotos(?PropertyPhotos $propertyPhotos): void {
         $this->propertyPhotos = $propertyPhotos;
+    }
+
+    public function getEnquiries(): ?array {
+        return $this->enquiry;
+    }
+
+    public function setEnquiries(?array $enquiry): void {
+        $this->enquiry = $enquiry;
     }
 }

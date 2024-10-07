@@ -236,3 +236,33 @@ h1 {
         width: 100%;
     }
 }
+
+
+.enquiryInputBox {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.enquiryInputBox textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.enquiryInputBox button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.enquiryInputBox button:hover {
+    background-color: #0056b3;
+}

@@ -5,19 +5,25 @@
         private UserService $userService;
         private PropertyTypeRepository $propertyTypeRepository;
         private CityRepository $cityRepository;
+        private CommentRepository $commentRepository;
+        private EnquiryRepository $enquiryRepository;
 
         public function __construct(
             PropertyRepository $propertyRepository,
             UserService $userService,
             PropertyTypeRepository $propertyTypeRepository,
-            CityRepository $cityRepository
+            CityRepository $cityRepository,
+            CommentRepository $commentRepository,
+            EnquiryRepository $enquiryRepository,
         ) {
             Helper::checkDependencies(
                 array(
                     "PropertyRepository" => $propertyRepository,
                     "UserService" => $userService,
                     "PropertyTypeRepository" => $propertyTypeRepository,
-                    "CityRepository" => $cityRepository
+                    "CityRepository" => $cityRepository,
+                    "CommentRepository" => $commentRepository,
+                    "EnquiryRepository" => $enquiryRepository
 
                 )
             );
@@ -25,10 +31,13 @@
             $this->userService = $userService;
             $this->propertyTypeRepository = $propertyTypeRepository;
             $this->cityRepository = $cityRepository;
+            $this->commentRepository = $commentRepository;
+            $this->enquiryRepository = $enquiryRepository;
 
         }
 
         public function home() : void {
+            session_start();
             if(isset($_SESSION["user"])){
                 logMessage($_SESSION["user"]->getRole());
 
@@ -60,6 +69,7 @@
 
                 return $dto;
             };
+            session_destroy();
             require_once __DIR__."/../../public/login.php";
         }
         public function getRegister() : void {
@@ -118,6 +128,13 @@
         public function getPropertyDetails($id) : void {
             logMessage($id);
             $property = $this->propertyRepository->getPropertyById($id);
+            $saveComment = function (Comment $comment) : Comment{
+                return $this->commentRepository->postComment($comment);
+            };
+
+            $saveEnquiry = function (Enquiry $enquiry):Enquiry {
+                return $this->enquiryRepository->postEnquiry($enquiry);
+            };
             require_once __DIR__."/../../public/property-details.php";
         }
 

@@ -6,7 +6,7 @@
 
         private Enquiry|null $commentFor=null; //property
         
-        function __construct(int|null $id=null,User|null $createdBy=null,string|null $comment,Property|null $commentFor) {
+        function __construct(int|null $id=null,User|null $createdBy=null,string|null $comment=null,Enquiry|null $commentFor=null) {
             $this->id=$id;
             $this->createdBy=$createdBy;
             $this->comment=$comment;
@@ -33,8 +33,8 @@
         public function setId(int|null $id) : void {
             $this->id = $id;
         }
-        public function setCreatedBy(User|null $user) : void {
-            $this->user = $user;
+        public function setCreatedBy(User|null $createdBy) : void {
+            $this->createdBy = $createdBy;
         }
 
         public function setComment(string|null $comment) : void {

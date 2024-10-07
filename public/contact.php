@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . "/../src/index.php";
+session_start();
 ?>
 <html>
 

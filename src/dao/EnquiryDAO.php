@@ -12,13 +12,14 @@ class EnquiryDAO
         if ($db == null) {
             throw new ErrorException("No Database Connection");
         }
+        $this->db = $db;
     }
     private function rowMapHelper(array $row): Enquiry
     {
         $propertyType = new Enquiry();
         $propertyType->setId($row["id"]);
         $propertyType->setEnquiry($row["enquiry"]);
-        $propertyType->setCreatedBy($row["createdBy"]);
+        $propertyType->setCreatedBy(new User($row["createdBy"]));
         $propertyType->setEnquiryFor(new Property($row["enquiryFor"]));
         
         return $propertyType;
@@ -28,7 +29,7 @@ class EnquiryDAO
     {
         $objs = [];
         try {
-            $stmt = $this->db->prepare("SELECT * FROM enquiry where id=?;");
+            $stmt = $this->db->prepare("SELECT * FROM enquiry where enquiryFor=?;");
             $stmt->bind_param("i", $propertyId);
             if (!$stmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
@@ -81,6 +82,7 @@ class EnquiryDAO
                 )
                 values(
                     ?,
+                    ?,
                     ?
                 );
             ");
@@ -98,7 +100,7 @@ class EnquiryDAO
 
 
             $stmt->bind_param(
-                "si",
+                "sii",
                 $enquiry,
                 $createdBy,
                 $enquiryFor

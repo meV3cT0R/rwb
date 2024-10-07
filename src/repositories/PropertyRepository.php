@@ -4,24 +4,30 @@
         private PropertyTypeDAO $propertyTypeDAO;
         private RoleDAO $roleDAO;
         private UserDAO $userDAO;
+        private EnquiryDAO $enquiryDAO;
+        private CommentDAO $commentDAO;
 
         public function __construct(
             PropertyDAO $propertyDAO,
             PropertyTypeDAO $propertyTypeDAO,
             UserDAO $userDAO,
-            RoleDAO $roleDAO
-
+            RoleDAO $roleDAO,
+            EnquiryDAO $enquiryDAO,
+            CommentDAO $commentDAO
         ) {
             Helper::checkDependencies(array(
                 "PropertyDAO" => $propertyDAO,
                 "PropertyTypeDAO" => $propertyTypeDAO,
                 "UserDAO" => $userDAO,
-                "RoleDAO" => $roleDAO
+                "RoleDAO" => $roleDAO,
+                "CommentDAO" => $commentDAO,
             ));
             $this->propertyDAO = $propertyDAO;
             $this->propertyTypeDAO = $propertyTypeDAO;
             $this->userDAO = $userDAO;
             $this->roleDAO = $roleDAO;
+            $this->enquiryDAO = $enquiryDAO;
+            $this->commentDAO = $commentDAO;
         }
 
         public function getProperties(): array {
@@ -49,6 +55,19 @@
             
             $property->setMarketedBy($marketedBy);
             $property->setPropertyType($propertyType);
+
+            $enquiries = $this->enquiryDAO->getEnquiriesByPropertyId($property->getId());
+            if($enquiries!=null ) {
+                foreach($enquiries as $enquiry) {
+                    if($enquiry->getId()!=null) {
+                        $enquiry->setCreatedBy($this->userDAO->getUserById($enquiry->getCreatedBy()->getId()));
+                        $enquiry->setComments($this->commentDAO->getCommentsByEnquiryId($enquiry->getId()));
+                    }
+                }
+            }
+            $property->setEnquiries($enquiries);
+
+            
             return $property;
         }
 

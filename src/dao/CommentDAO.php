@@ -46,7 +46,7 @@ class CommentDAO
             property.price as propertyPrice,
             property.totalSqFt as propertyTotalSqFt,
             property.lotSizeUnit as propertyLotSizeUnit,
-            property.lotSize as lotSize
+            property.lotSize as lotSize,
             marketedBy.id as marketedByUserId,
             marketedBy.firstName as marketedByUserFirstName,
             marketedBy.lastName as marketedByUserLastName,
@@ -88,42 +88,42 @@ class CommentDAO
                         $role,
                         $row["userAvatar"]
                     );
-                    $propertyType = new PropertyType(
-                        (int) $row["propertyTypeId"],
-                        $row["propertyTypeName"]
-                    );
-                    $propertyMarketedByUserRole = new Role(
-                        (int) $row["marketedByRoleId"],
-                        $row["marketedByRoleName"]
-                    );
-                    $propertyMarketedByUser = new User(
-                        (int) $row["marketedByUserId"],
-                        $row["marketedByUserFirstName"],
-                        $row["marketedByUserLastName"],
-                        $row["marketedByUserEmail"],
-                        $row["marketedByUserUsername"],
-                        $row["marketedByUserPassword"],
-                        $propertyMarketedByUserRole,
-                        $row["marketedByUserAvatar"]
-                    );
-                    $property = new Property(
-                        (int) $row["propertyId"],
-                        $propertyType,
-                        $row["propertyStatus"],
-                        $row["propertyYearBuilt"],
-                        $propertyMarketedByUser,
-                        $row["propertyTypeName"],
-                        $row["propertyTypeName"],
-                        $row["propertyTypeName"],
-                        (float) $row["propertyTypeName"],
-                        $row["propertyTypeName"],
-                        null,
-                    );
+                    // $propertyType = new PropertyType(
+                    //     (int) $row["propertyTypeId"],
+                    //     $row["propertyTypeName"]
+                    // );
+                    // $propertyMarketedByUserRole = new Role(
+                    //     (int) $row["marketedByRoleId"],
+                    //     $row["marketedByRoleName"]
+                    // );
+                    // $propertyMarketedByUser = new User(
+                    //     (int) $row["marketedByUserId"],
+                    //     $row["marketedByUserFirstName"],
+                    //     $row["marketedByUserLastName"],
+                    //     $row["marketedByUserEmail"],
+                    //     $row["marketedByUserUsername"],
+                    //     $row["marketedByUserPassword"],
+                    //     $propertyMarketedByUserRole,
+                    //     $row["marketedByUserAvatar"]
+                    // );
+                    // $property = new Property(
+                    //     (int) $row["propertyId"],
+                    //     $propertyType,
+                    //     $row["propertyStatus"],
+                    //     $row["propertyYearBuilt"],
+                    //     $propertyMarketedByUser,
+                    //     $row["propertyDescription"],
+                    //     (float)$row["propertyPrice"],
+                    //     $row["propertyTotalSqFt"],
+                    //     (float) $row["propertyLotSizeUnit"],
+                    //     $row["lotSize"]
+        
+                    // );
                     $comment = new Comment(
                         (int) $row["commentId"],
                         $user,
                         $row["comment"],
-                        $property
+                        new Enquiry($row["commentFor"])
                     );
                     array_push($comments, $comment);
                 }
@@ -258,10 +258,18 @@ class CommentDAO
     {
         // logMessage("Posting Comment");
         try {
-            $stmt = $this->db->prepare("INSERT INTO Comment(comment,createdBy,commentFor) values(?,?,?)");
+            $stmt = $this->db->prepare("INSERT INTO comment(comment,createdBy,commentFor) values(?,?,?)");
             $name = $comment->getComment();
-            $createdById = $comment->getCreatedBy()->getId();
-            $commentForId = $comment->getCommentFor()->getId();
+            $createdById = null;
+            $commentForId = null;
+            if($comment->getCreatedBy()!=null) {
+                $createdById = $comment->getCreatedBy()->getId();
+
+            }
+            if($comment->getCommentFor()!=null) {
+                $commentForId = $comment->getCommentFor()->getId();
+                
+            }
             $stmt->bind_param("sii", $name, $createdById, $commentForId);
 
             if (!$stmt->execute()) {

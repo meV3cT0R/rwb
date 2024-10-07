@@ -15,6 +15,8 @@ error_reporting(E_ALL);
     require_once "src/models/Property.php";
     require_once "src/models/User.php";
     require_once "src/models/Role.php";
+    require_once "src/models/Comment.php";
+    require_once "src/models/Enquiry.php";
 
     require_once "src/dao/PropertyTypeDAO.php";
     require_once "src/dao/UserDAO.php";
@@ -23,6 +25,8 @@ error_reporting(E_ALL);
     require_once "src/dao/CountryDAO.php";
     require_once "src/dao/CityDAO.php";
     require_once "src/dao/StateDAO.php";
+    require_once "src/dao/EnquiryDAO.php";
+    require_once "src/dao/CommentDAO.php";
 
 
     require_once "src/repositories/PropertyTypeRepository.php";
@@ -31,6 +35,8 @@ error_reporting(E_ALL);
     require_once "src/repositories/CityRepository.php";
     require_once "src/repositories/UserRepository.php";
     require_once "src/repositories/PropertyRepository.php";
+    require_once "src/repositories/EnquiryRepository.php";
+    require_once "src/repositories/CommentRepository.php";
     
     require_once "src/dto/ErrorDTO.php";
     require_once "src/dto/ResDTO.php";
@@ -59,6 +65,8 @@ error_reporting(E_ALL);
     $countryDAO = new CountryDAO($dbConnection);
     $stateDAO = new StateDAO($dbConnection);
     $cityDAO = new CityDAO($dbConnection);
+    $enquiryDAO = new EnquiryDAO($dbConnection);
+    $commentDAO = new CommentDAO($dbConnection);
 
 
 
@@ -84,18 +92,25 @@ error_reporting(E_ALL);
         $propertyDAO,
         $propertyTypeDAO,
         $userDAO,
-        $roleDAO
+        $roleDAO,
+        $enquiryDAO,
+        $commentDAO
     );
-    $propertyRepository = new PropertyRepository(
-        $propertyDAO,
-        $propertyTypeDAO,
-        $userDAO,
-        $roleDAO
-    );
+
     $userRepository = new UserRepository(
         $userDAO,
         $roleDAO,
     );
+    $commentRepository = new CommentRepository(
+        $commentDAO
+    );
+    $enquiryRepository = new EnquiryRepository(
+        $enquiryDAO,
+        $commentDAO
+    );
+
+
+
 
     $userService = new UserService(
         $userRepository
@@ -105,7 +120,9 @@ error_reporting(E_ALL);
         $propertyRepository,
                             $userService,
                             $propertyTypeRepository,
-                            $cityRepository
+                            $cityRepository,
+                            $commentRepository,
+                            $enquiryRepository
     );
     $adminController = new AdminController(
         $propertyTypeRepository,
