@@ -15,6 +15,7 @@
             UserRepository $userRepository,
             PropertyRepository $propertyRepository,
         ) {
+            // Check if all dependencies are provided
             Helper::checkDependencies(array(
                 "PropertyTypeRepository" => $propertyTypeRepository,
                 "CountryRepository" => $countryRepository,
@@ -32,6 +33,7 @@
         }
 
         public function dashboard() : void {
+            // Get total counts for various entities
             $totalPropertyTypes = count($this->propertyTypeRepository->getPropertyTypes());
             $totalCountry = count($this->countryRepository->getCountries());
             $totalState = count($this->stateRepository->getStates());
@@ -40,6 +42,7 @@
             $totalOwner = count($this->userRepository->getUsersByRoleName("OWNER"));
             $totalUser = count($this->userRepository->getUsersByRoleName("USER"));
             $totalProperties = count($this->propertyRepository->getProperties());
+            // Include the dashboard view
             require_once __DIR__."/../../public/admin/dashboard.php";
         }
 

@@ -28,7 +28,6 @@ require_once "src/dao/StateDAO.php";
 require_once "src/dao/EnquiryDAO.php";
 require_once "src/dao/CommentDAO.php";
 
-
 require_once "src/repositories/PropertyTypeRepository.php";
 require_once "src/repositories/CountryRepository.php";
 require_once "src/repositories/StateRepository.php";
@@ -56,9 +55,9 @@ require_once "src/controllers/AdminPageController.php";
 
 require_once "src/middlewares/authentications/Auth.php";
 
-$dbConnection = (new DB())->connect();
+$dbConnection = (new DB())->connect(); // Initialize database connection
 
-
+// Initialize DAOs
 $propertyTypeDAO = new PropertyTypeDAO($dbConnection);
 $userDAO = new UserDAO($dbConnection);
 $roleDAO = new RoleDAO($dbConnection);
@@ -69,9 +68,7 @@ $cityDAO = new CityDAO($dbConnection);
 $enquiryDAO = new EnquiryDAO($dbConnection);
 $commentDAO = new CommentDAO($dbConnection);
 
-
-
-
+// Initialize Repositories
 $propertyTypeRepository = new PropertyTypeRepository(
     $propertyTypeDAO,
     $userDAO,
@@ -94,6 +91,9 @@ $propertyRepository = new PropertyRepository(
     $propertyTypeDAO,
     $userDAO,
     $roleDAO,
+    $propertyTypeDAO,
+    $userDAO,
+    $roleDAO,
     $enquiryDAO,
     $commentDAO
 );
@@ -110,13 +110,11 @@ $enquiryRepository = new EnquiryRepository(
     $commentDAO
 );
 
-
-
-
 $userService = new UserService(
     $userRepository
 );
 
+// Initialize Controllers
 $homeController = new HomeController(
     $propertyRepository,
     $userService,
@@ -148,34 +146,29 @@ $adminCityController = new AdminCityController(
     $stateRepository,
     $countryRepository
 );
-
 $adminUserController = new AdminUserController(
     $userRepository
 );
 $adminPropertyController = new AdminPropertyController(
     $propertyRepository
 );
-
-
-$adminPagesController = new AdminPageController(
-
-);
+$adminPagesController = new AdminPageController();
 
 $auth = new Auth();
 
-$uri = $_SERVER['REQUEST_URI'];
+$uri = $_SERVER['REQUEST_URI']; // Get the current URI
 
-$uri = explode("?", $uri);
+$uri = explode("?", $uri); // Split URI by query parameters
 if (count($uri) > 1) {
-    $params = Helper::getParams($uri[1]);
+    $params = Helper::getParams($uri[1]); // Get query parameters
 }
 
-$uri = explode("/", $uri[0]);
-$uri = array_slice($uri, 2);
+$uri = explode("/", $uri[0]); // Split URI by slashes
+$uri = array_slice($uri, 2); // Remove the first two elements
 
+$uri = implode("/", $uri); // Reconstruct the URI
 
-$uri = implode("/", $uri);
-
+// Define routes
 $route = array(
     "" => function (): void {
         global $homeController;
@@ -211,7 +204,6 @@ $route = array(
         $add = false;
         $propertyTypeController->deletePropertyType($id);
         header("Location: /realEstate/admin/propertyType");
-
     },
     "admin/country" => function (): void {
         global $auth;
@@ -234,10 +226,8 @@ $route = array(
         global $adminCountryController;
         global $params;
         $id = $params["id"];
-
         $adminCountryController->deleteCountry($id);
         header("Location: /realEstate/admin/country");
-
     },
     "admin/state" => function (): void {
         global $auth;
@@ -259,9 +249,7 @@ $route = array(
     "admin/state/delete" => function (): void {
         global $adminStateController;
         global $params;
-
         $id = $params["id"];
-
         $adminStateController->deleteState($id);
         header("Location: /realEstate/admin/state");
     },
@@ -269,12 +257,10 @@ $route = array(
         global $auth;
         $auth->verifyAdmin();
         global $adminCityController;
-        ;
         $adminCityController->home();
     },
     "admin/city/create" => function (): void {
         global $adminCityController;
-        ;
         $adminCityController->addCity();
     },
     "admin/city/edit" => function (): void {
@@ -288,30 +274,25 @@ $route = array(
         global $params;
         global $stateRepository;
         $id = $params["id"];
-
         $stateRepository->deleteState($id);
         header("Location: /realEstate/admin/state");
-
     },
     "admin/users" => function (): void {
         global $auth;
         $auth->verifyAdmin();
         global $adminUserController;
-        ;
         $adminUserController->getUsers();
     },
     "admin/agents" => function (): void {
         global $auth;
         $auth->verifyAdmin();
         global $adminUserController;
-        ;
         $adminUserController->getAgents();
     },
     "admin/owners" => function (): void {
         global $auth;
         $auth->verifyAdmin();
         global $adminUserController;
-        ;
         $adminUserController->getOwners();
     },
     "admin/properties" => function (): void {
@@ -351,19 +332,16 @@ $route = array(
         global $userService;
         $userService->createUser();
         header("Location: /realEstate/login");
-
     },
     "admin/createowner" => function (): void {
         global $userService;
         $userService->createOwner();
         header("Location: /realEstate/login");
-
     },
     "admin/createagent" => function (): void {
         global $userService;
         $userService->createAgent();
         header("Location: /realEstate/login");
-
     },
     "login" => function (): void {
         global $homeController;
@@ -430,8 +408,8 @@ $route = array(
 );
 
 if (isset($route[strtolower($uri)])) {
-    $route[strtolower($uri)]();
+    $route[strtolower($uri)](); // Execute the matched route
 } else {
-    echo "404 : Page Not Found";
+    echo "404 : Page Not Found"; // Handle 404 error
 }
 exit();
