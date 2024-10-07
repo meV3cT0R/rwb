@@ -1,0 +1,34 @@
+/* Table action cell styling */
+.action-cell {
+    background-color: #003366; /* Dark blue background for the cell */
+    padding: 10px; /* Add some padding */
+    text-align: center; /* Center align the content */
+}
+
+/* Action link styles */
+.action-link {
+    text-decoration: none; /* Remove underline */
+    color: #ffffff; /* White text color */
+    padding: 5px 10px; /* Padding for a button-like effect */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Edit link style */
+.edit {
+    background-color: #007bff; /* Light blue for Edit */
+}
+
+/* Delete link style */
+.delete {
+    background-color: #dc3545; /* Red for Delete */
+}
+
+/* Hover effects */
+.edit:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.delete:hover {
+    background-color: #c82333; /* Darker red on hover */
+}

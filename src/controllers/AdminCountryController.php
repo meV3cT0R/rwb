@@ -33,4 +33,7 @@
             $title = "Countries";
             require_once __DIR__."/../../public/admin/table.php";
         }
+        public function addCountry() {
+            require_once __DIR__."/../../public/addCountry.php";
+        }
     }

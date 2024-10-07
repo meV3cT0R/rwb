@@ -24,6 +24,39 @@
             background-color: #0056b3;
             transform: scale(1.1);
         }
+        /* Table action cell styling */
+        .action-cell {
+            background-color: #003366; /* Dark blue background for the cell */
+            padding: 10px; /* Add some padding */
+            text-align: center; /* Center align the content */
+        }
+
+        /* Action link styles */
+        .action-link {
+            text-decoration: none; 
+            color: #ffffff; 
+            padding: 5px 10px; 
+            border-radius: 5px; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .edit {
+
+            border: 1px solid #007bff;
+        }
+
+        .delete {
+            border: 1px solid #dc3545;
+        }
+
+        .edit:hover {
+            border:1px solid #0056b3;
+        }
+
+        .delete:hover {
+            border:1px solid #c82333;
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>

@@ -35,4 +35,7 @@
             $title = "States";
             require_once __DIR__."/../../public/admin/table.php";
         }
+        function addState() {
+            require_once __DIR__."/../../public/addState.php";
+        }
     }

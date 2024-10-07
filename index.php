@@ -173,13 +173,25 @@ error_reporting(E_ALL);
             global $adminCountryController;
             $adminCountryController->home();
         },
+        "admin/country/create"=> function():void {
+            global $adminCountryController;
+            $adminCountryController->addCountry();
+        },
         "admin/state"=> function():void {
             global $adminStateController;
             $adminStateController->home();
         },
+        "admin/state/create"=> function():void {
+            global $adminStateController;
+            $adminStateController->addState();
+        },
         "admin/city"=> function():void {
             global $adminCityController;;
             $adminCityController->home();
+        },
+        "admin/city/create"=> function():void {
+            global $adminCityController;;
+            $adminCityController->addCity();
         },
         "admin/users"=> function():void {
             global $adminUserController;;
