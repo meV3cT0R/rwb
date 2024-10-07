@@ -28,6 +28,9 @@
             return $usersToBeSent;
         }
 
+        public function getUsersByRoleId(int $id) : array {
+            return $this->userDAO->getUsersByRole($id);
+        }
         public function getUserById(int $id) : User {
             $user = $this->userDAO->getUserById($id);
 
@@ -36,7 +39,7 @@
             return $user;
         }
 
-        public function getUserByUsername(string $username) : User {
+        public function getUserByUsername(string $username) : ?User {
             $user = $this->userDAO->getUserByUsername($username);
             $user->setRole($this->roleDAO->getRoleById($user->getRole()->getId()));
             return $user;
@@ -57,7 +60,7 @@
             $users = $this->getUsers();
             $usersWithSpecificRole = [];
             foreach($users as $user) {
-                if(strcmp($user->getRole()->getRoleName(),strtoupper($roleName))==0){
+                if(strcmp(strtoupper($user->getRole()->getRoleName()),strtoupper($roleName))==0){
                     array_push($usersWithSpecificRole,$user);
                 }
             }

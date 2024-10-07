@@ -3,7 +3,11 @@ h3 {
   font-size: 32px;
 }
 
-ul {
+.body  h1 {
+  color:var(--primaryDark);
+
+}
+.sets-apart ul {
   list-style: none;
   margin-bottom: 10px;
   display: flex;
@@ -11,13 +15,14 @@ ul {
   gap: 12px;
 }
 
-ul > li {
+.sets-apart ul > li {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding:10px 0px;
 }
 
-li > p {
+.sets-apart ul > li > p {
   font-size: 24px;
   color: rgb(9, 102, 102);
 }

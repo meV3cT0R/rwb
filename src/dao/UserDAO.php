@@ -61,7 +61,8 @@ class UserDAO
         try {
             $stmt = $this->db->prepare($query);
             if($bindString !=""){
-                $stmt->bind_param($bindString, ...$bindArr);
+                $params = array_merge([$bindString],$bindArr);
+                call_user_func_array([$stmt,"bind_param"],Helper::refValues($params));
             }
 
             if (!$stmt->execute()) {
@@ -89,7 +90,7 @@ class UserDAO
     public function getUsersByRole(int $roleId): array
     {
         return $this->getUsersHelper(array(
-            "role" => array(
+            "roleId" => array(
                 "type" => "i",
                 "value" => $roleId
             )
@@ -101,9 +102,9 @@ class UserDAO
         $bindString = "";
 
         $this->queryHelper("SELECT * FROM user",$map,$query,$bindArr,$bindString);
-        logMessage("Generated Query :".$query);
-        logMessage("Generated bind types :".$bindString);
-        logMessage("Generated bind values :".implode($bindArr));
+        // logMessage("Generated Query :".$query);
+        // logMessage("Generated bind types :".$bindString);
+        // logMessage("Generated bind values :".implode($bindArr));
 
         $user = null;
         try {
@@ -138,7 +139,7 @@ class UserDAO
         ));
     }
 
-    public function getUserByUsername(string $username): User {
+    public function getUserByUsername(string $username): ?User {
         return $this->getUserHelper(array(
             "username"=> array(
                 "type" => "s",
@@ -169,7 +170,7 @@ class UserDAO
                     email,
                     username,
                     password,
-                    role,
+                    roleId,
                     avatar
                 )
                 values(
@@ -226,7 +227,7 @@ class UserDAO
                     email=?,
                     username=?,
                     password=?,
-                    role=?,
+                    roleId=?,
                     avatar=?
                 where id=?
             ");
@@ -269,7 +270,7 @@ class UserDAO
 
     function deleteUser(int $id): User
     {
-        logMessage("Deleting Users with the id $id");
+        // logMessage("Deleting Users with the id $id");
         $user = null;
         try {
             $user = $this->getUserById($id);

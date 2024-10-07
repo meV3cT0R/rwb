@@ -2,9 +2,9 @@
     if(isset($_POST["register"])) {
         $user = new User();
         try{
-            logMessage("register clicked");
+            // logMessage("register clicked");
             $image = Helper::uploadImage($_FILES["file"]);
-            logMessage($image);
+            // logMessage($image);
             $user->setFirstName($_POST["firstName"]);
             $user->setLastName($_POST["lastName"]);
             $user->setUsername($_POST["username"]);
@@ -26,7 +26,7 @@
             include __DIR__."/../components/header.php";
         ?>
 
-        <div class="formContainer body">
+        <div class="formContainer body" style="margin-bottom:50px;">
             <form method="post" action="" enctype="multipart/form-data">
                 <h1> Register </h1>
                 <div>

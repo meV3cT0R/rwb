@@ -2,7 +2,7 @@
     State
 --->
 <?php
-    logMessage("inside RoleDAO.php");
+    // logMessage("inside RoleDAO.php");
 
     class RoleDAO {
         private mysqli $db;
@@ -14,7 +14,7 @@
             $this->db = $dbConnection;
         }
         function getRoles() : array {
-            logMessage("Getting roles");
+            // logMessage("Getting roles");
             $roles = []; 
             try {
                 $result = $this->db->query("SELECT 
@@ -37,7 +37,7 @@
         }
 
         function getRoleById(int $id) : Role {
-            logMessage("Getting Role by Id");
+            // logMessage("Getting Role by Id");
             $result  = $this->db->query("SELECT 
                    * from role where id=$id;
                    ") or trigger_error("Something Went wrong while trying to execute SELECT query");

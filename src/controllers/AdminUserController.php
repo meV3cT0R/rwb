@@ -13,7 +13,7 @@
             $cols = ["First Name","Last Name","E-mail","Username","avatar"];
             $arr = array_map(function(User $user){
                     $subArr = [];
-                    array_push($subArr, values: $user->getFirstName());
+                    array_push($subArr,  $user->getFirstName());
                     array_push($subArr, $user->getLastName());
                     array_push($subArr, $user->getEmail());
                     array_push($subArr, $user->getUsername());
@@ -24,7 +24,7 @@
         }
 
         public function getUsers() :void {
-            $users = $this->userRepository->getUsersByRoleName("USER");
+            $users = $this->userRepository->getUsersByRoleId(2);
             $title = "Users";
             $cols = [];
             $arr = [];
@@ -32,7 +32,7 @@
             require_once __DIR__."/../../public/admin/table.php";
         }        
         public function getAgents():void {
-            $users = $this->userRepository->getUsersByRoleName("AGENT");
+            $users = $this->userRepository->getUsersByRoleId(4);
             $title = "Agents";
             $cols = [];
             $arr = [];
@@ -40,11 +40,18 @@
             require_once __DIR__."/../../public/admin/table.php";
         }        
         public function getOwners(): void {
-            $users = $this->userRepository->getUsersByRoleName("OWNER");
+            $users = $this->userRepository->getUsersByRoleId(3);
             $title = "Owners";
             $cols = [];
             $arr = [];
             $this->helper( $users,$cols,$arr);
             require_once __DIR__."/../../public/admin/table.php";
-        }        
+        }  
+        public function getUserById($id) {
+            // logMessage($id);
+            $user = $this->userRepository->getUserById($id);
+            // $this->helper($user);
+            // require_once __DIR__."/../../public/admin/userProfile.php";
+            return $user;
+        }      
     }

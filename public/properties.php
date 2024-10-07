@@ -16,7 +16,7 @@ require_once __DIR__ . "/../src/models/Property.php";
     <?php include __DIR__ . "/../components/header.php"; ?>
 
     <div class="container">
-        <h1>Properties</h1>
+        <h1 style="margin-bottom:20px;">Properties</h1>
         <div class="properties-grid">
             <?php
             if (isset($properties)) {

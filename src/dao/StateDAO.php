@@ -2,7 +2,7 @@
     State
 --->
 <?php
-    logMessage("inside StateDAO.php");
+    // logMessage("inside StateDAO.php");
 
     class StateDAO {
         private mysqli $db;
@@ -14,7 +14,7 @@
             $this->db = $dbConnection;
         }
         function getStates() : array {
-            logMessage("Getting States");
+            // logMessage("Getting States");
             $states = []; 
             try {
                 $result = $this->db->query("SELECT 
@@ -44,7 +44,7 @@
         }
 
         function getStateById(int $id) : State {
-            logMessage("Getting State by Id");
+            // logMessage("Getting State by Id");
             $result  = $this->db->query("SELECT 
              state.id as stateId,
                 state.name as stateName,
@@ -67,7 +67,7 @@
         }
 
         function postState(State $state) : State{
-            logMessage("Posting State");
+            // logMessage("Posting State");
             try{
                 if($state->getCountry()===null) {
                     throw new ErrorException("[No Country Provided] State Should be part of Country");
@@ -102,7 +102,7 @@
         }
 
         function updateState(State $state) : State {
-            logMessage("Updating State");
+            // logMessage("Updating State");
             try{
                 $stmt = $this->db->prepare("UPDATE state set name=?,countryId=? where id=?");
                 $name= $state->getName();
@@ -122,7 +122,7 @@
         } 
     
         function deleteState(int $id) : State {
-            logMessage("Deleting data with the id $id");
+            // logMessage("Deleting data with the id $id");
             $state = null;
             try{
                 $state = $this->getStateById($id);

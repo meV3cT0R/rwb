@@ -3,6 +3,9 @@
     --secondary: #bcc8d4;
     --success : rgba(23, 83, 11, 0.8);
     --danger: rgba(215, 41, 41, 0.822);
+    --primaryDark : #084cc1;
+    --primaryShade1:#3380f2;
+    --primaryShade2:#094ab8;
 }
 
 body {
@@ -44,8 +47,6 @@ button {
     color:var(--primary);
     transition: .3s;
 }
-
-
 
 .header  .buttons {
     display:flex;
@@ -105,10 +106,12 @@ body>div:nth-child(2) {
 .header div .gap {
     flex-grow: 1;
 }
+
 #toggleContainer {
     display:flex;
     flex-direction: row-reverse;
 }
+
 .error {
     text-align: center;
     color:red;

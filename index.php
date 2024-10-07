@@ -47,6 +47,8 @@ error_reporting(E_ALL);
     require_once "src/controllers/AdminUserController.php";
     require_once "src/controllers/AdminPropertyController.php";
 
+    require_once "src/middlewares/authentications/Auth.php";
+
     $dbConnection = (new DB())->connect();
 
 
@@ -131,6 +133,9 @@ error_reporting(E_ALL);
         $propertyRepository
     );
 
+
+    $auth = new Auth();
+
     $uri = $_SERVER['REQUEST_URI'];
     
     $uri = explode("?",$uri);
@@ -150,6 +155,8 @@ error_reporting(E_ALL);
             $homeController->home();
         },
         "admin" => function() :void {
+            // global $auth;
+            // $auth->verifyAdmin();
             global $adminController;
             $adminController->dashboard();
 
@@ -189,6 +196,22 @@ error_reporting(E_ALL);
         "admin/properties"=> function():void {
             global $adminPropertyController;
             $adminPropertyController->home();
+        },
+     "admin/updateprofile" => function () use ($adminUserController) { 
+        global $params;
+        $id = $params["id"];
+        $user = $adminUserController->getUserById($id); 
+        require_once __DIR__ . '/public/admin/userProfile.php'; 
+    },
+       "admin/changepassword" => function () use ($adminUserController) { 
+        global $params;
+        $id = $params["id"];
+        $user = $adminUserController->getUserById($id); 
+        require_once __DIR__ . '/public/admin/changePassword.php'; 
+    },
+        "admin/createsuperadmin"=> function():void {
+            global $userService;
+            $userService->createSuperAdmin();
         },
         "login"=>function() :void {
             global $homeController;
