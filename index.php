@@ -158,6 +158,10 @@ error_reporting(E_ALL);
             global $propertyTypeController;
             $propertyTypeController->home();
         },
+        "admin/propertytype/create"=> function():void {
+            global $propertyTypeController;
+            $propertyTypeController->create();
+        },
         "admin/country"=> function():void {
             global $adminCountryController;
             $adminCountryController->home();
