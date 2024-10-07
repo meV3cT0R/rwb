@@ -142,4 +142,34 @@
         public function getChangePassword() :void {
             require_once __DIR__."/../../public/changePassword.php";
         }
+        public function manageProperties() : void {
+            $properties = $this->propertyRepository->getProperties();
+            $types = $this->propertyTypeRepository->getPropertyTypes();
+            $status = $this->propertyRepository->getStatuses();
+            $cities = $this->cityRepository->getCities();
+
+            $search = function($type,$status,$city): array {
+                $arr = [];
+
+                $properties = $this->propertyRepository->getProperties();
+                foreach ($properties as $property) {
+                    if(
+                        ($property->getPropertyType()->getId() == $type || $type=="all" ) &&
+                        (strtolower($property->getStatus()) == strtolower($status) || $status=="all" ) &&
+                        ($property->getCity()->getId() == $city || $city=="all" )
+                    ) {
+                        array_push($arr,$property);
+                    }
+                }
+
+                return $arr;
+            };
+            require_once __DIR__."/../../public/manageProperties.php";
+        }
+        public function addProperties(bool $add = true, int $id = NULL ) : void {
+            require_once __DIR__."/../../public/addProperty.php";
+        }
+        public function deleteProperties(int $id ) : void {
+            // do stuff
+        }
     }

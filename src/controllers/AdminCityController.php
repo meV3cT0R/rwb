@@ -25,6 +25,7 @@
             // echo implode($countries);
 
             $cols = ["City","State","Country","Actions"];
+            $add = true;
             $arr = array_map(function(City $city){
                     $subArr = [];
                     array_push($subArr, $city->getName());
