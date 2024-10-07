@@ -2,9 +2,9 @@
     if(isset($_POST["register"])) {
         $user = new User();
         try{
-            logMessage("register clicked");
+            // logMessage("register clicked");
             $image = Helper::uploadImage($_FILES["file"]);
-            logMessage($image);
+            // logMessage($image);
             $user->setFirstName($_POST["firstName"]);
             $user->setLastName($_POST["lastName"]);
             $user->setUsername($_POST["username"]);

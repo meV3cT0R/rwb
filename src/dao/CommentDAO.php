@@ -3,7 +3,7 @@
     Comment
 ----->
 <?php
-logMessage("inside CommentService.php");
+// logMessage("inside CommentService.php");
 
 class CommentDAO
 {
@@ -19,7 +19,7 @@ class CommentDAO
 
     function getCommentsByEnquiryId(int $id): array
     {
-        logMessage("Getting Comments");
+        // logMessage("Getting Comments");
         $comments = [];
         try {
             $commentStmt = $this->db->prepare("SELECT 
@@ -139,7 +139,7 @@ class CommentDAO
 
     function getCommentById(int $id): Comment
     {
-        logMessage("Getting Comment");
+        // logMessage("Getting Comment");
         $comment = null;
         try {
             $commentStmt = $this->db->prepare("SELECT 
@@ -256,7 +256,7 @@ class CommentDAO
 
     function postComment(Comment $comment): Comment
     {
-        logMessage("Posting Comment");
+        // logMessage("Posting Comment");
         try {
             $stmt = $this->db->prepare("INSERT INTO Comment(comment,createdBy,commentFor) values(?,?,?)");
             $name = $comment->getComment();
@@ -278,7 +278,7 @@ class CommentDAO
 
     function updateComment(Comment $comment): Comment
     {
-        logMessage("Updating Comment");
+        // logMessage("Updating Comment");
         try {
             $stmt = $this->db->prepare("UPDATE comment set comment=? where id=?");
             $name = $comment->getComment();
@@ -299,7 +299,7 @@ class CommentDAO
 
     function deleteComment(int $id): Comment
     {
-        logMessage("Deleting data with the id $id");
+        // logMessage("Deleting data with the id $id");
         $comment = null;
         try {
             $comment = $this->getCommentById($id);

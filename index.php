@@ -193,6 +193,18 @@ error_reporting(E_ALL);
             global $adminPropertyController;
             $adminPropertyController->home();
         },
+     "admin/updateprofile" => function () use ($adminUserController) { 
+        global $params;
+        $id = $params["id"];
+        $user = $adminUserController->getUserById($id); 
+        require_once __DIR__ . '/public/admin/userProfile.php'; 
+    },
+       "admin/changepassword" => function () use ($adminUserController) { 
+        global $params;
+        $id = $params["id"];
+        $user = $adminUserController->getUserById($id); 
+        require_once __DIR__ . '/public/admin/changePassword.php'; 
+    },
         "admin/createsuperadmin"=> function():void {
             global $userService;
             $userService->createSuperAdmin();

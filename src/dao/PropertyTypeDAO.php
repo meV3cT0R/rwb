@@ -111,7 +111,7 @@ class PropertyTypeDAO
 
     public function updatePropertyType(PropertyType $propertyType): PropertyType
     {
-        logMessage(msg: "Updating PropertyType with the id ".$propertyType->getId());
+        // logMessage(msg: "Updating PropertyType with the id ".$propertyType->getId());
 
         try {
             $stmt = $this->db->prepare("UPDATE propertyType
@@ -148,7 +148,7 @@ class PropertyTypeDAO
 
     function deletePropertyType(int $id): PropertyType
     {
-        logMessage("Deleting PropertyType with the id $id");
+        // logMessage("Deleting PropertyType with the id $id");
         $propertyType = null;
         try {
             $propertyType = $this->getPropertyTypeById($id);

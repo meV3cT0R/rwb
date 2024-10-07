@@ -26,13 +26,13 @@ class Helper
 
     public static function uploadImage($file): string
     {
-        logMessage("inside upload Image");
+        // logMessage("inside upload Image");
         $targetDir = "images/";
         if(!is_dir($targetDir)){
             if (mkdir($targetDir, 0755, true)) {
-                logMessage("Directory created successfully.");
+                // logMessage("Directory created successfully.");
             } else {
-                logMessage("Failed to create directory.");
+                // logMessage("Failed to create directory.");
             }
         }
         
@@ -43,7 +43,7 @@ class Helper
         if (isset($file)) {
             $check = getimagesize($file["tmp_name"]);
             if ($check !== false) {
-                logMessage("File is an image - " . $check["mime"]);
+                // logMessage("File is an image - " . $check["mime"]);
             } else {
                 throw new Exception("File is not an image.");
             }
@@ -60,7 +60,7 @@ class Helper
 
 
         if (move_uploaded_file($file["tmp_name"], $targetFile)) {
-            logMessage("The file " . basename($file["name"]) . " has been uploaded.");
+            // logMessage("The file " . basename($file["name"]) . " has been uploaded.");
         } else {
             throw new Exception("Sorry, there was an error uploading your file.");
         }
