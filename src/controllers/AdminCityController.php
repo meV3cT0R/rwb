@@ -38,14 +38,14 @@
                     }else {
                         array_push($subArr,"-");
                     }
-                    array_push($subArr, "<a class='action-link edit' href='/admin/city/edit?id=".$city->getId()."'>Edit</a> | <a class='action-link delete' href='/admin/city/delete?id=".$city->getId()."'>Delete</a>");
+                    array_push($subArr, "<a class='action-link edit' href='/realEstate/admin/city/edit?id=".$city->getId()."'>Edit</a> | <a class='action-link delete' href='/realEstate/admin/city/delete?id=".$city->getId()."'>Delete</a>");
                     return $subArr;
             },$cities);
 
             $title = "Cities";
             require_once __DIR__."/../../public/admin/table.php";
         }
-        public function addCity() {
+        public function addCity(bool $add=true, int $id = NULL) : void {
             $states= $this->stateRepository->getStates();
             $countries = $this->countryRepository->getCountries();
 

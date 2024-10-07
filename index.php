@@ -175,6 +175,13 @@ error_reporting(E_ALL);
             global $propertyTypeController;
             $propertyTypeController->addPropertyType();
         },
+        "admin/propertytype/edit"=> function():void {
+            global $propertyTypeController;
+            global $params;
+            $id = $params["id"];
+            $add = false;
+            $propertyTypeController->editPropertyType($add, $id);
+        },
         "admin/country"=> function():void {
             global $auth;
             $auth->verifyAdmin();
@@ -184,6 +191,13 @@ error_reporting(E_ALL);
         "admin/country/create"=> function():void {
             global $adminCountryController;
             $adminCountryController->addCountry();
+        },
+        "admin/country/edit"=> function():void {
+            global $adminCountryController;
+            global $params;
+            $id = $params["id"];
+            $add = false;
+            $adminCountryController->addCountry($add, $id);
         },
         "admin/state"=> function():void {
             global $auth;
@@ -195,6 +209,13 @@ error_reporting(E_ALL);
             global $adminStateController;
             $adminStateController->addState();
         },
+        "admin/state/edit"=> function():void {
+            global $adminStateController;
+            $add = false;
+            global $params;
+            $id = $params["id"];
+            $adminStateController->addState($add, $id);
+        },
         "admin/city"=> function():void {
             global $auth;
             $auth->verifyAdmin();
@@ -204,6 +225,13 @@ error_reporting(E_ALL);
         "admin/city/create"=> function():void {
             global $adminCityController;;
             $adminCityController->addCity();
+        },
+        "admin/city/edit"=> function():void {
+            global $adminCityController;
+            global $params;
+            $id = $params["id"];
+            $add = false;
+            $adminCityController->addCity($add, $id);
         },
         "admin/users"=> function():void {
             global $auth;
@@ -309,6 +337,10 @@ error_reporting(E_ALL);
         "changepassword"=>function() :void {
             global $homeController;
             $homeController->getChangePassword();
+        },
+        "/realEstate/manageproperties"=>function() :void {
+            global $homeController;
+            $homeController->manageProperties();
         },
     );
 

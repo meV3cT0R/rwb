@@ -33,14 +33,14 @@
                     }else {
                         array_push($subArr,"-");
                     }
-                    array_push($subArr, "<a class='action-link edit' href='/admin/state/edit?id=".$state->getId()."'>Edit</a> | <a class='action-link delete' href='/admin/state/delete?id=".$state->getId()."'>Delete</a>");
+                    array_push($subArr, "<a class='action-link edit' href='/realEstate/admin/state/edit?id=".$state->getId()."'>Edit</a> | <a class='action-link delete' href='/realEstate/admin/state/delete?id=".$state->getId()."'>Delete</a>");
                     return $subArr;
             },$states);
 
             $title = "States";
             require_once __DIR__."/../../public/admin/table.php";
         }
-        function addState() {
+        function addState(bool $add=true, int $id = NULL) : void {
             $countries = $this->countryRepository->getCountries();
             $saveState = function($state) :State {
                 return $this->stateRepository->postState($state);

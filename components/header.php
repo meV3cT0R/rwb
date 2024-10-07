@@ -71,7 +71,7 @@ session_start();
                         $user = $_SESSION['user'];
                         if ($user->getRole() == "OWNER") {
                             ?>
-                                <a href="/realEstate/manageproperties?id=<?php echo $id ?>"> Manage Properties </a>
+                                <a href="/realEstate/manageproperties"> Manage Properties </a>
                             <?php
                         }
                         ?>

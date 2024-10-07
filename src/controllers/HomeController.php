@@ -135,11 +135,11 @@
         }
 
         public function getUpdateProfile(): void {
-
+            require_once __DIR__."/../../public/updateProfile.php";
         }
 
 
         public function getChangePassword() :void {
-
+            require_once __DIR__."/../../public/changePassword.php";
         }
     }

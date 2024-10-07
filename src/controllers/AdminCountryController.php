@@ -28,13 +28,13 @@
                     }else {
                         array_push($subArr,"-");
                     }
-                    array_push($subArr, "<a class='action-link edit' href='/admin/country/edit?id=".$country->getId()."'>Edit</a> | <a class='action-link delete' href='/admin/country/delete?id=".$country->getId()."'>Delete</a>");
+                    array_push($subArr, "<a class='action-link edit' href='/realEstate/admin/country/edit?id=".$country->getId()."'>Edit</a> | <a class='action-link delete' href='/realEstate/admin/country/delete?id=".$country->getId()."'>Delete</a>");
                     return $subArr;
             },$countries);
             $title = "Countries";
             require_once __DIR__."/../../public/admin/table.php";
         }
-        public function addCountry() {
+        public function addCountry(bool $add=true, int $id = NULL) : void {
             $saveCountry = function(Country $country) : Country {
                 return $this->countryRepository->postCountry($country);
             };
