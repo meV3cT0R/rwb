@@ -1,0 +1,189 @@
+/* City Form Container Styling */
+.formContainer {
+    margin-top: 50px;
+}
+
+form.city-form {
+    width: 90%;
+    border-radius: 25px;
+    box-shadow: 1px 2px 5px grey;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+form.city-form > div {
+    padding: 20px 40px;
+}
+
+form.city-form > div > label {
+    display: block;
+    color: gray;
+    text-transform: capitalize;
+}
+
+form.city-form > div > input {
+    width: 100%;
+    padding: 10px 2px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+form.city-form > div:last-child {
+    text-align: center;
+}
+
+form.city-form > button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 10px;
+    border: 0;
+}
+
+form.city-form > button:hover {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    form.city-form {
+        width: 500px;
+    }
+}
+
+/* Dropdown Styling */
+.city-form-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: var(--primaryDark);
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    appearance: none;
+    background-color: var(--secondary);
+    background-image: url('data:image/svg+xml;charset=UTF8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27%23000000%27 viewBox=%270 0 24 24%27 width=%2724px%27 height=%2724px%27%3E%3Cpath d=%27M7 10l5 5 5-5H7z%27/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.city-form-select:focus {
+    outline: none;
+    border-color: var(--primaryShade1);
+    background-color: var(--primaryShade2);
+    color: white;
+}
+
+.city-form-select:hover {
+    border-color: var(--primaryShade1);
+}
+
+/* Option Styling */
+.city-form-option {
+    color: var(--primaryDark);
+    background-color: var(--secondary);
+    padding: 10px;
+}
+
+/* Disabled Dropdown Styling */
+.city-form-select:disabled {
+    background-color: var(--secondary);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.city-form-option:disabled {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.formContainer {
+    margin-top: 50px;
+}
+
+form.property-form {
+    width: 90%;
+    border-radius: 25px;
+    box-shadow: 1px 2px 5px grey;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+form.property-form > div {
+    padding: 20px 40px;
+}
+
+form.property-form > div > label {
+    display: block;
+    color: gray;
+    text-transform: capitalize;
+}
+
+form.property-form > div > input, 
+form.property-form > div > textarea {
+    width: 100%;
+    padding: 10px 2px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+form.property-form > div:last-child {
+    text-align: center;
+}
+
+form.property-form > button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 10px;
+    border: 0;
+}
+
+form.property-form > button:hover {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    form.property-form {
+        width: 500px;
+    }
+}
+
+/* Dropdown Styling */
+.property-form-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: var(--primaryDark);
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    appearance: none;
+    background-color: var(--secondary);
+    background-image: url('data:image/svg+xml;charset=UTF8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27%23000000%27 viewBox=%270 0 24 24%27 width=%2724px%27 height=%2724px%27%3E%3Cpath d=%27M7 10l5 5 5-5H7z%27/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.property-form-select:focus {
+    outline: none;
+    border-color: var(--primaryShade1);
+    background-color: var(--primaryShade2);
+    color: white;
+}
+
+.property-form-select:hover {
+    border-color: var(--primaryShade1);
+}
+
+/* Disabled Dropdown Styling */
+.property-form-select:disabled {
+    background-color: var(--secondary);
+    color: rgba(0, 0, 0, 0.5);
+}
+

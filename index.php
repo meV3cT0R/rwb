@@ -165,17 +165,33 @@ error_reporting(E_ALL);
             global $propertyTypeController;
             $propertyTypeController->home();
         },
+        "admin/propertytype/create"=> function():void {
+            global $propertyTypeController;
+            $propertyTypeController->addPropertyType();
+        },
         "admin/country"=> function():void {
             global $adminCountryController;
             $adminCountryController->home();
+        },
+        "admin/country/create"=> function():void {
+            global $adminCountryController;
+            $adminCountryController->addCountry();
         },
         "admin/state"=> function():void {
             global $adminStateController;
             $adminStateController->home();
         },
+        "admin/state/create"=> function():void {
+            global $adminStateController;
+            $adminStateController->addState();
+        },
         "admin/city"=> function():void {
             global $adminCityController;;
             $adminCityController->home();
+        },
+        "admin/city/create"=> function():void {
+            global $adminCityController;;
+            $adminCityController->addCity();
         },
         "admin/users"=> function():void {
             global $adminUserController;;
@@ -192,6 +208,10 @@ error_reporting(E_ALL);
         "admin/properties"=> function():void {
             global $adminPropertyController;
             $adminPropertyController->home();
+        },
+        "admin/properties/create"=> function():void {
+            global $adminPropertyController;
+            $adminPropertyController->addProperty();
         },
      "admin/updateprofile" => function () use ($adminUserController) { 
         global $params;

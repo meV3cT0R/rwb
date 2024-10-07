@@ -15,7 +15,7 @@
             $states = $this->stateRepository->getStates();
             // echo implode($countries);
 
-            $cols = ["State","Country","No. of Cities"];
+            $cols = ["State","Country","No. of Cities","Actions"];
             $arr = array_map(function(State $state){
                     $subArr = [];
                     array_push($subArr, $state->getName());
@@ -29,10 +29,14 @@
                     }else {
                         array_push($subArr,"-");
                     }
+                    array_push($subArr, "<a class='action-link edit' href='/admin/state/edit?id=".$state->getId()."'>Edit</a> | <a class='action-link delete' href='/admin/state/delete?id=".$state->getId()."'>Delete</a>");
                     return $subArr;
             },$states);
 
             $title = "States";
             require_once __DIR__."/../../public/admin/table.php";
+        }
+        function addState() {
+            require_once __DIR__."/../../public/addState.php";
         }
     }

@@ -23,8 +23,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/realEstate/admin/">
-                        Property TypepropertyType
+                    <a href="/realEstate/admin/propertyType">
+                        Property Type
                     </a>
                 </li>
                 <li>
@@ -34,22 +34,22 @@
                 </li>
                 <li>
                     <a href="/realEstate/admin/state">
-                        states
+                        States
                     </a>
                 </li>
                 <li>
                     <a href="/realEstate/admin/city">
-                        cities
+                        Cities
                     </a>
                 </li>
                 <li>
                     <a href="/realEstate/admin/agents">
-                        agents
+                        Agents
                     </a>
                 </li>
                 <li>
                     <a href="/realEstate/admin/owners">
-                        owners
+                        Owners
                     </a>
                 </li>
                 <li>
@@ -59,7 +59,7 @@
                 </li>
                 <li>
                     <a href="/realEstate/admin/properties">
-                        properties
+                        Properties
                     </a>
                 </li>
 

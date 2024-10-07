@@ -13,14 +13,26 @@
         }
         public function home():void {
             $propertyTypes = $this->propertyTypeRepository->getPropertyTypes();
-            $cols = ["id","Name"];
+            $cols = ["id","Name","Action"];
             $arr = array_map(function(PropertyType $propertyType){
                     $subArr = [];
                     array_push($subArr, $propertyType->getId());
                     array_push($subArr, $propertyType->getName());
-
+                    array_push($subArr, "<a class='action-link edit' href='/admin/propertyType/edit?id=".$propertyType->getId()."'>Edit</a> | <a class='action-link delete' href='/admin/propertyType/delete?id=".$propertyType->getId()."'>Delete</a>");
                     return $subArr;
             },$propertyTypes);
             require_once __DIR__."/../../public/admin/table.php";
+        }
+        public function addPropertyType():ResDTO {
+        // public function addPropertyType(PropertyType $propertyType):ResDTO {
+            // $dto = new ResDTO("Property Type Data");
+            // try {
+            //     $propertyType = $this->propertyTypeRepository->postPropertyType($propertyType);
+            //     $dto->setData($propertyType);
+            // }catch(Exception $e) {
+            //     $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
+            // }
+            // return $dto;
+            require_once __DIR__."/../../public/addPropertyType.php";
         }
     }
