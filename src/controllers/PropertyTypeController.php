@@ -1,22 +1,15 @@
 <?php
 
     class PropertyTypeController {
-        private mysqli $db;
         private PropertyTypeRepository $propertyTypeRepository;
         
         public  function __construct(
-            mysqli $dbConnection=null,
             PropertyTypeRepository $propertyTypeRepository
             ) {
                 Helper::checkDependencies(array(
                     "PropertyTypeRepository"=> $propertyTypeRepository
                 ));
                 $this->propertyTypeRepository = $propertyTypeRepository;
-                if($dbConnection===null){
-                    throw new ErrorException("No Database Connection");
-                }
-    
-                $this->db = $dbConnection;
         }
         public function home():void {
             $propertyTypes = $this->propertyTypeRepository->getPropertyTypes();
@@ -39,5 +32,6 @@
                 $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
             }
             return $dto;
+            require_once __DIR__."/../../public/admin/addPropertyType.php";
         }
     }

@@ -167,7 +167,7 @@ error_reporting(E_ALL);
         },
         "admin/propertytype/create"=> function():void {
             global $propertyTypeController;
-            $propertyTypeController->create();
+            $propertyTypeController->addPropertyType();
         },
         "admin/country"=> function():void {
             global $adminCountryController;

@@ -26,7 +26,7 @@
             foreach($propertyTypes as $propertyType) {
                 if($propertyType->getCreatedBy() !=null){
                     $createdBy = $this->userDAO->getUserById($propertyType->getCreatedBy()->getId());
-                    if($createdBy!=null && $createdBy->getRole() !=null) {
+                    if($createdBy!=null && $createdBy->getRole() !=null && $createdBy->getRole()->getId() !=null) {
                         $createdBy->setRole($this->roleDAO->getRoleById($createdBy->getRole()->getId()));
                     }
                     $propertyType->setCreatedBy($createdBy);
@@ -40,7 +40,9 @@
             $propertyType = $this->propertyTypeDAO->getPropertyTypeById($id);
             if($propertyType->getCreatedBy() !=null){
                 $createdBy = $this->userDAO->getUserById($propertyType->getCreatedBy()->getId());
-                $createdBy->setRole($this->roleDAO->getRoleById($createdBy->getRole()->getId()));
+                if($createdBy!=null && $createdBy->getRole() !=null && $createdBy->getRole()->getId() !=null) {
+                    $createdBy->setRole($this->roleDAO->getRoleById($createdBy->getRole()->getId()));
+                }
                 $propertyType->setCreatedBy($createdBy);
             }
             return $propertyType;
