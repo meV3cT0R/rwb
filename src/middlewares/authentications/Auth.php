@@ -22,7 +22,7 @@
                 $user = $_SESSION["user"];
                 if($user instanceof UserDTO) {
                     logMessage("User ". $user->getFirstName(). " " . $user->getLastName());                
-                    if($user->getRole()=="USER") {
+                    if($user->getRole()=="USER" || $user->getRole()=="ADMIN" || $user->getRole()=="AGENT" || $user->getRole()=="OWNER") {
                         return true;
                     }
                 }
@@ -39,7 +39,7 @@
                 $user = $_SESSION["user"];
                 if($user instanceof UserDTO) {
                     logMessage("User ". $user->getFirstName(). " " . $user->getLastName());                
-                    if($user->getRole()=="OWNER") {
+                    if($user->getRole()=="OWNER" || $user->getRole()=="ADMIN" || $user->getRole()=="AGENT") {
                         return true;
                     }
                 }

@@ -394,14 +394,20 @@ $route = array(
         $homeController->getChangePassword();
     },
     "manageproperties" => function (): void {
+        global $auth;
+        $auth->verifyOwner();
         global $homeController;
         $homeController->manageProperties();
     },
     "manageproperties/add" => function (): void {
+        global $auth;
+        $auth->verifyOwner();
         global $homeController;
         $homeController->addProperties();
     },
     "manageproperties/edit" => function (): void {
+        global $auth;
+        $auth->verifyOwner();
         global $homeController;
         global $params;
         $id = $params["id"];
@@ -409,6 +415,8 @@ $route = array(
         $homeController->editProperties($add, $id);
     },
     "manageproperties/delete" => function (): void {
+        global $auth;
+        $auth->verifyOwner();
         global $homeController;
         global $params;
         $id = $params["id"];

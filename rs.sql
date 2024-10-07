@@ -19,7 +19,7 @@ create table user(
     username varchar(50) not null,
     password varchar(255) not null,
     roleId int,
-    avatar longtext not null,
+    avatar varchar(100) not null,
     foreign key (roleId) references role(id) on delete set null,
     createdAt datetime default current_timestamp
 
@@ -83,7 +83,7 @@ create table property(
 
 create table propertyPhotos (
     id int auto_increment primary key,
-    url longtext not null,
+    url varchar(100) not null,
     propertyId int not null,
     foreign key (propertyId) references property(id) on delete cascade,
     createdAt datetime default current_timestamp
@@ -110,17 +110,17 @@ create table comment (
 );
 
 
-create table aboutUs {
+create table aboutUs (
     id int auto_increment primary key,
     aboutUs varchar(500),
     image varchar(100),
-    mission varchar(500);
-    team varchar(500);
-}
+    mission varchar(500),
+    team varchar(500)
+)
 
-create table contactUs {
+create table contactUs (
     id int auto_increment primary key,
     email varchar(100),
     phone varchar(20),
-    address varchar(20),
-}
+    address varchar(20)
+)
