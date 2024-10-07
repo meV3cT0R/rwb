@@ -18,9 +18,24 @@
         }
 
         public function home() : void {
+            if(isset($_SESSION["user"])){
+                logMessage($_SESSION["user"]->getRole());
+
+            }else {
+                logMessage("session not set");
+            }
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
+            session_start();
+            if(isset($_SESSION["user"])){
+                if($_SESSION["user"]->getRole()=="ADMIN"){
+                    header("Location: /realEstate/admin");
+                }else {
+                    header("Location: /realEstate");
+                }
+                return;
+            }
             $login = function (string $username,string $password): ResDTO {
                 $dto = new ResDTO("User Data");
                 try {
@@ -34,9 +49,19 @@
 
                 return $dto;
             };
+            session_destroy();
             require_once __DIR__."/../../public/login.php";
         }
         public function getRegister() : void {
+            session_start();
+            if(isset($_SESSION["user"])){
+                if($_SESSION["user"]->getRole()=="ADMIN"){
+                    header("Location: /realEstate/admin");
+                }else {
+                    header("Location: /realEstate");
+                }
+                return;
+            }
             $register = function (User $user): ResDTO {
                 $dto = new ResDTO("User Data");
                 try {
@@ -48,6 +73,7 @@
 
                 return $dto;
             };
+            session_destroy();
             require_once __DIR__."/../../public/register.php";
         }
 
@@ -68,5 +94,21 @@
 
         public function getContact() : void {
             require_once __DIR__."/../../public/contact.php";
+        }
+
+
+        public function logout() : void {
+            session_start();
+            session_destroy();
+            header("Location: /realEstate/login");
+        }
+
+        public function getUpdateProfile(): void {
+
+        }
+
+
+        public function getChangePassword() :void {
+
         }
     }

@@ -2,18 +2,24 @@
     if(isset($_POST["login"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
+        logMessage("Loggin in");
+
         $res = $login( $username, $password );
+
         if($res instanceof ResDTO){
             if($res->getErrorDTO()!=null) {
                 $error = $res->getErrorDTO()->getMessage();
             }
             else {
                 $userDTO = $res->getData();
+                logMessage("Login Success");
                 if($userDTO instanceof UserDTO) {
+                    $_SESSION["user"] = $userDTO;
                     if($userDTO->getRole()=="ADMIN") {
                         header("Location: /realEstate/admin");
                     }else {
-                        header("Location: /realEstate/");
+                        logMessage($userDTO->getRole());
+                        header("Location: /realEstate");
 
                     }
                 }
