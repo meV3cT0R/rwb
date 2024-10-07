@@ -21,7 +21,7 @@
             $this->name = $name;
         }
 
-        function getName(): string {
+        function getName(): ?string {
             return $this->name;
         }
         function getId():int|null {

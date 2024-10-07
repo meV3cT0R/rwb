@@ -17,7 +17,7 @@ $id = 1;
     <button
         id="toggleSidebar"
     >
-        click
+        T
     </button>
 
     <span class="dropdown">

@@ -20,7 +20,7 @@ class ResDTO
     {
         return $this->message;
     }
-    public function getErrorDTO(): ErrorDTO
+    public function getErrorDTO(): ?ErrorDTO
     {
         return $this->errorDTO;
     }

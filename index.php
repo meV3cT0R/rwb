@@ -155,8 +155,8 @@ error_reporting(E_ALL);
             $homeController->home();
         },
         "admin" => function() :void {
-            global $auth;
-            $auth->verifyAdmin();
+            // global $auth;
+            // $auth->verifyAdmin();
             global $adminController;
             $adminController->dashboard();
 

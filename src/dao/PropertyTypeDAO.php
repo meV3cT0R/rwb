@@ -20,7 +20,7 @@ class PropertyTypeDAO
 
         $propertyType->setId($row["id"]);
         $propertyType->setName($row["name"]);
-        $propertyType->setCreatedBy($row["createdBy"]);
+        $propertyType->setCreatedBy(new User($row["createdBy"]));
 
         return $propertyType;
     }
