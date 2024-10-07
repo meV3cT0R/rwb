@@ -1,16 +1,47 @@
 :root {
     --primary: #0c5de9;
     --secondary: #bcc8d4;
-    --success : rgba(23, 83, 11, 0.8);
+    --success: rgba(23, 83, 11, 0.8);
     --danger: rgba(215, 41, 41, 0.822);
-    --primaryDark : #084cc1;
-    --primaryShade1:#3380f2;
-    --primaryShade2:#094ab8;
+    --primaryDark: #084cc1;
+    --primaryShade1: #3380f2;
+    --primaryShade2: #094ab8;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 50%;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.profile {
+    width:32px;
+    height:32px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
 }
 
 body {
-    display:flex;
-    min-height:100vh;
+    display: flex;
+    min-height: 100vh;
 }
 
 body div:nth-child(2) {
@@ -19,10 +50,10 @@ body div:nth-child(2) {
 
 .header {
     background: white;
-    box-shadow:2px 1px 3px grey;
+    box-shadow: 2px 1px 3px grey;
 }
 
-.header > div {
+.header>div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,49 +67,54 @@ button {
     list-style-type: none;
 }
 
-.header >div >div {
-    width:100%;
+.header>div>div {
+    width: 100%;
 }
+
 .header div div ul li a {
     padding: 10px 20px;
-    display:block;
+    display: block;
     text-align: center;
-    text-decoration :none;
-    color:var(--primary);
+    text-decoration: none;
+    color: var(--primary);
     transition: .3s;
 }
 
-.header  .buttons {
-    display:flex;
-    flex-direction : column;
-    width:100%;
-    gap:15px;
-    margin:0 20px;
-}
-.header  .buttons div {
-    width:90%;
-    margin: 0 auto;
-}
-.header  .buttons  div  button {
-    width:100%;  
-    border:0;
-    padding:5px;
-    border-radius:10px;
+.header .buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    margin: 0 20px;
+    justify-content: end;
 }
 
-.header  .buttons  div  button:hover {
+.header .buttons div {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.header .buttons div button {
+    width: 100%;
+    border: 0;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.header .buttons div button:hover {
     box-shadow: 1px 2px 5px grey;
 }
 
 .header .buttons div:first-child button {
     background-color: var(--primary);
-    color:white;
+    color: white;
 }
 
 .header .buttons div:last-child button {
     background-color: var(--success);
-    color:white;
+    color: white;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -99,8 +135,9 @@ body {
 body>div:nth-child(2) {
     flex-grow: 1;
 }
+
 .body {
-    flex-grow:1;
+    flex-grow: 1;
 }
 
 .header div .gap {
@@ -108,70 +145,81 @@ body>div:nth-child(2) {
 }
 
 #toggleContainer {
-    display:flex;
+    display: flex;
     flex-direction: row-reverse;
 }
 
 .error {
     text-align: center;
-    color:red;
+    color: red;
 }
+
 @media (max-width: 767px) {
-    .header{
-        position:fixed;
+    .header {
+        position: fixed;
 
     }
+
     .header>div {
         height: 100vh;
-        width : 200px;
+        width: 200px;
     }
+
     .header div div ul li {
-        width : 100%;
+        width: 100%;
     }
+
     .header .buttons {
-        margin-bottom:15px;
+        margin-bottom: 15px;
 
     }
+
     .header div div ul li a:hover {
-        color:white;
-        background-color:var(--primary);
+        color: white;
+        background-color: var(--primary);
     }
 }
 
 @media (min-width: 768px) {
     .header {
-        transform : translateX(0%);
+        transform: translateX(0%);
     }
-    .header > div > div:first-child {
-        width:20%;
+
+    .header>div>div:first-child {
+        width: 20%;
     }
+
     .header>div {
         flex-direction: row;
         align-items: center;
-        padding :20px 0;
+        padding: 20px 0;
     }
+
     /* .header >div >div:nth-child(2) {
         width:100%;
     } */
     .header div div ul li {
-        display:inline-block;
+        display: inline-block;
     }
 
     .header .buttons {
         align-items: center;
         flex-direction: row;
     }
-    .header >div div ul li div {
-        width:0%; 
-        height:2px;
-        background-color:var(--primary);
+
+    .header>div div ul li div {
+        width: 0%;
+        height: 2px;
+        background-color: var(--primary);
         transition: .3s;
     }
-    .header >div div ul li:hover div {
-        width:100%; 
+
+    .header>div div ul li:hover div {
+        width: 100%;
     }
+
     #toggleContainer {
-        display:none;
+        display: none;
     }
 }
 

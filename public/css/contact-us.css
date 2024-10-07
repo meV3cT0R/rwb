@@ -31,7 +31,7 @@ label {
   gap: 10px;
 }
 
-button {
+button[type='submit'] {
   background-color: var(--primary);
   color: white;
   padding: 14px 20px;
@@ -42,7 +42,7 @@ button {
   border-radius: 4px;
 }
 
-button:hover {
+button[type='submit']:hover {
   opacity: 1;
 }
 

@@ -18,6 +18,12 @@
         }
 
         public function home() : void {
+            if(isset($_SESSION["user"])){
+                logMessage($_SESSION["user"]->getRole());
+
+            }else {
+                logMessage("session not set");
+            }
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
@@ -68,5 +74,21 @@
 
         public function getContact() : void {
             require_once __DIR__."/../../public/contact.php";
+        }
+
+
+        public function logout() : void {
+            session_start();
+            session_destroy();
+            header("Location: /realEstate/login");
+        }
+
+        public function getUpdateProfile(): void {
+
+        }
+
+
+        public function getChangePassword() :void {
+
         }
     }

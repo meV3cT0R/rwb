@@ -216,6 +216,9 @@ error_reporting(E_ALL);
         $user = $adminUserController->getUserById($id); 
         require_once __DIR__ . '/public/admin/userProfile.php'; 
     },
+        "logout"=>function() use ($homeController){
+            $homeController->logout();
+        },
        "admin/changepassword" => function () use ($adminUserController) { 
         global $auth;
         $auth->verifyAdmin();
@@ -227,18 +230,25 @@ error_reporting(E_ALL);
         "admin/createsuperadmin"=> function():void {
             global $userService;
             $userService->createSuperAdmin();
+            header("Location: /realEstate/login");
         },
         "admin/createuser"=> function():void {
             global $userService;
             $userService->createUser();
+            header("Location: /realEstate/login");
+
         },
         "admin/createowner"=> function():void {
             global $userService;
             $userService->createOwner();
+            header("Location: /realEstate/login");
+
         },
         "admin/createagent"=> function():void {
             global $userService;
             $userService->createAgent();
+            header("Location: /realEstate/login");
+
         },
         "login"=>function() :void {
             global $homeController;
@@ -266,7 +276,15 @@ error_reporting(E_ALL);
         "contact"=>function() :void {
             global $homeController;
             $homeController->getContact();
-        }
+        },
+        "updateprofile"=>function() :void {
+            global $homeController;
+            $homeController->getUpdateProfile();
+        },
+        "changepassword"=>function() :void {
+            global $homeController;
+            $homeController->getChangePassword();
+        },
     );
 
     if(isset($route[strtolower($uri)])) {

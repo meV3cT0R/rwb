@@ -20,15 +20,17 @@ h1 {
 
 .property-image {
     flex: 1; 
-    max-height: 400px; 
     overflow: hidden; 
     border-radius: 8px; 
+    height:500px;
+    width:500px;
 }
 
 .property-image img {
     width: 100%; 
     height: auto; 
     object-fit: cover; 
+
 }
 
 .property-info {
@@ -52,7 +54,6 @@ h1 {
 
     .property-image {
         max-height: 400px; 
-        width: 40%; 
     }
 
     .property-info {
@@ -88,4 +89,149 @@ h1 {
 
 .gallery-item img:hover {
     transform: scale(1.05); 
+}
+
+
+
+.enquiries {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    /* max-width: 600px; */
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width:100%;
+}
+
+.enquiries h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.enquiries-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.enquiry-box {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.enquiry {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.enquiry h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+.enquiry p {
+    font-size: 14px;
+    color: #888;
+}
+
+.enquiry > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.comments {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.comment {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.comment h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+}
+
+.comment p {
+    font-size: 13px;
+    color: #777;
+}
+
+/* Responsive comment box */
+.commentBox {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.commentBoxForm {
+    display: flex;
+}
+
+.commentBoxForm input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+}
+
+.commentBoxForm button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.commentBoxForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .enquiries {
+        padding: 15px;
+    }
+
+    .enquiry-box {
+        padding: 10px;
+    }
+
+    .enquiry h4 {
+        font-size: 16px;
+    }
+
+    .commentBoxForm {
+        flex-direction: column;
+    }
+
+    .commentBoxForm input[type="text"] {
+        margin-bottom: 10px;
+    }
+
+    .commentBoxForm button {
+        width: 100%;
+    }
 }
