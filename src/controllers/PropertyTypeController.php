@@ -18,22 +18,12 @@
                     $subArr = [];
                     array_push($subArr, $propertyType->getId());
                     array_push($subArr, $propertyType->getName());
-                    array_push($subArr, "<a class='action-link edit' href='/admin/propertyType/edit?id=".$propertyType->getId()."'>Edit</a> | <a class='action-link delete' href='/admin/propertyType/delete?id=".$propertyType->getId()."'>Delete</a>");
+                    array_push($subArr, "<a class='action-link edit' href='/realEstate/admin/propertyType/edit?id=".$propertyType->getId()."'>Edit</a> | <a class='action-link delete' href='/realEstate/admin/propertyType/delete?id=".$propertyType->getId()."'>Delete</a>");
                     return $subArr;
             },$propertyTypes);
             require_once __DIR__."/../../public/admin/table.php";
         }
-        public function addPropertyType() : void {
-        // public function addPropertyType(PropertyType $propertyType):ResDTO {
-            // $dto = new ResDTO("Property Type Data");
-            // try {
-            //     $propertyType = $this->propertyTypeRepository->postPropertyType($propertyType);
-            //     $dto->setData($propertyType);
-            // }catch(Exception $e) {
-            //     $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
-            // }
-            // return $dto;
-
+        public function addPropertyType(bool $add=true, int $id = NULL) : void {
             $addPropertyType = function(PropertyType $propertyType): PropertyType {
                 return $this->propertyTypeRepository->postPropertyType($propertyType);
                  
@@ -41,4 +31,5 @@
 
             require_once __DIR__."/../../public/addPropertyType.php";
         }
+
     }
