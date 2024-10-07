@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
+    
     require_once "devutils/logs.php";
     require_once "src/utils/Helper.php";
 
@@ -236,10 +236,7 @@ error_reporting(E_ALL);
      "admin/updateprofile" => function () use ($adminUserController) { 
         global $auth;
         $auth->verifyAdmin();
-        global $params;
-        $id = $params["id"];
-        $user = $adminUserController->getUserById($id); 
-        require_once __DIR__ . '/public/admin/userProfile.php'; 
+        $adminUserController->getUserById(); 
     },
         "logout"=>function() use ($homeController){
             $homeController->logout();
@@ -249,7 +246,7 @@ error_reporting(E_ALL);
         $auth->verifyAdmin();
         global $params;
         $id = $params["id"];
-        $user = $adminUserController->getUserById($id); 
+        $user = $adminUserController->getUserById(); 
         require_once __DIR__ . '/public/admin/changePassword.php'; 
     },
         "admin/createsuperadmin"=> function():void {

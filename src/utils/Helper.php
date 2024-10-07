@@ -24,9 +24,11 @@ class Helper
     }
 
 
-    public static function uploadImage($file): string
+    public static function uploadImage($file): ?string
     {
         // logMessage("inside upload Image");
+        if(basename($file["name"]=="")) {return null;}
+
         $targetDir = "images/";
         if(!is_dir($targetDir)){
             if (mkdir($targetDir, 0755, true)) {
@@ -35,7 +37,6 @@ class Helper
                 // logMessage("Failed to create directory.");
             }
         }
-        
         $targetFile = $targetDir . basename($file["name"]);
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $maxFileSize = 5 * 1024 * 1024;

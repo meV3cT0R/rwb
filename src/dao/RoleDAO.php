@@ -51,7 +51,21 @@
             }
             return $role;
         }
-
+        function getRoleByName(int $id) : Role {
+            // logMessage("Getting Role by Id");
+            $result  = $this->db->query("SELECT 
+                   * from role where name='$id';
+                   ") or trigger_error("Something Went wrong while trying to execute SELECT query");
+            $role = new Role();
+            if($result->num_rows> 0) {
+                $row=$result->fetch_assoc();
+                $role->setId($row["id"]);
+                $role->setName($row["name"]);
+            }else {
+                throw new ErrorException("State with Provided Id not found");
+            }
+            return $role;
+        }
 
 
     }

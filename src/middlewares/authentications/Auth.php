@@ -10,6 +10,7 @@
                 }
             }
             logMessage("no session user");
+            header("Location: /realEstate/login");
             return false;
         }
 
@@ -23,6 +24,8 @@
                 }
             }
             logMessage("no session user");
+            header("Location: /realEstate/login");
+
             return false;
         }
 
@@ -36,6 +39,8 @@
                 }
             }
             logMessage("no session user");
+            header("Location: /realEstate/login");
+
             return false;
         }
 

@@ -221,13 +221,11 @@ class UserDAO
     public function updateUser(User $user): User
     {
         try {
-            $stmt = $this->db->prepare("UPDATE users
+            $stmt = $this->db->prepare("UPDATE user
             set firstName=?,
                     lastName=?,
                     email=?,
                     username=?,
-                    password=?,
-                    roleId=?,
                     avatar=?
                 where id=?
             ");
@@ -240,25 +238,29 @@ class UserDAO
             $email = $user->getEmail();
             $lastName = $user->getLastName();
             $username = $user->getUsername();
-            $password = $user->getPassword();
             $avatar = $user->getAvatar();
 
+            logMessage("firstNam: $firstName");
+            logMessage("lastName : $lastName");
+            logMessage("username: $username");
+            logMessage("Inside Update User");
 
             $stmt->bind_param(
-                "sssssisi",
+                "sssssi",
                 $firstName,
                 $lastName,
                 $email,
                 $username,
-                $password,
-                $roleId,
                 $avatar,
                 $id
             );
+            logMessage("Inside Update User after bind_param");
 
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Updation Failed");
             }
+            logMessage("Inside Update User after bind_param after stmt_execution");
+            logMessage($this->db->error);
 
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());

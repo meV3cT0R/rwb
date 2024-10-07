@@ -20,7 +20,6 @@
                     }else {
                         logMessage($userDTO->getRole());
                         header("Location: /realEstate");
-
                     }
                 }
             }

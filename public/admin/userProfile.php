@@ -2,7 +2,6 @@
 require_once __DIR__ . "/../../constants.php";
 require_once __DIR__ . "/../../src/models/User.php";
 
-session_start();
 // $user = $_SESSION["user"];
 // echo "user".$user;
 
@@ -18,6 +17,44 @@ session_start();
 //     header("Location: error.php");
 //     exit;
 // }
+
+if (isset($_POST["submit"])) {
+  try {
+      $firstName = $_POST['firstName'];
+      $lastName = $_POST['lastName'];
+      $username = $_POST['username'];
+
+      if (empty($firstName) || empty($lastName) || empty($username)) {
+          throw new Exception("All fields are required.");
+      }
+
+      logMessage($firstName);
+      logMessage($lastName);
+      logMessage($username);
+      $image = Helper::uploadImage($_FILES["image"]);
+
+      $userToBeSent = new User();
+      $userToBeSent->setId($user->getId());
+      $userToBeSent->setFirstName($firstName);
+      if(isset($email)) {
+        $userToBeSent->setEmail($email);
+      }else {
+        $userToBeSent->setEmail($user->getEmail());
+
+      }
+      $userToBeSent->setLastName($lastName);
+      $userToBeSent->setUsername($username);
+      if($image!=null){
+          $userToBeSent->setAvatar($image);
+      }else {
+          $userToBeSent->setAvatar($user->getAvatar());
+      }
+      $editUser($userToBeSent);
+      // header("Location: /realEstate/admin");
+  } catch (Exception $e) {
+      $error = $e->getMessage();
+  }
+}
 
 ?>
 <!DOCTYPE html>
@@ -58,12 +95,18 @@ session_start();
   <button type="submit">Update</button>
 </form> -->
 
- <form id="contact-form" method="post" >
-
+ <form id="contact-form" method="post" enctype="multipart/form-data">
+        <div>
+           <?php 
+              if(isset($error)) {
+                echo $error;
+              }
+           ?>
+        </div>
       <!-- <div class="names"> -->
-            <label for="firstName">firstName<input type="text" id="firstName" name="firstName"  value="<?php echo $user-> getFirstName(); ?>"></label>
+            <label for="firstName">firstName<input type="text" id="firstName" name="firstName"  value="<?php echo $user->getFirstName(); ?>"></label>
         
-            <label for="lastName">lastName <input type="text" id="lastName" name="lastName"  value="<?php echo $user-> getLastName(); ?>"></label> 
+            <label for="lastName">lastName <input type="text" id="lastName" name="lastName"  value="<?php echo $user->getLastName(); ?>"></label> 
             
       <!-- </div> -->
 
@@ -72,8 +115,8 @@ session_start();
 
    <label for="image">Image:</label>
   <input type="file" id="image" name="image">
-  <img src="<?php echo $user->getAvatar(); ?>" alt="Current Image" width="100" height="100">
-  <button type="submit" class="button">Update</button>
+  <img src="<?php echo URL.$user->getAvatar(); ?>" alt="Current Image" width="100" height="100">
+  <button type="submit" class="button" name="submit">Update</button>
 
 </form>
 

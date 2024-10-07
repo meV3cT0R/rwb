@@ -33,8 +33,14 @@
         }
         public function getUserById(int $id) : User {
             $user = $this->userDAO->getUserById($id);
+            if($user->getRole()!=null) {
+                if($user->getRole()->getId()!=null) {
+                    $user->setRole($this->roleDAO->getRoleById($user->getRole()->getId()));
+                }else if($user->getRole()->getName()!=null){
+                    $user->setRole($this->roleDAO->getRoleByName($user->getRole()->getId()));
 
-            $user->setRole($this->roleDAO->getRoleById($user->getRole()->getId()));
+                }
+            }
 
             return $user;
         }

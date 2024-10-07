@@ -47,11 +47,15 @@
             $this->helper( $users,$cols,$arr);
             require_once __DIR__."/../../public/admin/table.php";
         }  
-        public function getUserById($id) {
-            // logMessage($id);
-            $user = $this->userRepository->getUserById($id);
-            // $this->helper($user);
-            // require_once __DIR__."/../../public/admin/userProfile.php";
-            return $user;
+        public function getUserById() {
+            $user=null;
+            if(isset($_SESSION["user"])) {
+                logMessage("Yes User");
+                $user = $this->userRepository->getUserById($_SESSION["user"]->getId());
+            }
+            $editUser = function (User $user) : User {
+                return $this->userRepository->updateUser($user);
+            };
+            require_once __DIR__ . '/../../public/admin/userProfile.php'; 
         }      
     }

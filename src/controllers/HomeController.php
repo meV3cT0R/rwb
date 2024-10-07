@@ -38,7 +38,6 @@
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
-            session_start();
             if(isset($_SESSION["user"])){
                 if($_SESSION["user"]->getRole()=="ADMIN"){
                     header("Location: /realEstate/admin");
