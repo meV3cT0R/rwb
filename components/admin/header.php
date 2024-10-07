@@ -14,8 +14,8 @@ $id = 1;
 
 
 <div class="header" id="admin-header">
-    <button id="toggleSidebar">
-        T
+    <button id="toggleSidebar" >
+        <img width="32" height="32" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png"/>
     </button>
 
     <span class="dropdown">

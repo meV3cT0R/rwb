@@ -48,4 +48,8 @@
             };
             require_once __DIR__."/../../public/addState.php";
         }
+
+        public function deleteState($id): State {
+            return $this->stateRepository->deleteState($id);
+        }
     }

@@ -6,7 +6,7 @@
             <h1> RE </h1>
         </div>
 
-        <div>
+        <div class="gap">
             <ul>
                 <li>
                     <a href="/realEstate">
@@ -37,10 +37,8 @@
                 </li>
             </ul>
         </div>
-        <div class="gap">
 
-        </div>
-        <div class="buttons">
+        <div class="buttons" style="max-width:300px">
             <?php
 
             if (!isset($_SESSION["user"])) {

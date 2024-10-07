@@ -2,7 +2,6 @@
 require_once __DIR__ . "/../../constants.php";
 require_once __DIR__ . "/../../src/models/User.php";
 
-session_start();
 // $user = $_SESSION["user"];
 // echo "user".$user;
 

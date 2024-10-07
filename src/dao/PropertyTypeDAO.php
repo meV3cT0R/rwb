@@ -155,7 +155,7 @@ class PropertyTypeDAO
             if ($propertyType === null) {
                 throw new ErrorException("Property with given id not found");
             }
-            $stmt = $this->db->prepare("DELETE FROM propertyPhotos where id=?");
+            $stmt = $this->db->prepare("DELETE FROM propertyType where id=?");
             $stmt->bind_param("i", $id);
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Deletion Failed");

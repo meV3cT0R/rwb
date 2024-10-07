@@ -1,5 +1,25 @@
 <?php
 require_once __DIR__ . "/../../constants.php";
+
+
+if(isset($_POST["aboutUsSubmit"])) {
+    try{
+        $updateAboutUs($_POST["aboutUs"],$_POST["image"],$_POST["mission"],$_POST["team"]);
+        header("Location: /realEstate/admin/pages");
+    }catch(Exception $e){
+        $error = $e->getMessage();
+    }
+}
+
+if(isset($_POST["contactUsSubmit"])) {
+    try{
+        $updateContactUs($_POST["email"],$_POST["phone"],$_POST["address"]);
+        header("Location: /realEstate/admin/pages");
+
+    }catch(Exception $e){
+        $error = $e->getMessage();
+    }
+}
 ?>
 <html>
 
@@ -31,37 +51,60 @@ require_once __DIR__ . "/../../constants.php";
             require_once __DIR__ . "/../../components/admin/header.php";
             ?>
             <!-- About Us Form -->
-            <form class="form" id="aboutUsForm">
+            <form class="form" id="aboutUsForm" method="post">
                 <h2>About Us</h2>
+
+                <div class="error">
+                    <?php
+                        if(isset($aboutUsError)) {
+                            echo $aboutUsError;
+                        }
+                    ?>
+                </div>
                 <label for="aboutUs">About Us</label>
                 <textarea id="aboutUs" name="aboutUs" maxlength="500"
-                    placeholder="Write about your organization"></textarea>
+                    placeholder="Write about your organization" value="<?php echo $aboutUs["aboutUs"]; ?>"><?php echo $aboutUs["aboutUs"]; ?></textarea>
 
                 <label for="image">Image URL</label>
                 <input type="text" id="image" name="image" maxlength="100" placeholder="Image URL">
 
                 <label for="mission">Mission</label>
-                <textarea id="mission" name="mission" maxlength="500" placeholder="Your mission"></textarea>
+                <textarea id="mission" name="mission" maxlength="500" placeholder="Your mission">
+
+                <?php echo $aboutUs["mission"]; ?>
+                </textarea>
 
                 <label for="team">Team</label>
-                <textarea id="team" name="team" maxlength="500" placeholder="Describe your team"></textarea>
+                <textarea id="team" name="team" maxlength="500" placeholder="Describe your team">
+                <?php echo $aboutUs["team"]; ?>
 
-                <button type="submit">Submit About Us</button>
+                </textarea>
+
+                <button type="submit" name="aboutUsSubmit">Submit About Us</button>
             </form>
 
             <!-- Contact Us Form -->
-            <form class="form" id="contactUsForm">
+            <form class="form" id="contactUsForm" method="post">
                 <h2>Contact Us</h2>
+
+                <div class="error">
+                    <?php
+                        if(isset($contactUsError)) {
+                            echo $contactUsError;
+                        }
+                    ?>
+                </div>
+                
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" maxlength="100" placeholder="Enter your email">
+                <input value="<?php echo $contactUs["email"];?>" type="email" id="email" name="email" maxlength="100" placeholder="Enter your email">
 
                 <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" maxlength="20" placeholder="Enter your phone number">
+                <input value="<?php echo $contactUs["phone"];?>" type="tel" id="phone" name="phone" maxlength="20" placeholder="Enter your phone number">
 
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" maxlength="20" placeholder="Enter your address">
+                <input value="<?php echo $contactUs["address"];?>" type="text" id="address" name="address" maxlength="20" placeholder="Enter your address">
 
-                <button type="submit">Submit Contact Us</button>
+                <button type="submit" name="contactUsSubmit">Submit Contact Us</button>
                 <form>
 
         </div>

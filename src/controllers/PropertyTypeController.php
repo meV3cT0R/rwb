@@ -33,4 +33,8 @@
             require_once __DIR__."/../../public/addPropertyType.php";
         }
 
+        public function deletePropertyType($id): PropertyType {
+            return $this->propertyTypeRepository->deletePropertyType($id);
+        }
+
     }

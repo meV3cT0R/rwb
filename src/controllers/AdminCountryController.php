@@ -42,4 +42,8 @@
 
             require_once __DIR__."/../../public/addCountry.php";
         }
+
+        public function deleteCountry(int $id) :Country {
+            return $this->countryRepository->deleteCountry($id);
+        }
     }
