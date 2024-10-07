@@ -305,6 +305,10 @@ error_reporting(E_ALL);
             global $homeController;
             $homeController->getChangePassword();
         },
+        "/realEstate/manageproperties"=>function() :void {
+            global $homeController;
+            $homeController->manageProperties();
+        },
     );
 
     if(isset($route[strtolower($uri)])) {
