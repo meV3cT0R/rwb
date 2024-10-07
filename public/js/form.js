@@ -1,4 +1,5 @@
 document.body.onload = function() {
     const loginButton = document.querySelector("form > div > button");
-    loginButton.style.transition = ".3s"
+    if(loginButton!=null)
+        loginButton.style.transition = ".3s"
 }

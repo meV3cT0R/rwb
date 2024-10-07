@@ -53,7 +53,6 @@ include __DIR__ . "/../src/index.php";
     include __DIR__ . "/../components/footer.php";
     ?>
     <script src=<?php echo URL . "public/js/index.js" ?>></script>
-    <script src=<?php echo URL . "public/js/form.js" ?>></script>
 
 </body>
 

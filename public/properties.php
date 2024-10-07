@@ -4,6 +4,7 @@ require_once __DIR__ . "/../src/models/Property.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +18,77 @@ require_once __DIR__ . "/../src/models/Property.php";
 
     <div class="container">
         <h1 style="margin-bottom:20px;">Properties</h1>
+
+        <div class="searchBar">
+            <form class="searchForm">
+                <?php
+                $types = ["Land", "home"];
+                $status = ["sold","available"];
+                $cities = ["kathmandu","tokyo"];
+                if (isset($types)) {
+                    ?>
+                    <select>
+                        <option value="all"> all</option>
+                        
+                        <?php
+                        foreach ($types as $type) {
+                            ?>
+                            <option value="<?php echo $type?>"> <?php echo $type; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <?php
+                }
+                ?>
+
+                <?php
+                if (isset($status)) {
+                    ?>
+                    <select>
+                        <option value="all"> all</option>
+
+                        <?php
+                        foreach ($status as $s) {
+                            ?>
+                            <option value="<?php echo $s?>"> <?php echo $s; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <?php
+                }
+                ?>
+                <?php
+                if (isset($cities)) {
+                    ?>
+                    <select>
+                        <option value="all"> all</option>
+
+                        <?php
+                        foreach ($cities as $city) {
+                            ?>
+                            <option value="<?php echo $city?>"> <?php echo $city; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <?php
+                }
+                ?>
+                <button
+                    class="search"
+                >
+                    search
+                </button>
+            </form>
+        </div>
         <div class="properties-grid">
             <?php
             if (isset($properties)) {
                 foreach ($properties as $property) {
                     if ($property instanceof Property) {
-                        $propertyId = $property->getId(); 
+                        $propertyId = $property->getId();
                         ?>
                         <a href="<?php echo URL . 'property-details?id=' . $propertyId; ?>" class="propertyCard">
                             <div class="propertyCardImage">
@@ -59,4 +125,5 @@ require_once __DIR__ . "/../src/models/Property.php";
     <?php include __DIR__ . "/../components/footer.php"; ?>
     <script src=<?php echo URL . "public/js/index.js" ?>></script>
 </body>
+
 </html>

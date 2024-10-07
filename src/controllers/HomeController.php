@@ -27,6 +27,15 @@
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
+            session_start();
+            if(isset($_SESSION["user"])){
+                if($_SESSION["user"]->getRole()=="ADMIN"){
+                    header("Location: /realEstate/admin");
+                }else {
+                    header("Location: /realEstate");
+                }
+                return;
+            }
             $login = function (string $username,string $password): ResDTO {
                 $dto = new ResDTO("User Data");
                 try {
@@ -40,9 +49,19 @@
 
                 return $dto;
             };
+            session_destroy();
             require_once __DIR__."/../../public/login.php";
         }
         public function getRegister() : void {
+            session_start();
+            if(isset($_SESSION["user"])){
+                if($_SESSION["user"]->getRole()=="ADMIN"){
+                    header("Location: /realEstate/admin");
+                }else {
+                    header("Location: /realEstate");
+                }
+                return;
+            }
             $register = function (User $user): ResDTO {
                 $dto = new ResDTO("User Data");
                 try {
@@ -54,6 +73,7 @@
 
                 return $dto;
             };
+            session_destroy();
             require_once __DIR__."/../../public/register.php";
         }
 
