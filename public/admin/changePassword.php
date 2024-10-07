@@ -7,9 +7,9 @@ if(isset($_POST["submit"])) {
     $newPassword = $_POST["newPassword"];
     $confirmPassword = $_POST["confirmPassword"];
 
-    if($newPassword==$confirmPassword) {
+    if(strcmp($oldPassword,$newPassword)) {
         try{
-          $changePassword($oldPassword,$newPassword);
+          $changePassword($user,$oldPassword,$newPassword);
         }catch(
           Exception $e
         ){

@@ -39,10 +39,16 @@
             $saveCountry = function(Country $country) : Country {
                 return $this->countryRepository->postCountry($country);
             };
-
+            
             require_once __DIR__."/../../public/addCountry.php";
         }
-
+        public function editCountry(bool $add=true, int $id = NULL) : void {
+            $country = $this->countryRepository->getCountryById($id);
+            $updateCountry = function(Country $country) : Country {
+                return $this->countryRepository->updateCountry($country);
+            };
+            require_once __DIR__."/../../public/addCountry.php";
+        }
         public function deleteCountry(int $id) :Country {
             return $this->countryRepository->deleteCountry($id);
         }

@@ -11,12 +11,19 @@ if (isset($_POST["submitState"])) {
             throw new Exception("Both State name and Country are required.");
         }
 
-        // Assuming State is a class handling state operations
-        $state = new State();
-        $state->setName($stateName);
-        $state->setCountry(new Country($countryId));
+        if ($add) {
 
-        $saveState($state);
+            // Assuming State is a class handling state operations
+            $state = new State();
+            $state->setName($stateName);
+            $state->setCountry(new Country($countryId));
+
+            $saveState($state);
+        } else {
+            $state->setName($stateName);
+            $state->setCountry(new Country($countryId));
+            $updateState($state);
+        }
 
         header("Location: /realEstate/admin/state");
         exit();
@@ -27,6 +34,7 @@ if (isset($_POST["submitState"])) {
 ?>
 
 <html>
+
 <head>
     <title>Add State</title>
     <link href="<?php echo URL . 'public/css/index.css'; ?>" rel="stylesheet" type="text/css" />
@@ -50,7 +58,7 @@ if (isset($_POST["submitState"])) {
             <form method="post" action="" class="city-form">
                 <h1>Add State</h1>
 
-                <?php if (isset($error)) : ?>
+                <?php if (isset($error)): ?>
                     <div class="error">
                         <?php echo $error; ?>
                     </div>
@@ -58,15 +66,23 @@ if (isset($_POST["submitState"])) {
 
                 <div>
                     <label for="stateName">State Name</label>
-                    <input type="text" name="stateName" id="stateName" />
+                    <input type="text" name="stateName" id="stateName" value="<?php
+                    if (isset($state)) {
+                        echo $state->getName();
+                    }
+                    ?>" />
                 </div>
 
                 <div>
                     <label for="countryId">Country</label>
                     <select name="countryId" id="countryId" class="city-form-select">
                         <option value="">Select Country</option>
-                        <?php foreach ($countries as $country) : ?>
-                            <option value="<?php echo $country->getId(); ?>" class="city-form-option">
+                        <?php foreach ($countries as $country): ?>
+                            <option selected="<?php
+                            if (isset($state) && $state->getCountry()) {
+                                echo $state->getCountry()->getId() == $country->getId();
+                            }
+                            ?>" value="<?php echo $country->getId(); ?>" class="city-form-option">
                                 <?php echo $country->getName(); ?>
                             </option>
                         <?php endforeach; ?>
@@ -91,4 +107,5 @@ if (isset($_POST["submitState"])) {
 
     <script src="<?php echo URL . 'public/js/admin/index.js'; ?>"></script>
 </body>
+
 </html>

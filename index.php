@@ -17,8 +17,10 @@ require_once "src/models/User.php";
 require_once "src/models/Role.php";
 require_once "src/models/Comment.php";
 require_once "src/models/Enquiry.php";
+require_once "src/models/PropertyPhotos.php";
 
 require_once "src/dao/PropertyTypeDAO.php";
+require_once "src/dao/PropertyPhotosDAO.php";
 require_once "src/dao/UserDAO.php";
 require_once "src/dao/RoleDAO.php";
 require_once "src/dao/PropertyDAO.php";
@@ -37,6 +39,7 @@ require_once "src/repositories/UserRepository.php";
 require_once "src/repositories/PropertyRepository.php";
 require_once "src/repositories/EnquiryRepository.php";
 require_once "src/repositories/CommentRepository.php";
+require_once "src/repositories/PropertyPhotosRepository.php";
 
 require_once "src/dto/ErrorDTO.php";
 require_once "src/dto/ResDTO.php";
@@ -60,6 +63,7 @@ $dbConnection = (new DB())->connect();
 
 
 $propertyTypeDAO = new PropertyTypeDAO($dbConnection);
+$propertyPhotosDAO = new PropertyPhotosDAO($dbConnection);
 $userDAO = new UserDAO($dbConnection);
 $roleDAO = new RoleDAO($dbConnection);
 $propertyDAO = new PropertyDAO($dbConnection);
@@ -92,10 +96,12 @@ $cityRepository = new CityRepository(
 $propertyRepository = new PropertyRepository(
     $propertyDAO,
     $propertyTypeDAO,
+    $propertyPhotosDAO,
     $userDAO,
     $roleDAO,
     $enquiryDAO,
-    $commentDAO
+    $commentDAO,
+
 );
 
 $userRepository = new UserRepository(
@@ -228,7 +234,7 @@ $route = array(
         global $params;
         $id = $params["id"];
         $add = false;
-        $adminCountryController->addCountry($add, $id);
+        $adminCountryController->editCountry($add, $id);
     },
     "admin/country/delete" => function (): void {
         global $adminCountryController;
@@ -254,7 +260,7 @@ $route = array(
         $add = false;
         global $params;
         $id = $params["id"];
-        $adminStateController->addState($add, $id);
+        $adminStateController->editState($add, $id);
     },
     "admin/state/delete" => function (): void {
         global $adminStateController;
@@ -282,7 +288,7 @@ $route = array(
         global $params;
         $id = $params["id"];
         $add = false;
-        $adminCityController->addCity($add, $id);
+        $adminCityController->editCity($add, $id);
     },
     "admin/city/delete" => function (): void {
         global $params;
@@ -293,6 +299,7 @@ $route = array(
         header("Location: /realEstate/admin/state");
 
     },
+
     "admin/users" => function (): void {
         global $auth;
         $auth->verifyAdmin();
@@ -300,6 +307,7 @@ $route = array(
         ;
         $adminUserController->getUsers();
     },
+
     "admin/agents" => function (): void {
         global $auth;
         $auth->verifyAdmin();
@@ -307,6 +315,7 @@ $route = array(
         ;
         $adminUserController->getAgents();
     },
+
     "admin/owners" => function (): void {
         global $auth;
         $auth->verifyAdmin();
@@ -314,20 +323,24 @@ $route = array(
         ;
         $adminUserController->getOwners();
     },
+
     "admin/properties" => function (): void {
         global $auth;
         $auth->verifyAdmin();
         global $adminPropertyController;
         $adminPropertyController->home();
     },
+
     "admin/updateprofile" => function () use ($adminUserController) {
         global $auth;
         $auth->verifyAdmin();
         $adminUserController->getUserById();
     },
+
     "logout" => function () use ($homeController) {
         $homeController->logout();
     },
+
     "admin/changepassword" => function () use ($adminUserController) {
         global $auth;
         $auth->verifyAdmin();
@@ -336,10 +349,12 @@ $route = array(
             logMessage("Yes User");
             $user = $userRepository->getUserById($_SESSION["user"]->getId());
         }
-        $editUser = function (User $user): User {
+        $changePassword = function (User $user,string $oldPassword,string $newPassword): User {
             global $userService;
-            return $userService->changePassword($user);
+            logMessage($user->getId());
+            return $userService->changePassword($user,$oldPassword,$newPassword);
         };
+        
         require_once __DIR__ . '/public/admin/changePassword.php';
     },
     "admin/createsuperadmin" => function (): void {
@@ -413,7 +428,7 @@ $route = array(
         global $params;
         $id = $params["id"];
         $add = false;
-        $homeController->addProperties($add, $id);
+        $homeController->editProperties($add, $id);
     },
     "manageproperties/delete" => function (): void {
         global $homeController;

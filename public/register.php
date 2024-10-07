@@ -3,13 +3,31 @@
         $user = new User();
         try{
             // logMessage("register clicked");
-            $image = Helper::uploadImage($_FILES["file"]);
             // logMessage($image);
             $user->setFirstName($_POST["firstName"]);
             $user->setLastName($_POST["lastName"]);
             $user->setUsername($_POST["username"]);
             $user->setPassword($_POST["password"]);
-            $register($user);
+            $user->setRole(new Role($_POST["role"]));
+            $user->setEmail("");
+            
+            $images = Helper::base64($_FILES["file"]);
+            if($images != null) {
+                $user->setAvatar($images);
+            }
+            
+            $res = $register($user);
+
+            if($res->getErrorDTO()!=null){
+                $error = $res->getErrorDTO()->getMessage();
+            }else {
+                if($res->getData()!=null) {
+                    logMessage("Yes Data");
+                    logMessage($res->getData()->getId());
+                    logMessage($res->getData()->getUsername());
+                }
+                // header("Location: /realEstate/login");
+            }
         }catch(Exception $e){
             $error = $e->getMessage();
         }
@@ -30,7 +48,11 @@
             <form method="post" action="" enctype="multipart/form-data">
                 <h1> Register </h1>
                 <div>
-
+                        <?php
+                            if(isset($error)) {
+                                echo $error;
+                            }
+                        ?>
                 </div>
                 <div>
                     <label> 

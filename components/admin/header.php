@@ -23,8 +23,8 @@ $id = 1;
             <img src="<?php echo URL . 'public/images/profile.png'; ?>" alt="profile" height="32" width="32">
         </button>
         <div id="dropdownMenu" class="dropdown-content">
-            <a href="/realEstate/admin/updateprofile?id=<?php echo $id ?>">Update Profile</a>
-            <a href="/realEstate/admin/changepassword?id=<?php echo $id ?>">Change Password</a>
+            <a href="/realEstate/admin/updateprofile">Update Profile</a>
+            <a href="/realEstate/admin/changepassword">Change Password</a>
         </div>
     </span>
 </div>

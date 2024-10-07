@@ -19,7 +19,7 @@ create table user(
     username varchar(50) not null,
     password varchar(255) not null,
     roleId int,
-    avatar varchar(255) not null,
+    avatar longtext not null,
     foreign key (roleId) references role(id) on delete set null,
     createdAt datetime default current_timestamp
 
@@ -83,7 +83,7 @@ create table property(
 
 create table propertyPhotos (
     id int auto_increment primary key,
-    url varchar(255) not null,
+    url longtext not null,
     propertyId int not null,
     foreign key (propertyId) references property(id) on delete cascade,
     createdAt datetime default current_timestamp

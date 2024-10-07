@@ -85,6 +85,6 @@
         }
 
         public function updatePassword(User $user): mixed {
-            return $this->userDAO->updatePassword($id);
+            return $this->userDAO->updatePassword($user);
         }
     }

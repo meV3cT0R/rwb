@@ -5,8 +5,10 @@
             if(isset($_SESSION["user"])) {
                 $user = $_SESSION["user"];
                 if($user instanceof UserDTO) {
-                    logMessage("User ". $user->getFirstName());                
-                    return $user->getRole()=="ADMIN";
+                    logMessage("User ". $user->getFirstName());
+                    if($user->getRole()=="ADMIN") {
+                        return true;
+                    }
                 }
             }
             logMessage("no session user");
@@ -20,7 +22,9 @@
                 $user = $_SESSION["user"];
                 if($user instanceof UserDTO) {
                     logMessage("User ". $user->getFirstName(). " " . $user->getLastName());                
-                    return $user->getRole()=="USER";
+                    if($user->getRole()=="USER") {
+                        return true;
+                    }
                 }
             }
             logMessage("no session user");
@@ -35,7 +39,9 @@
                 $user = $_SESSION["user"];
                 if($user instanceof UserDTO) {
                     logMessage("User ". $user->getFirstName(). " " . $user->getLastName());                
-                    return $user->getRole()=="OWNER";
+                    if($user->getRole()=="OWNER") {
+                        return true;
+                    }
                 }
             }
             logMessage("no session user");

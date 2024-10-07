@@ -138,21 +138,23 @@
             return $this->userRepository->updateUser($user);
         }
 
-        public function changePassword(User $user,string $oldPassword,string $newPassword) {
+        public function changePassword(User $user,string $oldPassword,string $newPassword): User {
             try{
                 $userFromDB = $this->userRepository->getUserById($user->getId());
-                if($userFromDB != null) {
+                
+                if($userFromDB == null) {
                     throw new Exception("User with given Id not found");
                 }
 
                 if(password_verify($oldPassword,$user->getPassword())) {
-                    $user->setPassword($newPassword);
-                        $this->userRepository->updatePassword($user);
+                    $user->setPassword(password_hash($newPassword,PASSWORD_BCRYPT));
+                    $this->userRepository->updatePassword($user);
                 }else {
                     throw new Exception("Old Password Didn't Match");
                 }
             }catch(Exception $e){
                 throw $e;
             }
+            return $user;
         }
     }

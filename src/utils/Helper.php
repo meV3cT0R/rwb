@@ -83,4 +83,34 @@ class Helper
         
         return $params;
     }
+
+    public static function base64($file): string|null {
+        if (isset($file) && $file["error"] == 0) {
+            $fileContent = file_get_contents($file["tmp_name"]);
+    
+            $base64EncodedFile = base64_encode($fileContent);
+            return $base64EncodedFile;
+        }
+        return null;
+    }
+
+    public static function base64_array($files): array {
+        $base64EncodedFiles = [];
+    
+        // Check if files are set and valid
+        if (isset($files) && is_array($files['tmp_name'])) {
+            // Loop through each file
+            for ($i = 0; $i < count($files['tmp_name']); $i++) {
+                if ($files["error"][$i] == 0) {
+                    $fileContent = file_get_contents($files["tmp_name"][$i]);
+                    $base64EncodedFile = base64_encode($fileContent);
+                    $base64EncodedFiles[] = $base64EncodedFile;
+                } else {
+                    $base64EncodedFiles[] = null; // Handle errors for specific files
+                }
+            }
+        }
+    
+        return $base64EncodedFiles;
+    }
 }

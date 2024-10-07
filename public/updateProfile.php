@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../constants.php";
 require_once __DIR__ . "/../src/models/User.php";
-
+logMessage("hello how are you");
 if(isset($_POST["submit"])) {
     try {
         $userToBeSent = new User();
@@ -11,6 +11,7 @@ if(isset($_POST["submit"])) {
         $userToBeSent->setLastName($_POST["lastName"]);
         $userToBeSent->setEmail("");
         $userToBeSent->setUsername($_POST["username"]);
+        $userToBeSent->setRole(new Role($_POST["role"]));
         $images = Helper::uploadImage($_FILES["file"]);
 
         if($images==null) {
@@ -19,7 +20,7 @@ if(isset($_POST["submit"])) {
             $userToBeSent->setAvatar($images);
         }
         $editUser($userToBeSent);
-        header("Location: /".APP."/updateProfile");
+        header("Location: /".APP."/admin");
     }catch(Exception $e) {
         $error = $e->getMessage();
     }

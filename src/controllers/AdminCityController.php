@@ -56,4 +56,14 @@
 
             require_once __DIR__."/../../public/addCity.php";
         }
+        public function editCity(bool $add=true, int $id = NULL) : void {
+            $states= $this->stateRepository->getStates();
+            $countries = $this->countryRepository->getCountries();
+            $city = $this->cityRepository->getCityById($id);
+            $updateCity = function(City $city) : City {
+                return $this->cityRepository->updateCity($city);
+            };
+
+            require_once __DIR__."/../../public/addCity.php";
+        }
     }

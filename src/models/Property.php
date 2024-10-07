@@ -158,7 +158,7 @@
         return $this->propertyPhotos;
     }
 
-    public function setPropertyPhotos(?PropertyPhotos $propertyPhotos): void {
+    public function setPropertyPhotos(?array $propertyPhotos): void {
         $this->propertyPhotos = $propertyPhotos;
     }
 

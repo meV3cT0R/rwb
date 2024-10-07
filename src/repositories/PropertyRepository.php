@@ -7,9 +7,12 @@
         private EnquiryDAO $enquiryDAO;
         private CommentDAO $commentDAO;
 
+        private PropertyPhotosDAO $propertyPhotosDAO;
+
         public function __construct(
             PropertyDAO $propertyDAO,
             PropertyTypeDAO $propertyTypeDAO,
+            PropertyPhotosDAO $propertyPhotosDAO,
             UserDAO $userDAO,
             RoleDAO $roleDAO,
             EnquiryDAO $enquiryDAO,
@@ -28,6 +31,7 @@
             $this->roleDAO = $roleDAO;
             $this->enquiryDAO = $enquiryDAO;
             $this->commentDAO = $commentDAO;
+            $this->propertyPhotosDAO = $propertyPhotosDAO;
         }
 
         public function getProperties(): array {
@@ -67,12 +71,25 @@
             }
             $property->setEnquiries($enquiries);
 
+
+            $propertyPhotos = $this->propertyPhotosDAO->getPhotosByPropertyId($property->getId());
             
+            $property->setPropertyPhotos($propertyPhotos);
             return $property;
         }
 
         public function postProperty(Property $property) : Property {
-            return $this->propertyDAO->postProperty($property);
+            $property = $this->propertyDAO->postProperty($property);
+            if($property->getPropertyPhotos()!=null) {        
+                $photos = $property->getPropertyPhotos();
+
+                foreach($photos as $photo) {
+                    $photo->setProperty($property);
+                    $this->propertyPhotosDAO->postPropertyPhoto($photo);
+                }
+            }
+
+            return $property;
         }
 
         public function updateProperty(Property $property) : Property {
