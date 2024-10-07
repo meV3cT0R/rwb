@@ -103,7 +103,9 @@ error_reporting(E_ALL);
 
     $homeController = new HomeController(
         $propertyRepository,
-                            $userService
+                            $userService,
+                            $propertyTypeRepository,
+                            $cityRepository
     );
     $adminController = new AdminController(
         $propertyTypeRepository,
@@ -120,10 +122,13 @@ error_reporting(E_ALL);
         $countryRepository
     );
     $adminStateController = new AdminStateController(
-        $stateRepository
+        $stateRepository,
+        $countryRepository
     );
     $adminCityController = new AdminCityController(
-        $cityRepository
+        $cityRepository,
+        $stateRepository,
+        $countryRepository
     );
 
     $adminUserController = new AdminUserController(

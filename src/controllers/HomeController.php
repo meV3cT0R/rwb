@@ -3,18 +3,29 @@
 
         private PropertyRepository $propertyRepository;
         private UserService $userService;
+        private PropertyTypeRepository $propertyTypeRepository;
+        private CityRepository $cityRepository;
+
         public function __construct(
             PropertyRepository $propertyRepository,
-            UserService $userService
+            UserService $userService,
+            PropertyTypeRepository $propertyTypeRepository,
+            CityRepository $cityRepository
         ) {
             Helper::checkDependencies(
                 array(
                     "PropertyRepository" => $propertyRepository,
-                    "UserService" => $userService
+                    "UserService" => $userService,
+                    "PropertyTypeRepository" => $propertyTypeRepository,
+                    "CityRepository" => $cityRepository
+
                 )
-                );
+            );
             $this->propertyRepository = $propertyRepository;
             $this->userService = $userService;
+            $this->propertyTypeRepository = $propertyTypeRepository;
+            $this->cityRepository = $cityRepository;
+
         }
 
         public function home() : void {
@@ -82,7 +93,27 @@
         }
 
         public function getProperties() : void {
-            $properties = $this->propertyRepository->getProperties();
+            $propertiesInitial = $this->propertyRepository->getProperties();
+            $types = $this->propertyTypeRepository->getPropertyTypes();
+            $status = $this->propertyRepository->getStatuses();
+            $cities = $this->cityRepository->getCities();
+
+            $search = function($type,$status,$city): array {
+                $arr = [];
+
+                $properties = $this->propertyRepository->getProperties();
+                foreach ($properties as $property) {
+                    if(
+                        ($property->getPropertyType()->getId() == $type || $type=="all" ) &&
+                        (strtolower($property->getStatus()) == strtolower($status) || $status=="all" ) &&
+                        ($property->getCity()->getId() == $city || $city=="all" )
+                    ) {
+                        array_push($arr,$property);
+                    }
+                }
+
+                return $arr;
+            };
             require_once __DIR__."/../../public/properties.php";
         }
 

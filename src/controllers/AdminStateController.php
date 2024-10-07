@@ -1,14 +1,18 @@
 <?php
     class AdminStateController {
         private StateRepository $stateRepository;
+        private CountryRepository $countryRepository;
 
         public function __construct(
-            StateRepository $stateRepository
+            StateRepository $stateRepository,
+            CountryRepository $countryRepository
         ) {
             Helper::checkDependencies(array(
                 "StateRepository" => $stateRepository
             ));
             $this->stateRepository = $stateRepository;
+            $this->countryRepository = $countryRepository;
+
         }
 
         public function home() {
@@ -37,6 +41,10 @@
             require_once __DIR__."/../../public/admin/table.php";
         }
         function addState() {
+            $countries = $this->countryRepository->getCountries();
+            $saveState = function($state) :State {
+                return $this->stateRepository->postState($state);
+            };
             require_once __DIR__."/../../public/addState.php";
         }
     }

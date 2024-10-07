@@ -1,14 +1,23 @@
 <?php
     class AdminCityController {
         private CityRepository $cityRepository;
+        private StateRepository $stateRepository;
+        private CountryRepository $countryRepository;
+
 
         public function __construct(
             CityRepository $cityRepository,
+            StateRepository $stateRepository,
+            CountryRepository $countryRepository,
         ) {
             Helper::checkDependencies(array(
-                "CityRepository" => $cityRepository
+                "CityRepository" => $cityRepository,
+                "StateRepository" => $stateRepository,
+                "CountryRepository" => $countryRepository
             ));
             $this->cityRepository = $cityRepository;
+            $this->stateRepository = $stateRepository;
+            $this->countryRepository = $countryRepository;
         }
 
         public function home() {
@@ -37,6 +46,13 @@
             require_once __DIR__."/../../public/admin/table.php";
         }
         public function addCity() {
+            $states= $this->stateRepository->getStates();
+            $countries = $this->countryRepository->getCountries();
+
+            $saveCity = function(City $city) : City {
+                return $this->cityRepository->postCity($city);
+            };
+
             require_once __DIR__."/../../public/addCity.php";
         }
     }

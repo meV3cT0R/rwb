@@ -23,7 +23,7 @@
             },$propertyTypes);
             require_once __DIR__."/../../public/admin/table.php";
         }
-        public function addPropertyType():ResDTO {
+        public function addPropertyType() : void {
         // public function addPropertyType(PropertyType $propertyType):ResDTO {
             // $dto = new ResDTO("Property Type Data");
             // try {
@@ -33,6 +33,12 @@
             //     $dto->setErrorDTO(new ErrorDTO(403,$e->getMessage()));
             // }
             // return $dto;
+
+            $addPropertyType = function(PropertyType $propertyType): PropertyType {
+                return $this->propertyTypeRepository->postPropertyType($propertyType);
+                 
+            }; 
+
             require_once __DIR__."/../../public/addPropertyType.php";
         }
     }

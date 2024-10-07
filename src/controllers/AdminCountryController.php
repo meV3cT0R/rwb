@@ -35,6 +35,10 @@
             require_once __DIR__."/../../public/admin/table.php";
         }
         public function addCountry() {
+            $saveCountry = function(Country $country) : Country {
+                return $this->countryRepository->postCountry($country);
+            };
+
             require_once __DIR__."/../../public/addCountry.php";
         }
     }

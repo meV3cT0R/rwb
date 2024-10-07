@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . "/../constants.php";
 
-// Handling form submission for adding a new country
 if (isset($_POST["submitCountry"])) {
     try {
         $countryName = $_POST["countryName"];
@@ -10,15 +9,12 @@ if (isset($_POST["submitCountry"])) {
             throw new Exception("Country name is required.");
         }
 
-        // Assuming Country is a class handling country operations
         $country = new Country();
         $country->setName($countryName);
 
-        // Assuming saveCountry is a function to save the country in the database
-        saveCountry($country);
+        $saveCountry($country);
 
-        // Optionally redirect after successful submission
-        header("Location: /realEstate/countryList");
+        header("Location: /realEstate/admin/country");
         exit();
     } catch (Exception $e) {
         $error = $e->getMessage();

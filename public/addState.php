@@ -1,12 +1,6 @@
 <?php
 require_once __DIR__ . "/../constants.php";
 
-// Simulating fetching countries from the backend (replace this with real database queries)
-$countries = [
-    ['id' => 1, 'name' => 'USA'],
-    ['id' => 2, 'name' => 'Canada'],
-    ['id' => 3, 'name' => 'India']
-];
 
 if (isset($_POST["submitState"])) {
     try {
@@ -20,12 +14,10 @@ if (isset($_POST["submitState"])) {
         // Assuming State is a class handling state operations
         $state = new State();
         $state->setName($stateName);
-        $state->setCountryId($countryId);
+        $state->setCountry(new Country($countryId));
 
-        // Assuming saveState is a function to save the state in the database
-        saveState($state);
+        $saveState($state);
 
-        // Optionally redirect after successful submission
         header("Location: /realEstate/admin/state");
         exit();
     } catch (Exception $e) {
@@ -74,8 +66,8 @@ if (isset($_POST["submitState"])) {
                     <select name="countryId" id="countryId" class="city-form-select">
                         <option value="">Select Country</option>
                         <?php foreach ($countries as $country) : ?>
-                            <option value="<?php echo $country['id']; ?>" class="city-form-option">
-                                <?php echo $country['name']; ?>
+                            <option value="<?php echo $country->getId(); ?>" class="city-form-option">
+                                <?php echo $country->getName(); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
