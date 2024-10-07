@@ -22,8 +22,22 @@ session_start();
 
             <h1> Welcome to RE</h1>
             <div class="title">
-
-                <p class="description">At RE, we believe that finding your dream home should be a seamless and enjoyable experience. Our team of dedicated professionals is committed to providing exceptional service, expert knowledge, and unparalleled results to make your real estate journey a success.</p>
+                
+                <p class="description">
+                <?php
+                    if(isset($aboutUs)) {
+                        echo $aboutUs;
+                    }else {
+                        ?>
+                        
+                    At RE, we believe that finding your dream home should be
+                     a seamless and enjoyable experience. Our team of dedicated professionals 
+                     is committed to providing exceptional service, expert knowledge, and
+                      unparalleled results to make your real estate journey a success.
+                    
+                      <?php
+                    }
+                ?></p>
                 <img src=<?php echo URL . "public/images/real-state.jpg" ?> alt="image">
             </div>
             </div>
@@ -33,14 +47,48 @@ session_start();
         <hr>
         <div class="mission">
             <h1>Our mission</h2>
-            <p class="desc">Our mission is to provide a superior real estate experience that exceeds our clients' expectations. We strive to build long-term relationships based on trust, respect, and open communication. Our goal is to make the process of buying or selling a property as smooth and stress-free as possible, while ensuring that our clients achieve their goals and realize their dreams.</p>
+            <p class="desc">
+            <?php
+                    if(isset($mission)) {
+                        echo $mission;
+                    }else {
+                        ?>
+                        
+                Our mission is to provide a 
+                    superior real estate experience that exceeds our clients'
+                    expectations. We strive to build long-term relationships
+                    based on trust, respect, and open communication. 
+                    Our goal is to make the process of buying or selling 
+                    a property as smooth and stress-free as possible, while 
+                    ensuring that our clients achieve their goals and realize their dreams.</p>
+
+                    <?php
+                    }
+                  ?>
         </div>
         <hr>
         <div class="team">
             <h1>Our Team</h1>
-            <p class="desc">Our team of experienced agents and support staff are dedicated to providing exceptional service and expert guidance throughout every step of the real estate process. With extensive knowledge of the local market and a passion for delivering results, our team is committed to helping you achieve your real estate goals.   </p>
+            <p class="desc">
+
+            <?php
+                    if(isset($mission)) {
+                        echo $mission;
+                    }else {
+                        ?>
+                        
+                Our team of experienced agents and support
+                 staff are dedicated to providing exceptional service 
+                 and expert guidance throughout every step of the real 
+                 estate process. With extensive knowledge of the local
+                  market and a passion for delivering results, our team
+                   is committed to helping you achieve your real estate goals.
+                <?php
+                    }
+                ?>
+                </p>
         </div>
-        <hr>
+        <!-- <hr>
         <div class="sets-apart">
             <h1>What sets Us Apart</h1>
             <ul>
@@ -62,7 +110,7 @@ session_start();
                 </li>
             </ul>
 
-        </div>
+        </div> -->
         <!-- <div class="touch"></div> -->
     </main>
     <?php

@@ -68,7 +68,7 @@ if (isset($_POST["enquiry"])) {
         <?php if ($property instanceof Property): ?>
             <div class="property-detail">
                 <div class="property-image">
-                    <img src="<?php echo $property->getPropertyPhotos() != null ? URL . $property->getPropertyPhotos()[0]->getUrl() : ''; ?>"
+                    <img src="<?php echo $property->getPropertyPhotos() != null ? $property->getPropertyPhotos()[0]->getUrl() : ''; ?>"
                         alt="Property Image" />
                 </div>
                 <div class="property-info">
@@ -92,7 +92,7 @@ if (isset($_POST["enquiry"])) {
                     <?php if ($property->getPropertyPhotos() != null): ?>
                         <?php foreach ($property->getPropertyPhotos() as $photo): ?>
                             <div class="gallery-item">
-                                <img src="<?php echo URL . $photo->getUrl(); ?>" alt="Gallery Image" />
+                                <img src="<?php echo base64_decode($photo->getUrl()); ?>" alt="Gallery Image" />
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>

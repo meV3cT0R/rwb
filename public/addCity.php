@@ -9,36 +9,48 @@ if (isset($_POST["submitCity"])) {
             throw new Exception("All fields are required.");
         }
 
-        $city = new City();
-        $city->setName($cityName);
+        if ($add) {
 
-        $city->setCountry(new Country($countryId));
-        $city->setState(new State($stateId));
+            $city = new City();
+            $city->setName($cityName);
 
-        $saveCity($city);
+            $city->setCountry(new Country($countryId));
+            $city->setState(new State($stateId));
+
+            $saveCity($city);
+        }else {
+            $city->setName($cityName);
+
+            $city->setCountry(new Country($countryId));
+            $city->setState(new State($stateId));
+            $updateCity($city);
+        }
+
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
 }
 ?>
 <html>
+
 <head>
-    <link href="<?php echo URL . 'public/css/index.css'; ?>" rel="stylesheet" type="text/css"/>
-    <link href="<?php echo URL . 'public/css/admin/index.css'; ?>" rel="stylesheet" type="text/css"/>
-    <link href="<?php echo URL . 'public/css/admin/admin-form.css'; ?>" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo URL . 'public/css/index.css'; ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo URL . 'public/css/admin/index.css'; ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo URL . 'public/css/admin/admin-form.css'; ?>" rel="stylesheet" type="text/css" />
 </head>
 
 <?php require_once __DIR__ . "/../components/admin/sidebar.php"; ?>
+
 <body>
-    
+
     <div class="body">
-        
+
         <?php require_once __DIR__ . "/../components/admin/header.php"; ?>
         <div class="formContainer body" style="margin-bottom: 50px">
             <form method="post" action="" class="city-form">
                 <h1>Add City</h1>
 
-                <?php if (isset($error)) : ?>
+                <?php if (isset($error)): ?>
                     <div class="error">
                         <?php echo $error; ?>
                     </div>
@@ -51,10 +63,20 @@ if (isset($_POST["submitCity"])) {
 
                 <div>
                     <label for="countryId">Country</label>
-                    <select name="countryId" id="countryDropdown" class="city-form-select" onchange="filterStates()">
+                    <select name="countryId" id="countryDropdown"
+                            
+                    class="city-form-select" onchange="filterStates()">
                         <option value="">Select Country</option>
-                        <?php foreach ($countries as $country) : ?>
-                            <option value="<?php echo $country->getId(); ?>"><?php echo $country->getName(); ?></option>
+                        <?php foreach ($countries as $country): ?>
+                            <option 
+                            selected="
+                                <?php
+                                        if(isset($city) && $city->getCountry()) {
+                                            echo $country->getId()==$city->getCountry()->getId();
+                                        }
+                                ?>
+                            "
+                            value="<?php echo $country->getId(); ?>"><?php echo $country->getName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -63,8 +85,15 @@ if (isset($_POST["submitCity"])) {
                     <label for="stateId">State</label>
                     <select name="stateId" id="stateDropdown" class="city-form-select">
                         <option value="">Select State</option>
-                        <?php foreach ($states as $state) : ?>
-                            <option value="<?php echo $state->getId(); ?>" data-country-id="<?php echo $state->getCountry()->getId(); ?>">
+                        <?php foreach ($states as $state): ?>
+                            <option value="<?php echo $state->getId(); ?>" selected="
+                                <?php
+                                        if(isset($city) && $city->getState()) {
+                                            echo $state->getId()==$city->getState()->getId();
+                                        }
+                                ?>
+                            "
+                                data-country-id="<?php echo $state->getCountry()->getId(); ?>">
                                 <?php echo $state->getName(); ?>
                             </option>
                         <?php endforeach; ?>
@@ -108,4 +137,5 @@ if (isset($_POST["submitCity"])) {
         }
     </script>
 </body>
+
 </html>

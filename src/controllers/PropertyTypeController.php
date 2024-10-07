@@ -37,4 +37,12 @@
             return $this->propertyTypeRepository->deletePropertyType($id);
         }
 
+        public function editPropertyType(bool $add=true, int $id = NULL) : void {
+            $propertyType = $this->propertyTypeRepository->getPropertyTypeById($id);
+            $editPropertyType = function(PropertyType $propertyType): PropertyType {
+                return $this->propertyTypeRepository->updatePropertyType($propertyType);
+                 
+            }; 
+            require_once __DIR__."/../../public/addPropertyType.php";
+        }
     }

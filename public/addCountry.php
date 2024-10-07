@@ -9,10 +9,16 @@ if (isset($_POST["submitCountry"])) {
             throw new Exception("Country name is required.");
         }
 
-        $country = new Country();
-        $country->setName($countryName);
+        if($add) {
 
-        $saveCountry($country);
+            $country = new Country();
+            $country->setName($countryName);
+
+            $saveCountry($country);
+        }else {
+            $country->setName($countryName);
+            $updateCountry($country);
+        }
 
         header("Location: /realEstate/admin/country");
         exit();
@@ -46,7 +52,12 @@ if (isset($_POST["submitCountry"])) {
 
                 <div>
                     <label for="countryName">Country Name</label>
-                    <input type="text" name="countryName" id="countryName" />
+                    <input
+                     type="text" name="countryName" id="countryName" 
+                     value="<?php 
+                        echo isset($country) ? $country->getName():'';
+                     ?>"
+                     />
                 </div>
 
                 <div>

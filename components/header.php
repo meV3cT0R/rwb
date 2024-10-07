@@ -86,7 +86,8 @@
 
 </div>
 <nav id="toggleContainer">
-    <button id="toggleSidebarNormal">
-        toggle
+<button id="toggleSidebarNormal" >
+        <img width="32" height="32" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png"/>
     </button>
+
 </nav>

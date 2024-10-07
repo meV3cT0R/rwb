@@ -195,6 +195,15 @@ class UserDAO
             $password = $user->getPassword();
             $avatar = $user->getAvatar();
 
+            
+            logMessage($firstName);
+            logMessage($lastName);
+            logMessage($username);
+            logMessage($email);
+            logMessage($password);
+            logMessage($roleId);
+            logMessage($avatar);
+
 
             $stmt->bind_param(
                 "sssssis",
@@ -209,6 +218,9 @@ class UserDAO
             if (!$stmt->execute()) {
                 throw new ErrorException("Data Insertion Failed");
             }
+
+            logMessage($this->db->error);
+            logMessage($this->db->info);
 
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());
@@ -293,7 +305,37 @@ class UserDAO
         return $user;
     }
 
-    public function updatePassword(string $user): void {
+    public function updatePassword(User $user): User {
+        try {
+            $stmt = $this->db->prepare("UPDATE user
+            set password=?
+                where id=?
+            ");
+            $id = $user->getId();
 
+            $password = $user->getPassword();
+
+            logMessage("Inside Update Password");
+
+            $stmt->bind_param(
+                "si",
+                $password,
+                $id
+            );
+            logMessage("Inside Update User after bind_param");
+
+            if (!$stmt->execute()) {
+                throw new ErrorException("Data Updation Failed");
+            }
+            logMessage("Inside Update User after bind_param after stmt_execution");
+            logMessage($this->db->error);
+            logMessage($this->db->info);
+
+        } catch (PDOException $pdoe) {
+            throw new ErrorException("Database Error : " . $pdoe->getMessage());
+        } catch (ErrorException $e) {
+            throw $e;
+        }
+        return $user;
     }
 }

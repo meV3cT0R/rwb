@@ -47,13 +47,17 @@
             $saveCountry = function(Country $country) : Country {
                 return $this->countryRepository->postCountry($country);
             };
-
-            // Include the add country view
+            
             require_once __DIR__."/../../public/addCountry.php";
         }
-
-        // Method to delete a country by ID
-        public function deleteCountry(int $id) : Country {
+        public function editCountry(bool $add=true, int $id = NULL) : void {
+            $country = $this->countryRepository->getCountryById($id);
+            $updateCountry = function(Country $country) : Country {
+                return $this->countryRepository->updateCountry($country);
+            };
+            require_once __DIR__."/../../public/addCountry.php";
+        }
+        public function deleteCountry(int $id) :Country {
             return $this->countryRepository->deleteCountry($id);
         }
     }

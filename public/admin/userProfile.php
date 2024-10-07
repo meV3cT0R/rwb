@@ -2,6 +2,31 @@
 require_once __DIR__ . "/../../constants.php";
 require_once __DIR__ . "/../../src/models/User.php";
 
+
+logMessage("hello how are you");
+if(isset($_POST["submit"])) {
+    try {
+        $userToBeSent = new User();
+        $userToBeSent->setId($user->getId());
+
+        $userToBeSent->setFirstName($_POST["firstName"]);
+        $userToBeSent->setLastName($_POST["lastName"]);
+        $userToBeSent->setEmail("");
+        $userToBeSent->setUsername($_POST["username"]);
+        $images = Helper::uploadImage($_FILES["file"]);
+
+        if($images==null) {
+            $userToBeSent->setAvatar($user->getAvatar());
+        }else {
+            $userToBeSent->setAvatar($images);
+        }
+        $editUser($userToBeSent);
+        header("Location: /".APP."/admin/updateprofile");
+    }catch(Exception $e) {
+        $error = $e->getMessage();
+    }
+
+}
 // $user = $_SESSION["user"];
 // echo "user".$user;
 

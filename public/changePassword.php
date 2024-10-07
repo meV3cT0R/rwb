@@ -2,8 +2,25 @@
 require_once __DIR__ . "/../constants.php";
 require_once __DIR__ . "/../src/models/User.php";
 
-session_start();
+if(isset($_POST["submit"])) {
+    $oldPassword = $_POST["oldPassword"];
+    $newPassword = $_POST["newPassword"];
+    $confirmPassword = $_POST["confirmPassword"];
 
+    if(strcmp($oldPassword,$newPassword)) {
+        try{
+          $changePassword($user,$oldPassword,$newPassword);
+        }catch(
+          Exception $e
+        ){
+            $error = $e->getMessage();
+        }
+      }else{
+      $error = "Confirm Password and Password didn't Match";
+    }
+
+    
+}
 // Uncomment this if you need to fetch the user details
 // $user = $_SESSION["user"];
 // if (!$user) {
@@ -30,7 +47,7 @@ session_start();
             <label for="oldPassword">Old Password <input type="password" id="oldPassword" name="oldPassword" required style="margin-top:10px;"></label>
             <label for="newPassword">New Password <input type="password" id="newPassword" name="newPassword" required style="margin-top:10px;"></label>
             <label for="confirmPassword">Confirm Password <input type="password" id="confirmPassword" name="confirmPassword" required style="margin-top:10px;"></label>
-            <button type="submit" class="button">Change Password</button>
+            <button type="submit" class="button" name="submit"> Change Password </button>
         </form>
     </div>
 

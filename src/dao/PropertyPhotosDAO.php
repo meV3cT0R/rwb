@@ -12,6 +12,8 @@ class PropertyPhotosDAO
         if ($db == null) {
             throw new ErrorException("No Database Connection");
         }
+
+        $this->db=$db;
     }
     private function rowMapHelper(array $row): PropertyPhotos
     {
@@ -19,7 +21,7 @@ class PropertyPhotosDAO
 
         $propertyPhoto->setId($row["id"]);
         $propertyPhoto->setUrl($row["url"]);
-        $propertyPhoto->setProperty($row["propertyId"]);
+        $propertyPhoto->setProperty(new Property($row["propertyId"]));
 
         return $propertyPhoto;
     }
@@ -73,7 +75,7 @@ class PropertyPhotosDAO
     {
         try {
             $stmt = $this->db->prepare("INSERT
-            INTO property(
+            INTO propertyPhotos(
                     url,
                     propertyId
                 )
@@ -87,17 +89,24 @@ class PropertyPhotosDAO
             if ($propertyPhotos->getProperty() != null) {
                 $propertyId = $propertyPhotos->getProperty()->getId();
             }
+            // logMessage($propertyPhotos->getUrl());
+
             $url = $propertyPhotos->getUrl();
+            logMessage($propertyId);
+            if($propertyId !=null && $url!=null){
+                $stmt->bind_param(
+                    "si",
+                    $url,
+                    $propertyId
 
-
-            $stmt->bind_param(
-                "si",
-                $propertyId,
-                $url,
-            );
-            if (!$stmt->execute()) {
-                throw new ErrorException("Data Insertion Failed");
+                );
+                if (!$stmt->execute()) {
+                    throw new ErrorException("Data Insertion Failed");
+                }
+            }else {
+                logMessage("url or propertyId is empty");
             }
+            
 
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());
@@ -120,11 +129,11 @@ class PropertyPhotosDAO
             if ($propertyPhotos->getProperty() != null) {
                 $propertyId = $propertyPhotos->getProperty()->getId();
             }
-            $url = $propertyPhotos->getUrl();
+            $url = $propertyPhotos->getUrl() ?? "";
 
-
+            logMessage($url);
             $stmt->bind_param(
-                "sii",
+                "ssi",
                 $propertyId,
                 $url,
                 $id

@@ -49,6 +49,15 @@
             require_once __DIR__."/../../public/addState.php";
         }
 
+        function editState(bool $add=true, int $id = NULL) : void {
+            $countries = $this->countryRepository->getCountries();
+            $state = $this->stateRepository->getStateById($id);
+            $updateState = function($state) :State {
+                return $this->stateRepository->updateState($state);
+            };
+            require_once __DIR__."/../../public/addState.php";
+        }
+
         public function deleteState($id): State {
             return $this->stateRepository->deleteState($id);
         }

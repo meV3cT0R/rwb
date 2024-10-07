@@ -97,6 +97,15 @@
         }
 
         public function getAbout() : void {
+            $conn = (new DB())->connect();
+            $result = $conn->query("select * from aboutUs;");
+            
+            if($result->num_rows >0) {
+                $about = $result->fetch_assoc();
+                $aboutUs = $about["aboutUs"];
+                $mission = $about["mission"];
+                $team = $about["team"];
+            }
             require_once __DIR__."/../../public/about.php";
         }
 
@@ -139,6 +148,15 @@
         }
 
         public function getContact() : void {
+            $conn = (new DB())->connect();
+            $result = $conn->query("select * from contactUs;");
+            
+            if($result->num_rows >0) {
+                $contact = $result->fetch_assoc();
+                $email = $contact["email"];
+                $phone = $contact["phone"];
+                $address = $contact["address"];
+            }
             require_once __DIR__."/../../public/contact.php";
         }
 
@@ -161,6 +179,17 @@
 
 
         public function getChangePassword() :void {
+            session_start();
+            global $userRepository;
+            if (isset($_SESSION["user"])) {
+                logMessage("Yes User");
+                $user = $userRepository->getUserById($_SESSION["user"]->getId());
+            }
+            $changePassword = function (User $user,string $oldPassword,string $newPassword): User {
+                global $userService;
+                logMessage($user->getId());
+                return $userService->changePassword($user,$oldPassword,$newPassword);
+            };
             require_once __DIR__."/../../public/changePassword.php";
         }
         public function manageProperties() : void {
@@ -188,9 +217,28 @@
             require_once __DIR__."/../../public/manageProperties.php";
         }
         public function addProperties(bool $add = true, int $id = NULL ) : void {
+            $propertyTypes = $this->propertyTypeRepository->getPropertyTypes();
+            $cities = $this->cityRepository->getCities();
+
+            $saveProperty = function(Property $property) : Property {
+                return $this->propertyRepository->postProperty($property);
+            };
+            require_once __DIR__."/../../public/addProperty.php";
+        }
+
+        public function editProperties(bool $add = true, int $id = NULL ) : void {
+            $propertyTypes = $this->propertyTypeRepository->getPropertyTypes();
+            $cities = $this->cityRepository->getCities();
+            $property = $this->propertyRepository->getPropertyById($id);
+            $updateProperty = function(Property $property) : Property {
+                return $this->propertyRepository->updateProperty($property);
+            };
             require_once __DIR__."/../../public/addProperty.php";
         }
         public function deleteProperties(int $id ) : void {
             // do stuff
+            $this->propertyRepository->deleteProperty($id);
+            header("Location: /realEstate/manageproperties");
+
         }
     }

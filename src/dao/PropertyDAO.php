@@ -109,7 +109,7 @@ class PropertyDAO
             }
             $status = $property->getStatus();
             $yearBuilt = $property->getYearBuilt();
-            $marketedBy = $property->getMarketedBy();
+            $marketedBy = $property->getMarketedBy()->getId();
             $description = $property->getDescription();
             $price = $property->getPrice();
             $totalSqFt = $property->getTotalSqFt();
@@ -121,7 +121,7 @@ class PropertyDAO
                 $cityId = $property->getCity()->getId();
             
 
-            $propertyStmt->bind_param("isiisffsfsi",
+            $propertyStmt->bind_param("isiisddsdsi",
                 $propertyType,
                 $status,
                 $yearBuilt,
@@ -134,10 +134,12 @@ class PropertyDAO
                 $address,
                 $cityId
             );
+            
             if(!$propertyStmt->execute()){
                 throw new ErrorException("Data Insertion Failed");
             }
 
+            $property->setId($this->db->insert_id);
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());
         } catch (ErrorException $e) {
