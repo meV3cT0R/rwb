@@ -83,4 +83,8 @@
         public function deleteUser(int $id) : User {
             return $this->userDAO->deleteUser($id);
         }
+
+        public function updatePassword(User $user): mixed {
+            return $this->userDAO->updatePassword($id);
+        }
     }

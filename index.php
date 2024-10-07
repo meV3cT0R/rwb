@@ -337,8 +337,8 @@ $route = array(
             $user = $userRepository->getUserById($_SESSION["user"]->getId());
         }
         $editUser = function (User $user): User {
-            global $userRepository;
-            return $userRepository->updateUser($user);
+            global $userService;
+            return $userService->changePassword($user);
         };
         require_once __DIR__ . '/public/admin/changePassword.php';
     },

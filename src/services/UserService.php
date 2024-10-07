@@ -136,5 +136,23 @@
 
         public function updateUser(User $user):User{
             return $this->userRepository->updateUser($user);
-    }
+        }
+
+        public function changePassword(User $user,string $oldPassword,string $newPassword) {
+            try{
+                $userFromDB = $this->userRepository->getUserById($user->getId());
+                if($userFromDB != null) {
+                    throw new Exception("User with given Id not found");
+                }
+
+                if(password_verify($oldPassword,$user->getPassword())) {
+                    $user->setPassword($newPassword);
+                        $this->userRepository->updatePassword($user);
+                }else {
+                    throw new Exception("Old Password Didn't Match");
+                }
+            }catch(Exception $e){
+                throw $e;
+            }
+        }
     }

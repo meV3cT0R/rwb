@@ -2,11 +2,29 @@
 require_once __DIR__ . "/../../constants.php";
 require_once __DIR__ . "/../../src/models/User.php";
 
+if(isset($_POST["submit"])) {
+    $oldPassword = $_POST["oldPassword"];
+    $newPassword = $_POST["newPassword"];
+    $confirmPassword = $_POST["confirmPassword"];
+
+    if($newPassword==$confirmPassword) {
+        try{
+          $changePassword($oldPassword,$newPassword);
+        }catch(
+          Exception $e
+        ){
+            $error = $e->getMessage();
+        }
+      }else{
+      $error = "Confirm Password and Password didn't Match";
+    }
+
+    
+}
 // $user = $_SESSION["user"];
 // echo "user".$user;
 
 // $id = $params['id'];
-// echo "fuck".$id;
 // $user = $_SESSION["user"];
 // echo $user;
 
@@ -61,16 +79,22 @@ require_once __DIR__ . "/../../src/models/User.php";
 </form> -->
 
  <form id="contact-form" method="post" >
-
+        <div class="error">
+            <?php
+                  if(isset($error)){
+                    echo $error;
+                  }
+            ?>
+        </div>
       <!-- <div class="names"> -->
-            <label for="oldPassword">oldPassword<input type="password" id="oldPassword" name="oldPassword"></label>
+            <label for="oldPassword">Old Password<input type="password" id="oldPassword" name="oldPassword"></label>
         
-            <label for="newPassword">newPassword <input type="password" id="newPassword" name="newPassword" ></label> 
+            <label for="newPassword">New Password <input type="password" id="newPassword" name="newPassword" ></label> 
             
-              <label for="confirmPassword">confirmPassword <input type="password" id="confirmPassword" name="confirmPassword"></label> 
+              <label for="confirmPassword">Confirm Password <input type="password" id="confirmPassword" name="confirmPassword"></label> 
       <!-- </div> -->
 
-  <button type="submit" class="button">Change Password</button>
+  <button type="submit" class="button" name="submit">Change Password</button>
 
 </form>
 

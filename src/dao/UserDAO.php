@@ -292,4 +292,8 @@ class UserDAO
         }
         return $user;
     }
+
+    public function updatePassword(string $user): void {
+
+    }
 }
