@@ -14,6 +14,7 @@
         public function home():void {
             $propertyTypes = $this->propertyTypeRepository->getPropertyTypes();
             $cols = ["id","Name","Action"];
+            $add = true;
             $arr = array_map(function(PropertyType $propertyType){
                     $subArr = [];
                     array_push($subArr, $propertyType->getId());

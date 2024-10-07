@@ -15,6 +15,7 @@
             $countries = $this->countryRepository->getCountries();
             // echo implode($countries);
             $cols = ["Country","No. of States","No. of Cities","Actions"];
+            $add = true;
             $arr = array_map(function(Country $country){
                     $subArr = [];
                     array_push($subArr, $country->getName());

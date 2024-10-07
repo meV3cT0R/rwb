@@ -105,6 +105,13 @@
     </table>
 </div>
 
-<a href="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']) . '/create'; ?>" class="add-data-button">
-    <i class="fa fa-plus"></i> 
-</a>
+<?php
+// Check if the add variable is set
+if (isset($add)) {
+            ?>
+        <a href="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']) . '/create'; ?>" class="add-data-button">
+            <i class="fa fa-plus"></i> 
+        </a>
+        <?php
+}
+?>

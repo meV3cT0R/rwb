@@ -1,16 +1,12 @@
 <html>
 <head>
     <link href="<?php echo URL . 'public/css/index.css'; ?>" rel="stylesheet" type="text/css"/>
-    <link href="<?php echo URL . 'public/css/admin/index.css'; ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php echo URL . 'public/css/admin/property.css'; ?>" rel="stylesheet" type="text/css"/>
 </head>
 
-<?php require_once __DIR__ . "/../components/admin/sidebar.php"; ?>
 <body>
-    
-    <div class="body">
         
-        <?php require_once __DIR__ . "/../components/admin/header.php"; ?>
+        <?php include __DIR__ . "/../components/header.php"; ?>
         <div class="formContainer body" style="margin-bottom: 50px;">
             <form method="post" action="" class="property-form">
                 <h1 class="form-title">Add Property</h1>
@@ -112,6 +108,6 @@
                 </div>
             </form>
         </div>
-    </div>
+        <?php include __DIR__ . "/../components/footer.php"; ?>
 </body>
 </html>

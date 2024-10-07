@@ -257,10 +257,6 @@ error_reporting(E_ALL);
             global $adminPropertyController;
             $adminPropertyController->home();
         },
-        "admin/properties/create"=> function():void {
-            global $adminPropertyController;
-            $adminPropertyController->addProperty();
-        },
      "admin/updateprofile" => function () use ($adminUserController) { 
         global $auth;
         $auth->verifyAdmin();
@@ -335,9 +331,26 @@ error_reporting(E_ALL);
             global $homeController;
             $homeController->getChangePassword();
         },
-        "/realEstate/manageproperties"=>function() :void {
+        "manageproperties"=>function() :void {
             global $homeController;
             $homeController->manageProperties();
+        },
+        "manageproperties/add"=>function() :void {
+            global $homeController;
+            $homeController->addProperties();
+        },
+        "manageproperties/edit"=>function() :void {
+            global $homeController;
+            global $params;
+            $id = $params["id"];
+            $add = false;
+            $homeController->addProperties($add, $id);
+        },
+        "manageproperties/delete"=>function() :void {
+            global $homeController;
+            global $params;
+            $id = $params["id"];
+            $homeController->deleteProperties($id);
         },
     );
 
