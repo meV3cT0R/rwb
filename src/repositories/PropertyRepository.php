@@ -45,6 +45,21 @@
                 
                 $property->setMarketedBy($marketedBy);
                 $property->setPropertyType($propertyType);
+                $enquiries = $this->enquiryDAO->getEnquiriesByPropertyId($property->getId());
+                if($enquiries!=null ) {
+                    foreach($enquiries as $enquiry) {
+                        if($enquiry->getId()!=null) {
+                            $enquiry->setCreatedBy($this->userDAO->getUserById($enquiry->getCreatedBy()->getId()));
+                            $enquiry->setComments($this->commentDAO->getCommentsByEnquiryId($enquiry->getId()));
+                        }
+                    }
+                }
+                $property->setEnquiries($enquiries);
+
+
+            $propertyPhotos = $this->propertyPhotosDAO->getPhotosByPropertyId($property->getId());
+            $property->setPropertyPhotos($propertyPhotos);
+
                 array_push($propertiesToBeSent,$property);
             }
             return $propertiesToBeSent;

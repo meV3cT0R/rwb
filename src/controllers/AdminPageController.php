@@ -19,7 +19,11 @@
             $aboutUsResult = $this->db->query($aboutUsQuery); 
             $contactUsResult= $this->db->query($contactUsQuery); 
 
-            if($aboutUsResult->num_rows == 0) {
+            if(!$aboutUsResult){
+                logMessage($this->db->error);
+                return;
+            }
+            if($aboutUsResult && $aboutUsResult->num_rows == 0) {
                 $this->db->query("INSERT
                  INTO aboutUs 
                      (aboutUs,image,mission,team)
@@ -29,7 +33,10 @@
             }else {
                 $this->aboutUs = $aboutUsResult->fetch_assoc();
             }
-
+            if(!$contactUsResult){
+                logMessage($this->db->error);
+                return;
+            }
             if($contactUsResult->num_rows == 0) {
                 $this->db->query("INSERT
                  INTO contactUs 

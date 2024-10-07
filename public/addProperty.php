@@ -28,16 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
     // Set the values using the setters
-    $property->setPropertyType(new PropertyType($propertyTypeId));
+    $property->setPropertyType(new PropertyType((int)$propertyTypeId));
     $property->setStatus($status);
-    $property->setYearBuilt($yearBuilt);
+    $property->setYearBuilt((int)$yearBuilt);
     $property->setMarketedBy(new User($_SESSION["user"]->getId()));
     $property->setDescription($description);
-    $property->setPrice($price);
-    $property->setTotalSqFt($totalSqFt);
+    $property->setPrice((int)$price);
+    $property->setTotalSqFt((int)$totalSqFt);
     $property->setLotSizeUnit($lotSizeUnit);
-    $property->setLotSize($lotSize);
-    $property->setCity(new City($cityId));
+    $property->setLotSize((int)$lotSize);
+    $property->setCity(new City((int)$cityId));
     $property->setAddress($address);
 
     // Now, $property object has all the posted data set
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }else {
         $updateProperty($property);
     }
-
+    header("Location: /realEstate/manageproperties");
 
 }catch(
     Exception $e

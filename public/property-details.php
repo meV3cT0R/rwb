@@ -92,7 +92,7 @@ if (isset($_POST["enquiry"])) {
                     <?php if ($property->getPropertyPhotos() != null): ?>
                         <?php foreach ($property->getPropertyPhotos() as $photo): ?>
                             <div class="gallery-item">
-                                <img src="<?php echo base64_decode($photo->getUrl()); ?>" alt="Gallery Image" />
+                                <img src="<?php echo URL.$photo->getUrl(); ?>" alt="Gallery Image" />
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>

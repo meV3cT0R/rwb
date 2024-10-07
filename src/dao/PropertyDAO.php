@@ -178,7 +178,7 @@ class PropertyDAO
             $lotSize = $property->getLotSize();
             
 
-            $propertyStmt->bind_param("isiisffsfi",
+            $propertyStmt->bind_param("isiisddsdi",
                 $propertyType,
                 $status,
                 $yearBuilt,

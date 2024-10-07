@@ -110,17 +110,17 @@ create table comment (
 );
 
 
-create table aboutUs {
+create table aboutUs (
     id int auto_increment primary key,
     aboutUs varchar(500),
     image varchar(100),
-    mission varchar(500);
-    team varchar(500);
-}
+    mission varchar(500),
+    team varchar(500)
+);
 
-create table contactUs {
+create table contactUs (
     id int auto_increment primary key,
     email varchar(100),
     phone varchar(20),
-    address varchar(20),
-}
+    address varchar(20)
+);

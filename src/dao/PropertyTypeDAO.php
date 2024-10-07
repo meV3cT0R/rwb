@@ -48,7 +48,7 @@ class PropertyTypeDAO
         return $propertyTypes;
     }
 
-    public function getPropertyTypeById(int $id): PropertyType
+    public function getPropertyTypeById(int $id): ?PropertyType
     {
         $propertyType = null;
         try {

@@ -26,6 +26,7 @@ if (isset($_POST["submitCity"])) {
             $updateCity($city);
         }
 
+        header("Location: /realEstate/admin/city");
     } catch (Exception $e) {
         $error = $e->getMessage();
     }

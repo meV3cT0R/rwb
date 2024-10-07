@@ -265,3 +265,47 @@ body>div:nth-child(2) {
 .hamburger.open .bar:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
 }
+
+
+/* styles.css */
+
+/* Team Members Section Styles */
+.team-container {
+    background-color: #f9f9f9; /* Light background */
+    padding: 20px; /* Padding around the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 20px 0; /* Margin for spacing */
+    max-width: 600px; /* Maximum width */
+    text-align: center; /* Center text */
+}
+
+.team-title {
+    font-size: 24px; /* Title font size */
+    margin-bottom: 15px; /* Space below title */
+    color: #333; /* Title color */
+}
+
+.team-member {
+    background-color: #fff; /* White background for members */
+    margin: 10px 0; /* Space between members */
+    padding: 15px; /* Padding inside member box */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.team-member h3 {
+    margin: 0; /* No margin for the name */
+    font-size: 20px; /* Font size for name */
+}
+
+.team-member p {
+    margin: 5px 0 0; /* Space above and below ID */
+    font-size: 14px; /* Font size for ID */
+    color: #666; /* Grey color for ID */
+}
+
+.footerNames {
+    display:flex;
+    flex-wrap: wrap;
+}
