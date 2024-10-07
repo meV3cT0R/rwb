@@ -38,6 +38,7 @@
             require_once __DIR__."/../../public/index.php";
         }
         public function getLogin() : void {
+            session_start();
             if(isset($_SESSION["user"])){
                 if($_SESSION["user"]->getRole()=="ADMIN"){
                     header("Location: /realEstate/admin");
@@ -59,7 +60,6 @@
 
                 return $dto;
             };
-            session_destroy();
             require_once __DIR__."/../../public/login.php";
         }
         public function getRegister() : void {
@@ -83,7 +83,6 @@
 
                 return $dto;
             };
-            session_destroy();
             require_once __DIR__."/../../public/register.php";
         }
 

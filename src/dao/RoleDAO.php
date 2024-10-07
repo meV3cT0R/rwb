@@ -3,7 +3,6 @@
 --->
 <?php
     // logMessage("inside RoleDAO.php");
-
     class RoleDAO {
         private mysqli $db;
 
