@@ -16,7 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cityId = $_POST['cityId'] ?? null;
     $address = $_POST['address'] ?? null;
 
-
+        if(empty($propertyTypeId)){
+            $error = "Empty Property Type";
+        }
 
 
     // Create a new instance of Property
@@ -44,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $photos = [];
 
     if(isset($_FILES["propertyFiles"])) {
-        $base64Files = Helper::base64_array($_FILES['propertyFiles']);
-        foreach($base64Files as $b64) {
+        $files = Helper::uploadImages($_FILES['propertyFiles']);
+        foreach($files as $f) {
             $photo = new PropertyPhotos();
-            $photo->setUrl($b64);
+            $photo->setUrl($f);
             array_push($photos, $photo);
 
         }

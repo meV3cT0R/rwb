@@ -81,7 +81,7 @@ if(isset($_POST["submit"])) {
 
    <label for="image">Image:</label>
   <input style="margin-top:10px;" type="file" id="image" name="file">
-  <img src="<?php echo $user->getAvatar(); ?>" alt="Current Image" width="100" height="100">
+  <img src="<?php echo URL.$user->getAvatar(); ?>" alt="Current Image" width="100" height="100">
   <button type="submit" class="button" name="submit">Update</button>
 
 </form>

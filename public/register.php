@@ -11,7 +11,7 @@
             $user->setRole(new Role($_POST["role"]));
             $user->setEmail("");
             
-            $images = Helper::base64($_FILES["file"]);
+            $images = Helper::uploadImage($_FILES["file"]);
             if($images != null) {
                 $user->setAvatar($images);
             }
