@@ -1,6 +1,6 @@
 
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     /* background-color: #f9f9f9; */
     margin: 0;
     padding: 0;
@@ -70,11 +70,14 @@ h1 {
 
 .property-status {
     color: #007BFF;
+    font-size: .8em; 
+    margin-right:10px; 
 }
 
 .property-price {
     color: #FF5722; 
-    font-size: 1em; 
+    font-size: .8em;
+    margin-left:10px; 
 }
 
 @media (max-width: 900px) {

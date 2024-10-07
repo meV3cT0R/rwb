@@ -155,51 +155,70 @@ error_reporting(E_ALL);
             $homeController->home();
         },
         "admin" => function() :void {
-            // global $auth;
-            // $auth->verifyAdmin();
+            global $auth;
+            $auth->verifyAdmin();
             global $adminController;
             $adminController->dashboard();
-
         },
         "admin/propertytype"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $propertyTypeController;
             $propertyTypeController->home();
         },
         "admin/country"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $adminCountryController;
             $adminCountryController->home();
         },
         "admin/state"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $adminStateController;
             $adminStateController->home();
         },
         "admin/city"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $adminCityController;;
             $adminCityController->home();
         },
         "admin/users"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $adminUserController;;
             $adminUserController->getUsers();
         },
         "admin/agents"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $adminUserController;;
             $adminUserController->getAgents();
         },
         "admin/owners"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $adminUserController;;
             $adminUserController->getOwners();
         },
         "admin/properties"=> function():void {
+            global $auth;
+            $auth->verifyAdmin();
             global $adminPropertyController;
             $adminPropertyController->home();
         },
      "admin/updateprofile" => function () use ($adminUserController) { 
+        global $auth;
+        $auth->verifyAdmin();
         global $params;
         $id = $params["id"];
         $user = $adminUserController->getUserById($id); 
         require_once __DIR__ . '/public/admin/userProfile.php'; 
     },
        "admin/changepassword" => function () use ($adminUserController) { 
+        global $auth;
+        $auth->verifyAdmin();
         global $params;
         $id = $params["id"];
         $user = $adminUserController->getUserById($id); 
@@ -208,6 +227,18 @@ error_reporting(E_ALL);
         "admin/createsuperadmin"=> function():void {
             global $userService;
             $userService->createSuperAdmin();
+        },
+        "admin/createuser"=> function():void {
+            global $userService;
+            $userService->createUser();
+        },
+        "admin/createowner"=> function():void {
+            global $userService;
+            $userService->createOwner();
+        },
+        "admin/createagent"=> function():void {
+            global $userService;
+            $userService->createAgent();
         },
         "login"=>function() :void {
             global $homeController;

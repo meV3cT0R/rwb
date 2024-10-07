@@ -33,9 +33,10 @@ require_once __DIR__ . "/../src/models/Property.php";
                     <p><strong>Lot Size:</strong> <?php echo $property->getLotSize() . ' ' . $property->getLotSizeUnit(); ?></p>
                     <p><strong>Marketed By:</strong> <?php echo $property->getMarketedBy()->getFirstName(); ?></p>
                     <p><strong>City:</strong> <?php echo $property->getCity()->getName(); ?></p>
-                </div>
-                
+                </div>      
             </div>
+
+            
             <div class="gallery">
                 <h3>Property Gallery</h3>
                 <div class="gallery-grid">
