@@ -14,7 +14,7 @@
         public function home() {
             $countries = $this->countryRepository->getCountries();
             // echo implode($countries);
-            $cols = ["Country","No. of States","No. of Cities"];
+            $cols = ["Country","No. of States","No. of Cities","Actions"];
             $arr = array_map(function(Country $country){
                     $subArr = [];
                     array_push($subArr, $country->getName());
@@ -28,6 +28,7 @@
                     }else {
                         array_push($subArr,"-");
                     }
+                    array_push($subArr, "<a class='action-link edit' href='/admin/country/edit?id=".$country->getId()."'>Edit</a> | <a class='action-link delete' href='/admin/country/delete?id=".$country->getId()."'>Delete</a>");
                     return $subArr;
             },$countries);
             $title = "Countries";

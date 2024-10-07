@@ -1,0 +1,123 @@
+/* Reset default browser styles for better consistency */
+body, h1, label, input, select, textarea {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc; /* Light background for a clean look */
+    color: #333; /* Dark text for readability */
+    padding: 20px;
+}
+
+/* Form container styling */
+.formContainer {
+    background: #fff; /* White background for the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px;
+    max-width: 800px; /* Limit the width for better readability */
+    margin: auto; /* Center the form */
+}
+
+/* Title styling */
+.form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #007bff; /* Primary color for the title */
+}
+
+/* Form row styling */
+.form-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow fields to wrap in small screens */
+    margin-bottom: 15px; /* Space between rows */
+}
+
+/* Form group styling */
+.form-group {
+    flex: 1; /* Allow each field to take equal space */
+    min-width: 250px; /* Minimum width for responsiveness */
+    margin-right: 15px; /* Space between form fields */
+}
+
+/* Remove right margin for the last element in each row */
+.form-row .form-group:last-child {
+    margin-right: 0;
+}
+
+/* Input and select styling */
+.input-field,
+.select-field,
+.textarea-field {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Padding for comfort */
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Font size for readability */
+    transition: border-color 0.3s; /* Smooth transition on focus */
+}
+
+/* Input and select focus styling */
+.input-field:focus,
+.select-field:focus,
+.textarea-field:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Label styling */
+.label {
+    font-weight: bold; /* Bold labels for clarity */
+    margin-bottom: 5px; /* Space between label and input */
+    display: block; /* Make labels block elements */
+}
+
+/* Button styling */
+.submit-button {
+    background-color: #007bff; /* Primary color for button */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+/* Button hover styling */
+.submit-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Error message styling */
+.error-message {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 10px;
+    border: 1px solid #f5c6cb; /* Border for error box */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below the error message */
+}
+
+/* Link styling */
+.link {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for hover */
+}
+
+.link:hover {
+    color: #0056b3; /* Darker shade on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .form-group {
+        min-width: 100%; /* Full width for smaller screens */
+        margin-right: 0; /* Remove right margin */
+    }
+}

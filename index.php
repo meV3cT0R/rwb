@@ -209,6 +209,10 @@ error_reporting(E_ALL);
             global $adminPropertyController;
             $adminPropertyController->home();
         },
+        "admin/properties/create"=> function():void {
+            global $adminPropertyController;
+            $adminPropertyController->addProperty();
+        },
      "admin/updateprofile" => function () use ($adminUserController) { 
         global $params;
         $id = $params["id"];
