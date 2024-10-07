@@ -1,23 +1,29 @@
 <?php
+// Include the constants file for configuration settings
 require_once __DIR__ . "/../../constants.php";
 ?>
 <html>
 
 <head>
     <title>Admin Dashboard</title>
+    <!-- Link to the main CSS file -->
     <link href="http://localhost/realEstate/public/css/index.css" rel="stylesheet" type="text/css" />
+    <!-- Link to the admin-specific CSS file -->
     <link href="http://localhost/realEstate/public/css/admin/index.css" rel="stylesheet" type="text/css" />
+    <!-- Link to the dashboard-specific CSS file -->
     <link href="http://localhost/realEstate/public/css/admin/dashboard.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <?php
+    // Include the sidebar component
     include __DIR__ . "/../../components/admin/sidebar.php";
     ?>
 
     <div id="body">
 
         <?php
+        // Include the header component
         include __DIR__ . "/../../components/admin/header.php";
         ?>
         <div class="info">
@@ -47,10 +53,12 @@ require_once __DIR__ . "/../../constants.php";
             </div>
         </div>
         <?php
+        // Include the footer component
         include __DIR__ . "/../../components/admin/footer.php";
         ?>
     </div>
 
+    <!-- Link to the admin-specific JavaScript file -->
     <script src=<?php echo URL . "public/js/admin/index.js" ?>></script>
 </body>
 

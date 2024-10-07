@@ -1,3 +1,13 @@
+<!-- /**
+ * Class DB
+ * Handles database connection using MySQLi
+ * 
+ * This class is responsible for establishing a connection to the MySQL database
+ * using the MySQLi extension. It provides methods to connect, disconnect, and 
+ * execute queries on the database.
+ * 
+ * 
+ */ -->
 <?php  
     class DB {
         private string $servername = "localhost";
