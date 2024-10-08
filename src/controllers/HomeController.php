@@ -121,9 +121,9 @@
                 $properties = $this->propertyRepository->getProperties();
                 foreach ($properties as $property) {
                     if(
-                        ($property->getPropertyType()->getId() == $type || $type=="all" ) &&
+                        (($property->getPropertyType()==null || $property->getPropertyType()->getId() == $type) || $type=="all" ) &&
                         (strtolower($property->getStatus()) == strtolower($status) || $status=="all" ) &&
-                        ($property->getCity()->getId() == $city || $city=="all" )
+                        (($property->getPropertyType()==null || $property->getCity()->getId() == $city )|| $city=="all" )
                     ) {
                         array_push($arr,$property);
                     }

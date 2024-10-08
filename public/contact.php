@@ -1,6 +1,11 @@
 <?php
 include __DIR__ . "/../src/index.php";
 session_start();
+
+if(isset($_POST["submit"]))  {
+  $info = "Thank you for being Awesome";
+}
+
 ?>
 <html>
 
@@ -42,7 +47,15 @@ session_start();
           }
       ?></p>
     </div>
-    <form class="contact-form">
+    <form class="contact-form" method="post">
+
+    <div class="info">
+          <?php
+            if(isset($info)) {
+              echo "". $info ."";
+            }
+          ?>
+    </div>
       <label for="name">Name</label>
       <input type="text" id="name" placeholder="Your Name">
 
@@ -52,7 +65,7 @@ session_start();
       <label for="message">Message</label>
       <textarea id="message" placeholder="Your Message"></textarea>
 
-      <button type="submit">Submit</button>
+      <button type="submit" name="submit">Submit</button>
     </form>
   </div>
 
