@@ -102,7 +102,7 @@ if(isset($_POST["contactUsSubmit"])) {
                 <input value="<?php echo $contactUs["phone"];?>" type="tel" id="phone" name="phone" maxlength="20" placeholder="Enter your phone number">
 
                 <label for="address">Address</label>
-                <input value="<?php echo $contactUs["address"];?>" type="text" id="address" name="address" maxlength="20" placeholder="Enter your address">
+                <input value="<?php echo $contactUs["address"];?>" type="text" id="address" name="address"  placeholder="Enter your address">
 
                 <button type="submit" name="contactUsSubmit">Submit Contact Us</button>
                 <form>

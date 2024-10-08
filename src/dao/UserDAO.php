@@ -56,7 +56,7 @@ class UserDAO
         $bindString = "";
 
         $this->queryHelper("SELECT * FROM user",$map,$query,$bindArr,$bindString);
-
+        logMessage($query);
         $users = [];
         try {
             $stmt = $this->db->prepare($query);
@@ -74,6 +74,8 @@ class UserDAO
                     array_push($users, $this->rowMapHelper($row));
                 }
             }
+
+            logMessage("length : ".$result->num_rows);
         } catch (PDOException $pdoe) {
             throw new ErrorException("Database Error : " . $pdoe->getMessage());
         } catch (ErrorException $e) {

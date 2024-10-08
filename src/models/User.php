@@ -92,4 +92,8 @@ class User {
     public function setAvatar(?string $avatar): void {
         $this->avatar = $avatar;
     }
+
+    public function __tostring() :string{
+            return "[". ($this->getRole()->getId()??"") ."]". $this->getFirstName();
+    }
 }

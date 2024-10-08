@@ -8,6 +8,7 @@
         private CommentDAO $commentDAO;
 
         private PropertyPhotosDAO $propertyPhotosDAO;
+        private CityDAO $cityDAO;
 
         public function __construct(
             PropertyDAO $propertyDAO,
@@ -16,7 +17,8 @@
             UserDAO $userDAO,
             RoleDAO $roleDAO,
             EnquiryDAO $enquiryDAO,
-            CommentDAO $commentDAO
+            CommentDAO $commentDAO,
+            CityDAO $cityDAO
         ) {
             Helper::checkDependencies(array(
                 "PropertyDAO" => $propertyDAO,
@@ -24,6 +26,7 @@
                 "UserDAO" => $userDAO,
                 "RoleDAO" => $roleDAO,
                 "CommentDAO" => $commentDAO,
+                "CityDAO" => $cityDAO,
             ));
             $this->propertyDAO = $propertyDAO;
             $this->propertyTypeDAO = $propertyTypeDAO;
@@ -32,6 +35,7 @@
             $this->enquiryDAO = $enquiryDAO;
             $this->commentDAO = $commentDAO;
             $this->propertyPhotosDAO = $propertyPhotosDAO;
+            $this->cityDAO = $cityDAO;
         }
 
         public function getProperties(): array {
@@ -57,8 +61,12 @@
                 $property->setEnquiries($enquiries);
 
 
-            $propertyPhotos = $this->propertyPhotosDAO->getPhotosByPropertyId($property->getId());
-            $property->setPropertyPhotos($propertyPhotos);
+                if($property->getCity() !=null && $property->getCity()->getId()!=null) {
+                    $city = $this->cityDAO->getCityById($property->getCity()->getId());
+                    $property->setCity($city);
+                }
+                $propertyPhotos = $this->propertyPhotosDAO->getPhotosByPropertyId($property->getId());
+                $property->setPropertyPhotos($propertyPhotos);
 
                 array_push($propertiesToBeSent,$property);
             }
@@ -71,7 +79,6 @@
             $marketedBy = $this->userDAO->getUserById($property->getMarketedBy()->getId());
             $marketedBy->setRole($this->roleDAO->getRoleById($marketedBy->getRole()->getId()));
             $propertyType = $this->propertyTypeDAO->getPropertyTypeById($property->getPropertyType()->getId());
-            
             $property->setMarketedBy($marketedBy);
             $property->setPropertyType($propertyType);
 
@@ -86,6 +93,10 @@
             }
             $property->setEnquiries($enquiries);
 
+            if($property->getCity() !=null && $property->getCity()->getId()!=null) {
+                $city = $this->cityDAO->getCityById($property->getCity()->getId());
+                $property->setCity($city);
+            }
 
             $propertyPhotos = $this->propertyPhotosDAO->getPhotosByPropertyId($property->getId());
             
@@ -108,8 +119,18 @@
         }
 
         public function updateProperty(Property $property) : Property {
-            return $this->propertyDAO->updateProperty($property);
+            $property = $this->propertyDAO->updateProperty($property);
+            if($property->getPropertyPhotos()!=null) {        
+                $photos = $property->getPropertyPhotos();
+
+                foreach($photos as $photo) {
+                    $photo->setProperty($property);
+                    $this->propertyPhotosDAO->postPropertyPhoto($photo);
+                }
+            
+             return $property;
         }
+    }
 
         public function deleteProperty(int $id) : Property {
             return $this->propertyDAO->deleteProperty($id);

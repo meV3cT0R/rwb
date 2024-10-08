@@ -4,30 +4,89 @@
         try{
             // logMessage("register clicked");
             // logMessage($image);
-            $user->setFirstName($_POST["firstName"]);
-            $user->setLastName($_POST["lastName"]);
-            $user->setUsername($_POST["username"]);
-            $user->setPassword($_POST["password"]);
-            $user->setRole(new Role($_POST["role"]));
-            $user->setEmail("");
-            
-            $images = Helper::uploadImage($_FILES["file"]);
-            if($images != null) {
-                $user->setAvatar($images);
-            }
-            
-            $res = $register($user);
 
-            if($res->getErrorDTO()!=null){
-                $error = $res->getErrorDTO()->getMessage();
-            }else {
-                if($res->getData()!=null) {
-                    logMessage("Yes Data");
-                    logMessage($res->getData()->getId());
-                    logMessage($res->getData()->getUsername());
+                $firstName = trim($_POST["firstName"] ?? null);
+                $lastName = trim($_POST["lastName"] ?? null);
+                $username = trim($_POST["username"] ?? null);
+                $email = trim($_POST["email"] ?? null);
+                $password = trim($_POST["password"] ?? null);
+                $role = trim($_POST["role"] ?? null);
+
+                $errYes = false;
+                $error = "";
+
+                if (empty($firstName)) {
+                    $error = "First name is required.";
+                    $errYes = true;
                 }
-                // header("Location: /realEstate/login");
-            }
+
+                if (empty($lastName)) {
+                    $error = "Last name is required.";
+                    $errYes = true;
+                }
+
+                if (empty($username)) {
+                    $error = "Username is required.";
+                    $errYes = true;
+                }
+
+                if (empty($email)) {
+                    $error = "Email is required.";
+                    $errYes = true;
+                } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $error = "Invalid email format.";
+                    $errYes = true;
+                }
+
+                if (empty($password)) {
+                    $error = "Password is required.";
+                    $errYes = true;
+                }
+
+                if (empty($role)) {
+                    $error = "Role is required.";
+                    $errYes = true;
+                }
+                logMessage("ERror validating");
+                logMessage($error);
+                logMessage($errYes);
+
+                if (!$errYes) {
+                    logMessage("NO ERror");
+                    // If validation passes, set values to the user object
+                    $user->setFirstName($firstName);
+                    $user->setLastName($lastName);
+                    $user->setUsername($username);
+                    $user->setEmail($email);  // Fixed: should setEmail, not setUsername
+                    $user->setPassword($password);
+                    $user->setRole(new Role($role));
+                    $images = Helper::uploadImage($_FILES["file"]);
+
+                    if($images != null) {
+                        $user->setAvatar($images);
+                    }
+                    
+                    $res = $register($user);
+        
+                    if($res->getErrorDTO()!=null){
+                        $error = $res->getErrorDTO()->getMessage();
+                    logMessage("Yes Error");
+
+                    }else {
+                        if($res->getData()!=null) {
+                            logMessage("Yes Data");
+                            logMessage($res->getData()->getId());
+                            logMessage($res->getData()->getUsername());
+                            
+                        }
+                        header("Location: /realEstate/login");
+
+                    }
+                    // Proceed with further processing, e.g., save user to the database
+                }
+
+            
+
         }catch(Exception $e){
             $error = $e->getMessage();
         }
@@ -47,7 +106,7 @@
         <div class="formContainer body" style="margin-bottom:50px;">
             <form method="post" action="" enctype="multipart/form-data">
                 <h1> Register </h1>
-                <div>
+                <div class="error">
                         <?php
                             if(isset($error)) {
                                 echo $error;
@@ -74,6 +133,14 @@
                     </label>
 
                     <input type="text" name="username" />
+                </div>
+
+                <div>
+                    <label> 
+                        email
+                    </label>
+
+                    <input type="text" name="email" />
                 </div>
                 <div>
                     <label> 

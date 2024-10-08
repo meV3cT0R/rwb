@@ -100,7 +100,6 @@ h1 {
     /* max-width: 600px; */
     margin: 20px auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width:100%;
 }
 
 .enquiries h3 {
@@ -248,7 +247,7 @@ h1 {
 
 .enquiryInputBox textarea {
     width: 100%;
-    padding: 10px;
+    padding: 10px 2px;
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: vertical;

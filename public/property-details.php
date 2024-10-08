@@ -3,6 +3,10 @@ require_once __DIR__ . "/../src/models/Property.php";
 session_start();
 if (isset($_POST["comment"])) {
     try {
+        if(!isset($_SESSION["user"])){
+            header("Location: /realEstate/login");
+            exit();
+        }
         $commentString = $_POST["comment"];
         $enquiryId = $_POST["enquiryId"];
         $comment = new Comment();
@@ -22,6 +26,10 @@ if (isset($_POST["comment"])) {
 
 if (isset($_POST["enquiry"])) {
     try {
+        if(!isset($_SESSION["user"])){
+            header("Location: /realEstate/login");
+            exit();
+        }
         $enquiryString = $_POST["enquiryString"];
         $enquiry = new Enquiry();
         $enquiry->setEnquiry($enquiryString);
@@ -51,11 +59,11 @@ if (isset($_POST["enquiry"])) {
     <title>Property Details</title>
 </head>
 
-<>
+
     <?php include __DIR__ . "/../components/header.php"; ?>
 
     <div class="container">
-        <h1>Property Details</h1>
+        <h1>Property Details</h1>   
         <div>
             <p class="error">
                     <?php

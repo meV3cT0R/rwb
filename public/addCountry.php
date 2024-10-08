@@ -76,7 +76,7 @@ if (isset($_POST["submitCountry"])) {
                 </div>
 
                 <div>
-                    <a href="/realEstate/countryList">View Countries</a>
+                    <a href="/realEstate/admin/countryList">View Countries</a>
                 </div>
             </form>
         </div>

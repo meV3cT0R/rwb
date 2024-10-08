@@ -1,8 +1,8 @@
 <?php
 // Check if the form is submitted
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try{
-
     // Extract the posted data
     $propertyTypeId = $_POST['propertyTypeId'] ?? null;
     $status = $_POST['status'] ?? null;
@@ -14,17 +14,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lotSize = $_POST['lotSize'] ?? null;
     $cityId = $_POST['cityId'] ?? null;
     $address = $_POST['address'] ?? null;
+    $errYes = false;
+    $error = '';
 
-        if(empty($propertyTypeId)){
-            $error = "Empty Property Type";
-        }
+    $propertyTypeId = trim($_POST['propertyTypeId'] ?? null);
+    $status = trim($_POST['status'] ?? null);
+    $yearBuilt = trim($_POST['yearBuilt'] ?? null);
+    $description = trim($_POST['description'] ?? null);
+    $price = trim($_POST['price'] ?? null);
+    $totalSqFt = trim($_POST['totalSqFt'] ?? null);
+    $lotSizeUnit = trim($_POST['lotSizeUnit'] ?? null);
+    $lotSize = trim($_POST['lotSize'] ?? null);
+    $cityId = trim($_POST['cityId'] ?? null);
+    $address = trim($_POST['address'] ?? null);
 
+    if (
+        empty($propertyTypeId) || empty($status) || empty($yearBuilt) ||
+        empty($description) || empty($price) || empty($totalSqFt) ||
+        empty($lotSizeUnit) || empty($lotSize) || empty($cityId) || empty($address)
+    ) {
+        $error = "All fields are required";
+        $errYes = true;
+    }
 
-    // Create a new instance of Property
-    if($add){
+    if (!is_numeric($yearBuilt) || !is_numeric($price) || !is_numeric($totalSqFt) || !is_numeric($lotSize)) {
+        $error = "Year Built, Price, Total Sq Ft, and Lot Size should be numbers";
+        $errYes = true;
+    }
+    
+    if(!$errYes){
 
-            $property = new Property();
-        }
+        if($add){
+
+                $property = new Property();
+            }
 
     // Set the values using the setters
     $property->setPropertyType(new PropertyType((int)$propertyTypeId));
@@ -56,12 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $property->setPropertyPhotos($photos);
 
     if($add){
-
         $saveProperty($property);
     }else {
         $updateProperty($property);
     }
     header("Location: /realEstate/manageproperties");
+}
 
 }catch(
     Exception $e
@@ -99,7 +122,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <select name="propertyTypeId" id="propertyTypeId" class="select-field">
                             <option value="">Select Property Type</option>
                             <?php foreach ($propertyTypes as $type) : ?>
-                                <option value="<?php echo $type->getId(); ?>"><?php echo $type->getName(); ?></option>
+                                <option value="<?php echo $type->getId(); ?>"
+                                    selected="<?php
+                                        if(isset($type) && isset($property) && $property->getPropertyType()!=null) {
+                                            if($type->getId()!=null) {
+                                                echo $type->getId()==$property->getPropertyType()->getId();
+                                            }
+                                        }
+                                    ?>"
+                                ><?php echo $type->getName(); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -109,8 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input
                          type="text" name="status" id="status" class="input-field" 
 
-                         value="
-                         <?php
+                         value="<?php
                             if(isset($property))
                                 echo $property->getStatus();
                          ?>"
@@ -119,11 +149,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-group">
                         <label for="yearBuilt" class="label">Year Built</label>
-                        <input type="number" name="yearBuilt" id="yearBuilt" class="input-field"
-                        value="
-                         <?php
-                            if(isset($property))
+                        <input type="text" name="yearBuilt" id="yearBuilt" class="input-field"
+                        value="<?php
+
+                            if(isset($property)){
+                                
                                 echo $property->getYearBuilt();
+                            }
                          ?>"
                         />
                     </div>
@@ -134,10 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-group">
                         <label for="description" class="label">Description</label>
-                        <textarea name="description" id="description" class="textarea-field">
-
-                    
-                         <?php
+                        <textarea name="description" id="description" class="textarea-field"><?php
                             if(isset($property))
                                 echo $property->getDescription();
                          ?>
@@ -153,9 +182,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-group">
                         <label for="price" class="label">Price</label>
-                        <input type="number" name="price" id="price" class="input-field" 
-                        value="
-                        <?php
+                        <input type="text" name="price" id="price" class="input-field" 
+                        value="<?php
+
                             if(isset($property))
                                 echo $property->getPrice();
                          ?>
@@ -168,9 +197,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-row">
                     <div class="form-group">
                         <label for="totalSqFt" class="label">Total Sq Ft</label>
-                        <input type="number" name="totalSqFt" id="totalSqFt" class="input-field"
-                        value="
-                        <?php
+                        <input type="text" name="totalSqFt" id="totalSqFt" class="input-field"
+                        value=" <?php
                             if(isset($property))
                                 echo $property->getTotalSqFt();
                          ?>
@@ -189,10 +217,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-group">
                         <label for="lotSize" class="label">Lot Size</label>
-                        <input type="number" name="lotSize" id="lotSize" class="input-field" 
+                        <input type="text" name="lotSize" id="lotSize" class="input-field" 
                         
-                        value="
-                        <?php
+                        value="<?php
                             if(isset($property))
                                 echo $property->getLotSize();
                          ?>
@@ -206,7 +233,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <select name="cityId" id="cityId" class="select-field">
                             <option value="">Select City</option>
                             <?php foreach ($cities as $city) : ?>
-                                <option value="<?php echo $city->getId(); ?>"><?php echo $city->getName(); ?></option>
+                                <option value="<?php echo $city->getId(); ?>"
+                                selected="<?php
+                                        if(isset($type) && isset($property) && $property->getCity()!=null) {
+                                            if($city->getId()!=null) {
+                                                echo $city->getId()==$property->getCity()->getId();
+                                            }
+                                        }
+                                    ?>"
+                                
+                                ><?php echo $city->getName(); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -214,8 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-group">
                         <label for="address" class="label">Address</label>
                         <input type="text" name="address" id="address" class="input-field" 
-                        value="
-                        <?php
+                            value="<?php
                             if(isset($property))
                                 echo $property->getAddress();
                          ?>

@@ -309,3 +309,9 @@ body>div:nth-child(2) {
     display:flex;
     flex-wrap: wrap;
 }
+
+.info {
+    text-align: center;
+    color : rgba(0,0,255,.5);
+    padding:10px 0;
+}

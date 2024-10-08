@@ -53,7 +53,7 @@ class PropertyDAO
                 $property = new Property();
                 $property->setId($row["id"]);
                 $property->setStatus($row["status"]);
-                $property->setYearBuilt($row["yearBuilt"]);
+                $property->setYearBuilt((int)$row["yearBuilt"]);
                 $property->setDescription($row["description"]);
                 $property->setPrice($row["price"]);
                 $property->setTotalSqFt($row["totalSqFt"]);
@@ -155,7 +155,6 @@ class PropertyDAO
             set propertyType=?,
                     status=?,
                     yearBuilt=?,
-                    marketedBy=?,
                     description=?,
                     price=?,
                     totalSqFt=?,
@@ -170,7 +169,6 @@ class PropertyDAO
             }
             $status = $property->getStatus();
             $yearBuilt = $property->getYearBuilt();
-            $marketedBy = $property->getMarketedBy();
             $description = $property->getDescription();
             $price = $property->getPrice();
             $totalSqFt = $property->getTotalSqFt();
@@ -178,11 +176,10 @@ class PropertyDAO
             $lotSize = $property->getLotSize();
             
 
-            $propertyStmt->bind_param("isiisddsdi",
+            $propertyStmt->bind_param("isisddsdi",
                 $propertyType,
                 $status,
                 $yearBuilt,
-                $marketedBy,
                 $description,
                 $price,
                 $totalSqFt,

@@ -101,6 +101,7 @@ $propertyRepository = new PropertyRepository(
     $roleDAO,
     $enquiryDAO,
     $commentDAO,
+    $cityDAO
 
 );
 

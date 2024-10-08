@@ -18,12 +18,12 @@
 
         public function getUsers(): array {
             $users = $this->userDAO->getUsers();
-            
+            logMessage(implode($users));
             $usersToBeSent = array();
             foreach($users as $user) {
                 $user->setRole($this->roleDAO->getRoleById($user->getRole()->getId()));
 
-                array_push($users,$user);
+                array_push($usersToBeSent,$user);
             }
             return $usersToBeSent;
         }
@@ -64,9 +64,12 @@
 
         public function getUsersByRoleName(string $roleName) : array {
             $users = $this->getUsers();
+            logMessage($roleName);
+
             $usersWithSpecificRole = [];
             foreach($users as $user) {
-                if(strcmp(strtoupper($user->getRole()->getRoleName()),strtoupper($roleName))==0){
+                logMessage($user->getRole()->getName());
+                if(strcmp(strtoupper($user->getRole()->getName()),strtoupper($roleName))==0){
                     array_push($usersWithSpecificRole,$user);
                 }
             }

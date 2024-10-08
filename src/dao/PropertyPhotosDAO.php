@@ -29,7 +29,7 @@ class PropertyPhotosDAO
     {
         $propertyPhotos = [];
         try {
-            $propertyPhotosStmt = $this->db->prepare("SELECT * FROM propertyPhotos where propertyId=?;");
+            $propertyPhotosStmt = $this->db->prepare("SELECT * FROM propertyPhotos where propertyId=? order by createdAt desc;");
             $propertyPhotosStmt->bind_param("i", $propertyId);
             if (!$propertyPhotosStmt->execute()) {
                 throw new Exception("Someting went wrong while trying to get the data");
