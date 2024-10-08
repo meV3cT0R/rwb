@@ -110,7 +110,10 @@
         }
 
         public function getProperties() : void {
+            session_start();
             $propertiesInitial = $this->propertyRepository->getProperties();
+
+
             $types = $this->propertyTypeRepository->getPropertyTypes();
             $status = $this->propertyRepository->getStatuses();
             $cities = $this->cityRepository->getCities();
@@ -194,6 +197,16 @@
         }
         public function manageProperties() : void {
             $properties = $this->propertyRepository->getProperties();
+            $properties = array_filter($properties,function(Property $property): bool {
+                if($property->getMarketedBy() !=null) {
+                    if($property->getMarketedBy()->getId()==null || $_SESSION["user"]->getId()==false) return false;
+                    if($property->getMarketedBy()->getId() == $_SESSION["user"]->getId()) {
+                        return true;
+                    }
+                }
+                return false;
+        });
+
             $types = $this->propertyTypeRepository->getPropertyTypes();
             $status = $this->propertyRepository->getStatuses();
             $cities = $this->cityRepository->getCities();

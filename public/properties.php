@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . "/../constants.php";
 require_once __DIR__ . "/../src/models/Property.php";
-session_start();
 
 if (isset($_POST["search"])) {
     if (isset($search)) {

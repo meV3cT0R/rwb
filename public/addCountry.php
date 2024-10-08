@@ -28,19 +28,29 @@ if (isset($_POST["submitCountry"])) {
 }
 ?>
 
+
 <html>
+
 <head>
+    <title>Add State</title>
     <link href="<?php echo URL . 'public/css/index.css'; ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo URL . 'public/css/admin/index.css'; ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo URL . 'public/css/admin/admin-form.css'; ?>" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <?php require_once __DIR__ . "/../components/admin/sidebar.php"; ?>
-    <div class="body">
-        <?php require_once __DIR__ . "/../components/admin/header.php"; ?>
-        
-        <div class="formContainer body" style="margin-bottom: 50px;">
+    <?php
+    // Include the sidebar
+    require_once __DIR__ . "/../components/admin/sidebar.php";
+    ?>
+
+    <div id="body">
+        <?php
+        // Include the header
+        require_once __DIR__ . "/../components/admin/header.php";
+        ?>
+
+<div class="formContainer body" style="margin-bottom: 50px;">
             <form method="post" action="" class="city-form">
                 <h1>Add Country</h1>
 
@@ -60,6 +70,7 @@ if (isset($_POST["submitCountry"])) {
                      />
                 </div>
 
+
                 <div>
                     <button type="submit" name="submitCountry">Submit</button>
                 </div>
@@ -69,10 +80,16 @@ if (isset($_POST["submitCountry"])) {
                 </div>
             </form>
         </div>
-
-        <?php require_once __DIR__ . "/../components/admin/footer.php"; ?>
+        <?php
+        // Include the footer
+        require_once __DIR__ . "/../components/admin/footer.php";
+        ?>
     </div>
 
-    <script src="<?php echo URL . 'public/js/index.js'; ?>"></script>
+    <script src="<?php echo URL . 'public/js/admin/index.js'; ?>"></script>
 </body>
+
 </html>
+
+
+

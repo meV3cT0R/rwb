@@ -35,19 +35,25 @@ if (isset($_POST["submitCity"])) {
 <html>
 
 <head>
+    <title>Add State</title>
     <link href="<?php echo URL . 'public/css/index.css'; ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo URL . 'public/css/admin/index.css'; ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo URL . 'public/css/admin/admin-form.css'; ?>" rel="stylesheet" type="text/css" />
 </head>
 
-<?php require_once __DIR__ . "/../components/admin/sidebar.php"; ?>
-
 <body>
+    <?php
+    // Include the sidebar
+    require_once __DIR__ . "/../components/admin/sidebar.php";
+    ?>
 
-    <div class="body">
+    <div id="body">
+        <?php
+        // Include the header
+        require_once __DIR__ . "/../components/admin/header.php";
+        ?>
 
-        <?php require_once __DIR__ . "/../components/admin/header.php"; ?>
-        <div class="formContainer body" style="margin-bottom: 50px">
+<div class="formContainer body" style="margin-bottom: 50px">
             <form method="post" action="" class="city-form">
                 <h1>Add City</h1>
 
@@ -111,32 +117,15 @@ if (isset($_POST["submitCity"])) {
             </form>
         </div>
 
-        <?php require_once __DIR__ . "/../components/admin/footer.php"; ?>
+   
+
+        <?php
+        // Include the footer
+        require_once __DIR__ . "/../components/admin/footer.php";
+        ?>
     </div>
 
-    <script src="<?php echo URL . 'public/js/index.js'; ?>"></script>
-    <script src="<?php echo URL . 'public/js/form.js'; ?>"></script>
     <script src="<?php echo URL . 'public/js/admin/index.js'; ?>"></script>
-
-    <script>
-        // Function to filter states based on the selected country
-        function filterStates() {
-            var countryDropdown = document.getElementById("countryDropdown");
-            var selectedCountry = countryDropdown.value;
-            var stateDropdown = document.getElementById("stateDropdown");
-
-            for (var i = 0; i < stateDropdown.options.length; i++) {
-                var option = stateDropdown.options[i];
-                var countryId = option.getAttribute('data-country-id');
-
-                if (selectedCountry === "" || countryId === selectedCountry) {
-                    option.style.display = 'block';
-                } else {
-                    option.style.display = 'none';
-                }
-            }
-        }
-    </script>
 </body>
 
 </html>

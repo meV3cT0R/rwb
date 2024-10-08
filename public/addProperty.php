@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try{
@@ -229,11 +228,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" name="submitProperty" class="submit-button">Submit</button>
                 </div>
 
-                <div>
-                    <a href="#" class="link">Cancel</a>
-                </div>
+
             </form>
         </div>
         <?php include __DIR__ . "/../components/footer.php"; ?>
+    <script src=<?php echo URL . "public/js/index.js" ?>></script>
+
 </body>
 </html>
