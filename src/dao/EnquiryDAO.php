@@ -25,6 +25,27 @@ class EnquiryDAO
         return $propertyType;
     }
 
+
+    public function getEnquiries():array {
+        $objs = [];
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM enquiry");
+            if (!$stmt->execute()) {
+                throw new Exception("Someting went wrong while trying to get the data");
+            }
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    array_push($objs, $this->rowMapHelper($row));
+                }
+            }
+        } catch (PDOException $pdoe) {
+            throw new ErrorException("Database Error : " . $pdoe->getMessage());
+        } catch (ErrorException $e) {
+            throw $e;
+        }
+        return $objs;
+    }
     public function getEnquiriesByPropertyId(int $propertyId): array
     {
         $objs = [];

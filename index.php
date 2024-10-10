@@ -56,6 +56,7 @@ require_once "src/controllers/AdminCityController.php";
 require_once "src/controllers/AdminUserController.php";
 require_once "src/controllers/AdminPropertyController.php";
 require_once "src/controllers/AdminPageController.php";
+require_once "src/controllers/AdminEnquiryController.php";
 
 require_once "src/middlewares/authentications/Auth.php";
 
@@ -114,7 +115,8 @@ $commentRepository = new CommentRepository(
 );
 $enquiryRepository = new EnquiryRepository(
     $enquiryDAO,
-    $commentDAO
+    $commentDAO,
+    $userDAO
 );
 
 
@@ -166,6 +168,10 @@ $adminPropertyController = new AdminPropertyController(
 
 $adminPagesController = new AdminPageController(
 
+);
+
+$adminEnquiryController = new AdminEnquiryController(
+    $enquiryRepository
 );
 
 $auth = new Auth();
@@ -325,6 +331,22 @@ $route = array(
         $adminUserController->getOwners();
     },
 
+    "admin/enquiries" => function (): void {
+        global $auth;
+        $auth->verifyAdmin();
+        global $adminEnquiryController;
+        ;
+        $adminEnquiryController->home();
+    },
+    "admin/enquiries/delete" => function (): void {
+        global $params;
+        global $enquiryRepository;
+        $id = $params["id"];
+
+        $enquiryRepository->deleteEnquiry($id);
+        header("Location: /realEstate/admin/enquiries");
+
+    },
     "admin/properties" => function (): void {
         global $auth;
         $auth->verifyAdmin();
