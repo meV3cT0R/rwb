@@ -2,16 +2,35 @@
     class EnquiryRepository {
         private EnquiryDAO $enquiryDAO;
         private CommentDAO $commentDAO;
+        private UserDAO $userDAO;
+
         public function __construct(
             EnquiryDAO $enquiryDAO,
             CommentDAO $commentDAO,
+            UserDAO $userDAO
         ) {
             Helper::checkDependencies(array(
                 "EnquiryDAO" => $enquiryDAO,
-                "CommentDAO" => $commentDAO
+                "CommentDAO" => $commentDAO,
+                "UserDAO" => $userDAO,
+
             ));
             $this->enquiryDAO = $enquiryDAO;
             $this->commentDAO = $commentDAO;
+            $this->userDAO = $userDAO;
+        }
+
+        public function getEnquiries() : array {
+            $enquiriesTemp = $this->enquiryDAO->getEnquiries();
+            $enquiries = [];
+            foreach ($enquiriesTemp as $enquiry) {
+                $enquiry->setComments($this->commentDAO->getCommentsByEnquiryId($enquiry->getId()));
+                array_push($enquiries, $enquiry);
+                if($enquiry->getCreatedBy() !== null) {
+                    $enquiry->setCreatedBy($this->userDAO->getUserById($enquiry->getCreatedBy()->getId()));
+                }
+            }
+            return $enquiries;
         }
 
         public function getEnquiriesByPropertyId(int $id): array {

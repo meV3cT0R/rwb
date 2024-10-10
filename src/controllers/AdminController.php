@@ -36,9 +36,9 @@
             $totalCountry = count($this->countryRepository->getCountries());
             $totalState = count($this->stateRepository->getStates());
             $totalCity = count($this->cityRepository->getCities());
-            $totalAgent = count($this->userRepository->getUsersByRoleName("AGENT"));
-            $totalOwner = count($this->userRepository->getUsersByRoleName("OWNER"));
-            $totalUser = count($this->userRepository->getUsersByRoleName("USER"));
+            $totalAgent = count($this->userRepository->getUsersByRoleId(4));
+            $totalOwner = count($this->userRepository->getUsersByRoleId(3));
+            $totalUser = count($this->userRepository->getUsersByRoleId(2));
             $totalProperties = count($this->propertyRepository->getProperties());
             require_once __DIR__."/../../public/admin/dashboard.php";
         }

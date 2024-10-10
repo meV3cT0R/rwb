@@ -12,7 +12,7 @@
          <span><i> Bishal Nayabha (K220089)</i> </span>,
           <span><i> Mr. Bipesh Lama(K220049 )</i> </span>
     </div>
-    <h4>&copy; RE 2023- <?php echo date("Y"); ?> </h4>
+    <h4>&copy; CC 2023- <?php echo date("Y"); ?> </h4>
     <div>
      The
 website was created for

@@ -11,9 +11,10 @@
 
         public function home () {
             $title= "Properties";
-            $cols = ["Property Type","Status","Year Built","Marketed By","Description","Price","Total Sq Ft","Lot Size" ,"Lot Size Unit"];
+            $cols = ["Id","Property Type","Status","Year Built","Marketed By","Description","Price","Total Sq Ft","Lot Size" ,"Lot Size Unit"];
             $arr = array_map(function(Property $property){
                     $subArr = [];
+                    array_push($subArr,  $property->getId());
                     array_push($subArr,  $property->getPropertyType()->getName());
                     array_push($subArr,  $property->getStatus());
                     array_push($subArr,  $property->getYearBuilt());

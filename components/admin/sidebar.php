@@ -11,7 +11,7 @@
     <div>
         <div id="logo">
             <div>
-                <h1> RE </h1>
+                <h1> CC </h1>
             </div>
 
         </div>
@@ -40,6 +40,11 @@
                 <li>
                     <a href="/realEstate/admin/city">
                         Cities
+                    </a>
+                </li>
+                <li>
+                    <a href="/realEstate/admin/enquiries">
+                        Enquiries
                     </a>
                 </li>
                 <li>
